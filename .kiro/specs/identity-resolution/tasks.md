@@ -18,3 +18,5 @@
   - _Requirements: 5, 6.1_
 - [ ] 8. Write tests: ORCID merge, name-only candidate, rejection on ORCID conflict, low-confidence matches never merged
   - _Requirements: 3, 6_
+- [ ] 9. Write property-based tests for correctness properties I1–I6 in `design.md`
+  - _Requirements: 3, 6_

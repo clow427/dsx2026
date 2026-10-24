@@ -31,3 +31,15 @@ tests/innovation/
 ## Hand-off to identity (P2)
 
 Provide each inventor's or PI's name, location, and assignee or institution in `attributes`, so that P2 can block and score matches. Do not attempt to match people yourself.
+
+## Correctness properties (planned)
+
+Implement these as Hypothesis tests in `tests/innovation/test_normalize_properties.py`, reusing the oracle style of `tests/research/test_normalize_properties.py`.
+
+| ID | Property: for any set of patent and award records… | Requirements |
+|---|---|---|
+| N1 | The emitted graph has zero validator errors | 4 |
+| N2 | `INVENTED` edges are exactly the inventor listings, and `ASSIGNED_TO` edges are exactly the assignee listings, each with its patent record as evidence | 1.2, 1.3 |
+| N3 | A `FUNDED_BY` edge exists **only** when the award record names the publication ID or DOI. Nothing is inferred from titles | 2 |
+| N4 | No person from this module is `verified_alumnus`, and no person ID uses the `canonical` namespace | 3 |
+| N5 | Normalizing the same input twice gives identical documents | 4 |
