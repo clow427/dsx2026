@@ -154,6 +154,7 @@ __pycache__/
 .venv/
 venv/
 .pytest_cache/
+.hypothesis/
 
 # Raw API response caches (re-fetchable; may be large)
 data/raw/
