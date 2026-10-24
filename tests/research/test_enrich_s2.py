@@ -69,3 +69,25 @@ def test_response_is_cached(graph, config):
     enrich_with_s2(graph, config, client=FakeClient([s2]))
     stats = enrich_with_s2(graph, config, client=FakeClient([]))
     assert stats.from_cache and stats.matched == 1
+
+
+def test_one_failed_batch_does_not_discard_the_others(config, monkeypatch):
+    from pipelines.common.graph import GraphBuilder
+    from pipelines.common.sources import source_ref
+    from pipelines.research import enrich_s2
+
+    monkeypatch.setattr(enrich_s2, "BATCH_SIZE", 1)
+    g = GraphBuilder()
+    for wid, doi in (("W1", "10.0000/example.a"), ("W2", "10.0000/example.b")):
+        g.add_node(f"publication:openalex:{wid}", "publication", f"Example {wid}",
+                   [source_ref("openalex", f"https://example.org/{wid}", record_id=wid)], attributes={"doi": doi})
+
+    ok = [{"paperId": "p1", "citationCount": 1, "externalIds": {"DOI": "10.0000/example.a"}}]
+    stats = enrich_with_s2(g, config, client=FakeClient([ok, requests.HTTPError("429")]))
+    assert (stats.batches, stats.failed_batches, stats.matched) == (2, 1, 1)
+    assert not stats.failed
+
+    # A rerun reuses the cached batch and only requests the missing one.
+    retry = FakeClient([[{"paperId": "p2", "citationCount": 2, "externalIds": {"DOI": "10.0000/example.b"}}]])
+    stats = enrich_with_s2(g, config, client=retry)
+    assert (stats.cached_batches, stats.matched, len(retry.calls)) == (1, 2, 1)
