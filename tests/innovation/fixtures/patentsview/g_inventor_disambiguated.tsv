@@ -1,0 +1,7 @@
+patent_id	inventor_sequence	inventor_id	disambig_inventor_name_first	disambig_inventor_name_last	gender_code	location_id
+9000001	0	mockinv001	Example	Inventor	M	loc-1
+9000001	1	mock:inv/002	Example	Coinventor	F	loc-2
+9000002	0	mockinv001	Example	Inventor	M	loc-1
+9000003	0	mockinv003	Example	Imager	F	
+9000003	1		No	Identifier		
+9000004	0	mockinv004	Example	Outsider	M	loc-2

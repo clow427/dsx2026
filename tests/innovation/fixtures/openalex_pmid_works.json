@@ -1,0 +1,31 @@
+{
+ "_comment": "MOCK OpenAlex works by PMID",
+ "results": [
+  {
+   "id": "https://openalex.org/W9100000001",
+   "ids": {
+    "pmid": "https://pubmed.ncbi.nlm.nih.gov/10000001"
+   },
+   "doi": "https://doi.org/10.0000/example.funded1",
+   "display_name": "MOCK Example Funded Study",
+   "publication_year": 2022
+  },
+  {
+   "id": "https://openalex.org/W9100000002",
+   "ids": {
+    "pmid": "https://pubmed.ncbi.nlm.nih.gov/10000002"
+   },
+   "doi": null,
+   "display_name": "MOCK Example Second Study",
+   "publication_year": 2023
+  },
+  {
+   "id": "https://openalex.org/W9100000003",
+   "ids": {
+    "pmid": "https://pubmed.ncbi.nlm.nih.gov/10000003"
+   },
+   "display_name": "MOCK Example Tufts Study",
+   "publication_year": 2023
+  }
+ ]
+}

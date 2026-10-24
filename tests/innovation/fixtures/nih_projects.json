@@ -1,0 +1,159 @@
+{
+ "_comment": "MOCK NIH RePORTER projects (fictional)",
+ "results": [
+  {
+   "appl_id": 1001,
+   "project_num": "1R01EX000001-01",
+   "core_project_num": "R01EX000001",
+   "fiscal_year": 2021,
+   "project_title": "MOCK Example Machine Learning for Clinical Triage",
+   "organization": {
+    "org_name": "BOSTON UNIVERSITY MEDICAL CAMPUS"
+   },
+   "principal_investigators": [
+    {
+     "profile_id": 9000001,
+     "first_name": "Example",
+     "middle_name": "Q",
+     "last_name": "Investigator",
+     "is_contact_pi": true
+    },
+    {
+     "profile_id": 9000002,
+     "first_name": "Example",
+     "middle_name": "",
+     "last_name": "Coinvestigator",
+     "is_contact_pi": false
+    }
+   ],
+   "agency_ic_admin": {
+    "abbreviation": "EXIC",
+    "name": "Example Institute"
+   },
+   "award_amount": 100000,
+   "project_start_date": "2021-01-01T00:00:00",
+   "project_end_date": "2025-12-31T00:00:00",
+   "activity_code": "R01",
+   "project_detail_url": "https://example.org/nih/project/1001"
+  },
+  {
+   "appl_id": 1002,
+   "project_num": "5R01EX000001-02",
+   "core_project_num": "R01EX000001",
+   "fiscal_year": 2022,
+   "project_title": "MOCK Example Machine Learning for Clinical Triage (renewal)",
+   "organization": {
+    "org_name": "BOSTON UNIVERSITY MEDICAL CAMPUS"
+   },
+   "principal_investigators": [
+    {
+     "profile_id": 9000001,
+     "first_name": "Example",
+     "middle_name": "Q",
+     "last_name": "Investigator",
+     "is_contact_pi": true
+    },
+    {
+     "profile_id": 9000002,
+     "first_name": "Example",
+     "middle_name": "",
+     "last_name": "Coinvestigator",
+     "is_contact_pi": false
+    }
+   ],
+   "agency_ic_admin": {
+    "abbreviation": "EXIC",
+    "name": "Example Institute"
+   },
+   "award_amount": 120000,
+   "project_start_date": "2021-01-01T00:00:00",
+   "project_end_date": "2025-12-31T00:00:00",
+   "activity_code": "R01",
+   "project_detail_url": "https://example.org/nih/project/1002"
+  },
+  {
+   "appl_id": 1003,
+   "project_num": "1R21EX000002-01",
+   "core_project_num": "R21EX000002",
+   "fiscal_year": 2023,
+   "project_title": "MOCK Example Machine Learning for Clinical Triage",
+   "organization": {
+    "org_name": "BOSTON UNIVERSITY (CHARLES RIVER CAMPUS)"
+   },
+   "principal_investigators": [
+    {
+     "profile_id": 9000002,
+     "first_name": "Example",
+     "middle_name": "",
+     "last_name": "Coinvestigator",
+     "is_contact_pi": false
+    }
+   ],
+   "agency_ic_admin": {
+    "abbreviation": "EXIC",
+    "name": "Example Institute"
+   },
+   "award_amount": 100000,
+   "project_start_date": "2021-01-01T00:00:00",
+   "project_end_date": "2025-12-31T00:00:00",
+   "activity_code": "R01",
+   "project_detail_url": "https://example.org/nih/project/1003"
+  },
+  {
+   "appl_id": 1004,
+   "project_num": "1R01EX000003-01",
+   "core_project_num": "R01EX000003",
+   "fiscal_year": 2023,
+   "project_title": "MOCK Example Machine Learning for Clinical Triage",
+   "organization": {
+    "org_name": "TUFTS UNIVERSITY BOSTON"
+   },
+   "principal_investigators": [
+    {
+     "profile_id": 9000003,
+     "first_name": "Example",
+     "middle_name": "",
+     "last_name": "Elsewhere",
+     "is_contact_pi": true
+    }
+   ],
+   "agency_ic_admin": {
+    "abbreviation": "EXIC",
+    "name": "Example Institute"
+   },
+   "award_amount": 100000,
+   "project_start_date": "2021-01-01T00:00:00",
+   "project_end_date": "2025-12-31T00:00:00",
+   "activity_code": "R01",
+   "project_detail_url": "https://example.org/nih/project/1004"
+  },
+  {
+   "appl_id": 1005,
+   "project_num": "1R01EX000004-01",
+   "core_project_num": "",
+   "fiscal_year": 2023,
+   "project_title": "MOCK Example Machine Learning for Clinical Triage",
+   "organization": {
+    "org_name": "BOSTON UNIVERSITY"
+   },
+   "principal_investigators": [
+    {
+     "profile_id": 9000001,
+     "first_name": "Example",
+     "middle_name": "Q",
+     "last_name": "Investigator",
+     "is_contact_pi": true
+    }
+   ],
+   "agency_ic_admin": {
+    "abbreviation": "EXIC",
+    "name": "Example Institute"
+   },
+   "award_amount": 100000,
+   "project_start_date": "2021-01-01T00:00:00",
+   "project_end_date": "2025-12-31T00:00:00",
+   "activity_code": "R01",
+   "project_detail_url": "https://example.org/nih/project/1005"
+  }
+ ]
+}
