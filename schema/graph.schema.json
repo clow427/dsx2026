@@ -1,0 +1,138 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://dsx2026.example.org/schema/graph.schema.json",
+  "title": "Alumni Network Graph - shared graph contract",
+  "description": "Structural contract for every graph file (module outputs, merged graph, mock data). Semantic rules that JSON Schema cannot express (unique IDs, edge references, ID prefix matches type) are enforced by scripts/validate_graph.py. See .kiro/specs/shared-data-contract/design.md.",
+  "type": "object",
+  "required": ["schema_version", "generated_at", "producer", "nodes", "edges"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "const": "0.1.0" },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "producer": { "enum": ["research", "identity", "innovation", "merge", "mock"] },
+    "notes": { "type": "string" },
+    "nodes": { "type": "array", "items": { "$ref": "#/definitions/node" } },
+    "edges": { "type": "array", "items": { "$ref": "#/definitions/edge" } }
+  },
+  "definitions": {
+    "nodeType": {
+      "enum": ["person", "publication", "patent", "award", "organization", "topic"]
+    },
+    "edgeType": {
+      "enum": [
+        "AUTHORED",
+        "COAUTHORED_WITH",
+        "INVENTED",
+        "ASSIGNED_TO",
+        "RECEIVED_AWARD",
+        "FUNDED_BY",
+        "AFFILIATED_WITH",
+        "HAS_TOPIC",
+        "SAME_AS_CANDIDATE"
+      ]
+    },
+    "nodeId": {
+      "type": "string",
+      "pattern": "^(person|publication|patent|award|organization|topic):[a-z0-9_]+:[A-Za-z0-9._-]+$"
+    },
+    "confidence": { "enum": ["high", "medium", "low"] },
+    "sourceRef": {
+      "type": "object",
+      "required": ["source", "url"],
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "enum": [
+            "openalex",
+            "semantic_scholar",
+            "patentsview",
+            "nih_reporter",
+            "nsf_awards",
+            "bu_repository",
+            "institutional_bio",
+            "professional_profile",
+            "user_submitted",
+            "manual_curation"
+          ]
+        },
+        "record_id": { "type": "string", "description": "Original identifier in the source system." },
+        "url": { "type": "string", "format": "uri" },
+        "retrieved_at": { "type": "string", "format": "date" },
+        "note": { "type": "string" }
+      }
+    },
+    "buAffiliation": {
+      "type": "object",
+      "required": ["status", "evidence"],
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": ["verified_alumnus", "bu_affiliated_researcher", "unverified", "ambiguous"]
+        },
+        "evidence": { "type": "array", "items": { "$ref": "#/definitions/sourceRef" } },
+        "details": {
+          "type": "object",
+          "description": "Only include fields stated by a source in `evidence`.",
+          "additionalProperties": false,
+          "properties": {
+            "degree": { "type": "string" },
+            "department": { "type": "string" },
+            "graduation_year": { "type": "integer", "minimum": 1839, "maximum": 2100 }
+          }
+        }
+      },
+      "if": {
+        "properties": { "status": { "enum": ["verified_alumnus", "bu_affiliated_researcher"] } }
+      },
+      "then": {
+        "properties": { "evidence": { "minItems": 1 } }
+      }
+    },
+    "node": {
+      "type": "object",
+      "required": ["id", "type", "label", "sources"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/definitions/nodeId" },
+        "type": { "$ref": "#/definitions/nodeType" },
+        "label": { "type": "string", "minLength": 1 },
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/definitions/sourceRef" }
+        },
+        "bu_affiliation": { "$ref": "#/definitions/buAffiliation" },
+        "attributes": {
+          "type": "object",
+          "description": "Type-specific attributes. Recommended keys are listed in the shared-data-contract design. Omit unknown values; never guess."
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "type": { "const": "person" } } },
+          "then": { "required": ["bu_affiliation"] },
+          "else": { "not": { "required": ["bu_affiliation"] } }
+        }
+      ]
+    },
+    "edge": {
+      "type": "object",
+      "required": ["id", "type", "source", "target", "evidence", "confidence", "derivation"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^edge:.+$" },
+        "type": { "$ref": "#/definitions/edgeType" },
+        "source": { "$ref": "#/definitions/nodeId" },
+        "target": { "$ref": "#/definitions/nodeId" },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/definitions/sourceRef" }
+        },
+        "confidence": { "$ref": "#/definitions/confidence" },
+        "derivation": { "enum": ["source_record", "derived", "identity_match"] },
+        "note": { "type": "string" }
+      }
+    }
+  }
+}

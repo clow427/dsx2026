@@ -1,0 +1,196 @@
+{
+  "schema_version": "0.1.0",
+  "generated_at": "2026-10-24T00:00:00Z",
+  "producer": "mock",
+  "notes": "MOCK DATA. All people, organizations, and records are fictional and all URLs point to example domains. Used by the frontend until real module output exists. Do not merge into data/graph.json.",
+  "nodes": [
+    {
+      "id": "person:canonical:example-researcher-a",
+      "type": "person",
+      "label": "Example Researcher A",
+      "sources": [
+        { "source": "institutional_bio", "url": "https://example.edu/people/researcher-a", "note": "MOCK" },
+        { "source": "openalex", "record_id": "A0000000001", "url": "https://example.org/openalex/authors/A0000000001", "note": "MOCK" }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          { "source": "institutional_bio", "url": "https://example.edu/people/researcher-a", "note": "MOCK: bio states PhD from BU" }
+        ],
+        "details": { "degree": "PhD", "department": "Biomedical Engineering", "graduation_year": 2012 }
+      },
+      "attributes": { "orcid": "0000-0000-0000-0000" }
+    },
+    {
+      "id": "person:openalex:A0000000002",
+      "type": "person",
+      "label": "Example Researcher B",
+      "sources": [
+        { "source": "openalex", "record_id": "A0000000002", "url": "https://example.org/openalex/authors/A0000000002", "note": "MOCK" }
+      ],
+      "bu_affiliation": {
+        "status": "bu_affiliated_researcher",
+        "evidence": [
+          { "source": "openalex", "record_id": "W0000000001", "url": "https://example.org/openalex/works/W0000000001", "note": "MOCK: authorship institution is the example university" }
+        ]
+      }
+    },
+    {
+      "id": "person:openalex:A0000000003",
+      "type": "person",
+      "label": "E. Researcher",
+      "sources": [
+        { "source": "openalex", "record_id": "A0000000003", "url": "https://example.org/openalex/authors/A0000000003", "note": "MOCK" }
+      ],
+      "bu_affiliation": { "status": "ambiguous", "evidence": [] }
+    },
+    {
+      "id": "publication:openalex:W0000000001",
+      "type": "publication",
+      "label": "Example Study of Machine Learning for Clinical Triage",
+      "sources": [
+        { "source": "openalex", "record_id": "W0000000001", "url": "https://example.org/openalex/works/W0000000001", "note": "MOCK" }
+      ],
+      "attributes": { "year": 2021, "venue": "Example Journal of Medical AI", "doi": "10.0000/example.0001" }
+    },
+    {
+      "id": "patent:uspto:US0000001B1",
+      "type": "patent",
+      "label": "Example System for Automated Medical Image Triage",
+      "sources": [
+        { "source": "patentsview", "record_id": "US0000001B1", "url": "https://example.org/patents/US0000001B1", "note": "MOCK" }
+      ],
+      "attributes": { "patent_number": "US0000001B1", "grant_date": "2023-05-02" }
+    },
+    {
+      "id": "award:nih:R00EX000001",
+      "type": "award",
+      "label": "Example Award: Learning Health Systems",
+      "sources": [
+        { "source": "nih_reporter", "record_id": "R00EX000001", "url": "https://example.org/reporter/R00EX000001", "note": "MOCK" }
+      ],
+      "attributes": { "agency": "Example Funding Agency", "award_number": "R00EX000001", "fiscal_year": 2022 }
+    },
+    {
+      "id": "organization:mock:example-university",
+      "type": "organization",
+      "label": "Example University",
+      "sources": [
+        { "source": "manual_curation", "url": "https://example.edu", "note": "MOCK" }
+      ]
+    },
+    {
+      "id": "organization:mock:example-medtech",
+      "type": "organization",
+      "label": "Example MedTech Inc.",
+      "sources": [
+        { "source": "patentsview", "record_id": "assignee-0001", "url": "https://example.org/assignees/0001", "note": "MOCK" }
+      ]
+    },
+    {
+      "id": "topic:openalex:T00001",
+      "type": "topic",
+      "label": "Artificial Intelligence in Healthcare",
+      "sources": [
+        { "source": "openalex", "record_id": "T00001", "url": "https://example.org/openalex/topics/T00001", "note": "MOCK" }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge:authored:person:canonical:example-researcher-a|publication:openalex:W0000000001",
+      "type": "AUTHORED",
+      "source": "person:canonical:example-researcher-a",
+      "target": "publication:openalex:W0000000001",
+      "evidence": [{ "source": "openalex", "record_id": "W0000000001", "url": "https://example.org/openalex/works/W0000000001", "note": "MOCK" }],
+      "confidence": "high",
+      "derivation": "source_record"
+    },
+    {
+      "id": "edge:authored:person:openalex:A0000000002|publication:openalex:W0000000001",
+      "type": "AUTHORED",
+      "source": "person:openalex:A0000000002",
+      "target": "publication:openalex:W0000000001",
+      "evidence": [{ "source": "openalex", "record_id": "W0000000001", "url": "https://example.org/openalex/works/W0000000001", "note": "MOCK" }],
+      "confidence": "high",
+      "derivation": "source_record"
+    },
+    {
+      "id": "edge:coauthored_with:person:canonical:example-researcher-a|person:openalex:A0000000002",
+      "type": "COAUTHORED_WITH",
+      "source": "person:canonical:example-researcher-a",
+      "target": "person:openalex:A0000000002",
+      "evidence": [{ "source": "openalex", "record_id": "W0000000001", "url": "https://example.org/openalex/works/W0000000001", "note": "MOCK: shared publication" }],
+      "confidence": "high",
+      "derivation": "derived"
+    },
+    {
+      "id": "edge:has_topic:publication:openalex:W0000000001|topic:openalex:T00001",
+      "type": "HAS_TOPIC",
+      "source": "publication:openalex:W0000000001",
+      "target": "topic:openalex:T00001",
+      "evidence": [{ "source": "openalex", "record_id": "W0000000001", "url": "https://example.org/openalex/works/W0000000001", "note": "MOCK" }],
+      "confidence": "high",
+      "derivation": "source_record"
+    },
+    {
+      "id": "edge:invented:person:canonical:example-researcher-a|patent:uspto:US0000001B1",
+      "type": "INVENTED",
+      "source": "person:canonical:example-researcher-a",
+      "target": "patent:uspto:US0000001B1",
+      "evidence": [{ "source": "patentsview", "record_id": "US0000001B1", "url": "https://example.org/patents/US0000001B1", "note": "MOCK" }],
+      "confidence": "medium",
+      "derivation": "identity_match",
+      "note": "MOCK: inventor record linked to canonical person via name + shared affiliation"
+    },
+    {
+      "id": "edge:assigned_to:patent:uspto:US0000001B1|organization:mock:example-medtech",
+      "type": "ASSIGNED_TO",
+      "source": "patent:uspto:US0000001B1",
+      "target": "organization:mock:example-medtech",
+      "evidence": [{ "source": "patentsview", "record_id": "US0000001B1", "url": "https://example.org/patents/US0000001B1", "note": "MOCK" }],
+      "confidence": "high",
+      "derivation": "source_record"
+    },
+    {
+      "id": "edge:received_award:person:openalex:A0000000002|award:nih:R00EX000001",
+      "type": "RECEIVED_AWARD",
+      "source": "person:openalex:A0000000002",
+      "target": "award:nih:R00EX000001",
+      "evidence": [{ "source": "nih_reporter", "record_id": "R00EX000001", "url": "https://example.org/reporter/R00EX000001", "note": "MOCK" }],
+      "confidence": "medium",
+      "derivation": "identity_match"
+    },
+    {
+      "id": "edge:funded_by:publication:openalex:W0000000001|award:nih:R00EX000001",
+      "type": "FUNDED_BY",
+      "source": "publication:openalex:W0000000001",
+      "target": "award:nih:R00EX000001",
+      "evidence": [{ "source": "nih_reporter", "record_id": "R00EX000001", "url": "https://example.org/reporter/R00EX000001", "note": "MOCK: publication listed under award" }],
+      "confidence": "high",
+      "derivation": "source_record"
+    },
+    {
+      "id": "edge:affiliated_with:person:openalex:A0000000002|organization:mock:example-university",
+      "type": "AFFILIATED_WITH",
+      "source": "person:openalex:A0000000002",
+      "target": "organization:mock:example-university",
+      "evidence": [{ "source": "openalex", "record_id": "W0000000001", "url": "https://example.org/openalex/works/W0000000001", "note": "MOCK" }],
+      "confidence": "high",
+      "derivation": "source_record"
+    },
+    {
+      "id": "edge:same_as_candidate:person:canonical:example-researcher-a|person:openalex:A0000000003",
+      "type": "SAME_AS_CANDIDATE",
+      "source": "person:canonical:example-researcher-a",
+      "target": "person:openalex:A0000000003",
+      "evidence": [
+        { "source": "openalex", "record_id": "A0000000003", "url": "https://example.org/openalex/authors/A0000000003", "note": "MOCK" },
+        { "source": "institutional_bio", "url": "https://example.edu/people/researcher-a", "note": "MOCK" }
+      ],
+      "confidence": "low",
+      "derivation": "identity_match",
+      "note": "MOCK: name variant only; not merged"
+    }
+  ]
+}

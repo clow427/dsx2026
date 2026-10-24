@@ -1,0 +1,16 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Validate graph data on save",
+      "trigger": "PostFileSave",
+      "description": "Runs the shared graph validator whenever a JSON file under data/ is saved, so contract violations are caught immediately.",
+      "matcher": "(^|/)data/.*\\.json$",
+      "action": {
+        "type": "command",
+        "command": "if [ -f scripts/validate_graph.py ]; then python3 scripts/validate_graph.py data/mock/graph.sample.json $(ls data/modules/*.json data/graph.json 2>/dev/null | grep -v identity_matches); else echo \"Graph validator not implemented yet - see .kiro/specs/shared-data-contract/tasks.md (task 4).\"; fi",
+        "timeout": 60
+      }
+    }
+  ]
+}
