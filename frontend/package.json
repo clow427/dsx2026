@@ -4,12 +4,16 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "sync-graph": "node scripts/sync-graph.mjs",
+    "predev": "node scripts/sync-graph.mjs",
     "dev": "vite",
+    "prebuild": "node scripts/sync-graph.mjs",
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.strict.json --noEmit",
     "test:watch": "vitest"
   },
   "dependencies": {
@@ -51,6 +55,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
+    "cytoscape": "3.34.4",
     "date-fns": "^3.6.0",
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.35.0",
