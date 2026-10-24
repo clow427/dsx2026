@@ -39,7 +39,7 @@ OUTPUT_PATH = REPO_ROOT / "data" / "modules" / "research.json"
 class ResearchConfig:
     institution_id: str = BU_OPENALEX_ID
     topic_ids: tuple[str, ...] = DEMO_TOPIC_IDS
-    from_year: int = 2019
+    from_year: int = 2000
     to_year: int = 2025
     # OpenAlex work types to keep. Conference papers are typed "article".
     work_types: tuple[str, ...] = ("article", "review")

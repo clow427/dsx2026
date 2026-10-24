@@ -23,7 +23,7 @@ def config(tmp_path):
 def test_filter_uses_bu_lineage_topics_and_years():
     f = ResearchConfig().openalex_filter()
     assert "authorships.institutions.lineage:I111088046" in f
-    assert "publication_year:2019-2025" in f
+    assert f"publication_year:{ResearchConfig().from_year}-{ResearchConfig().to_year}" in f
     assert "topics.id:T11396|" in f
     assert "topics.id" not in replace(ResearchConfig(), topic_ids=()).openalex_filter()
 
