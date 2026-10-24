@@ -44,3 +44,13 @@ This module establishes who each person is and how their BU connection is suppor
 1. WHEN a person has multiple source records, THE merged graph SHALL contain exactly one node for that person.
 2. WHEN a match is uncertain, THE graph SHALL show it as a `SAME_AS_CANDIDATE` edge that the UI flags visibly, not as a silent merge.
 3. Both output files SHALL pass validation.
+
+### Requirement 7: Person photos (optional)
+
+**User story:** As a student, I want to see a photo of a person when one is legitimately available, so that the network feels recognizable without compromising anyone's privacy.
+
+1. THE module SHALL store a person photo only from one of three permitted sources: the person themselves (`user_submitted`), Wikimedia Commons under an open license (`wikimedia_commons`), or an institutional image with documented permission (`institutional_permission`).
+2. Each photo SHALL include `url`, `source` (`user_submitted` | `wikimedia_commons` | `institutional_permission`), `license` (a license identifier or permission statement), `attribution`, and an `evidence` URL.
+3. IF any of those fields is missing, THEN THE module SHALL omit the photo.
+4. WHEN a person has no photo, THE graph and UI SHALL remain complete and usable, and THE UI SHALL show a non-photo fallback.
+5. THE module SHALL NOT scrape photos or use photos for identity matching.

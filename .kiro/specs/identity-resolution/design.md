@@ -36,8 +36,16 @@ tests/identity/
       - { source: institutional_bio, url: "https://..." }
   profiles:
     - { source: professional_profile, url: "https://www.linkedin.com/in/...", note: "user-submitted" }
+  photo:                          # optional; omit entirely when no permitted photo exists
+    url: "https://example.org/photos/jane-doe.jpg"
+    source: wikimedia_commons     # user_submitted | wikimedia_commons | institutional_permission
+    license: CC-BY-SA-4.0         # license identifier or permission statement
+    attribution: "Photo by Example Author"
+    evidence: "https://example.org/wiki/File:Jane_Doe.jpg"
   submitted_by: manual_curation   # or user_submitted
 ```
+
+`directory.py` copies `photo` into the node's `attributes.photo` only when `url`, `source`, `license`, `attribution`, and `evidence` are all present; otherwise the photo is omitted (Requirement 7). Wikidata P18 values resolve to Commons file pages, and the license and author from that page are recorded as `license` and `attribution`.
 
 ## Matching pipeline
 
@@ -61,3 +69,5 @@ Unmatched source-level persons pass through the merge unchanged and keep their s
 ## Privacy
 
 Store public, professional information only. Never store contact details. When a fact's evidence URL is removed or disputed, drop the fact.
+
+Photos follow Requirement 7 and the photo rule in `.kiro/steering/data-integrity.md`.

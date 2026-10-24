@@ -1,0 +1,196 @@
+{
+  "schema_version": "0.1.0",
+  "generated_at": "2026-10-24T22:42:16Z",
+  "notes": "Automated identity matches: canonical people (people.json) vs source-level persons, blocked by name and ORCID and scored per design.md. 6 merged, 0 candidate, 0 rejected. Pairs not shown because the canonical person has a stronger match: person:canonical:michael-lavalley-biostatistics ~ person:openalex:A5075246228 (rejected/high, reviewed by p2-curator 2026-10-24). 2 pair(s) overridden by manual review (data/curation/reviews.yaml).",
+  "matches": [
+    {
+      "canonical_id": "person:canonical:alexa-beiser-biostatistics",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5063754448"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5063754448 carries the same ORCID 0000-0001-8551-7778",
+          "evidence_urls": [
+            "https://orcid.org/0000-0001-8551-7778"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5063754448 name 'Alexa Beiser' equals 'Alexa Beiser' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5063754448 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W4225114792",
+            "https://www.bu.edu/academics/archive/2013-2014/grs/faculty/biostatistics/",
+            "https://orcid.org/0000-0001-8551-7778"
+          ]
+        },
+        {
+          "signal": "manual_review",
+          "detail": "Reviewed by p2-curator on 2026-10-24: merged/high. Confirmed by hand: the OpenAlex record A5063754448 (\"Alexa Beiser\", ORCID 0000-0001-8551-7778, BU authorship) is the same person as the curated BU biostatistics alumna. Same ORCID and same BU affiliation; promote the automated result to a confirmed merge."
+        }
+      ],
+      "reviewed": {
+        "by": "p2-curator",
+        "at": "2026-10-24",
+        "note": "Confirmed by hand: the OpenAlex record A5063754448 (\"Alexa Beiser\", ORCID 0000-0001-8551-7778, BU authorship) is the same person as the curated BU biostatistics alumna. Same ORCID and same BU affiliation; promote the automated result to a confirmed merge."
+      }
+    },
+    {
+      "canonical_id": "person:canonical:david-gagnon-biostatistics",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5032470748"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5032470748 carries the same ORCID 0000-0002-6367-3179",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-6367-3179"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5032470748 name 'DAVID R. GAGNON' equals 'David R. Gagnon' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5032470748 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W2781904184",
+            "https://openalex.org/W2809966205",
+            "https://openalex.org/W2896420497"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:howard-cabral-biostatistics",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5045667842"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5045667842 carries the same ORCID 0000-0002-1185-8331",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-1185-8331"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5045667842 name 'Howard Cabral' equals 'Howard Cabral' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5045667842 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W3131648174",
+            "https://openalex.org/W4324321257",
+            "https://www.bu.edu/academics/archive/2013-2014/grs/faculty/biostatistics/"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:kathryn-lunetta-biostatistics",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5086558373"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5086558373 carries the same ORCID 0000-0002-9268-810X",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-9268-810X"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5086558373 name 'Kathryn L. Lunetta' equals 'Kathryn L. Lunetta' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5086558373 has a Boston University affiliation; canonical person is bu_affiliated_researcher",
+          "evidence_urls": [
+            "https://openalex.org/W7116895279",
+            "https://www.bu.edu/academics/archive/2013-2014/grs/faculty/biostatistics/",
+            "https://orcid.org/0000-0002-9268-810X"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:michael-lavalley-biostatistics",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5045583989"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5045583989 carries the same ORCID 0000-0002-8488-5170",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-8488-5170"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5045583989 name 'Michael P. LaValley' equals 'Michael P. LaValley' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5045583989 has a Boston University affiliation; canonical person is bu_affiliated_researcher",
+          "evidence_urls": [
+            "https://openalex.org/W4256049924",
+            "https://openalex.org/W4282930522",
+            "https://www.bu.edu/academics/archive/2013-2014/grs/faculty/biostatistics/"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:serkalem-demissie-biostatistics",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5067354038"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5067354038 carries the same ORCID 0000-0002-8009-0987",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-8009-0987"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5067354038 name 'Serkalem Demissie' equals 'Serkalem Demissie' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5067354038 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W4285386114",
+            "https://openalex.org/W7116895279",
+            "https://www.bu.edu/academics/archive/2013-2014/grs/faculty/biostatistics/"
+          ]
+        }
+      ]
+    }
+  ]
+}

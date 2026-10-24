@@ -21,10 +21,10 @@
 - [x] 5. Write contract tests in `tests/contract/`
   - Cover unique IDs, dangling edges, missing evidence, `verified_alumnus` without evidence, a `merged` match at low confidence, and confirmation that the mock data passes.
   - _Requirements: 7.2, 9.2_
-- [ ] 6. Implement the merge step in `pipelines/merge/` (P2)
-  - [ ] 6.1 ID rewriting and source union for merged matches
-  - [ ] 6.2 `SAME_AS_CANDIDATE` edges for candidate matches
-  - [ ] 6.3 Deduplication, deterministic output, and a validator run on `data/graph.json`
+- [x] 6. Implement the merge step in `pipelines/merge/` (P2)
+  - [x] 6.1 ID rewriting and source union for merged matches
+  - [x] 6.2 `SAME_AS_CANDIDATE` edges for candidate matches
+  - [x] 6.3 Deduplication, deterministic output, and a validator run on `data/graph.json`
   - _Requirements: 8_
 - [ ] 7. Verify that the Kiro hook fires when a file under `data/` is saved, and record the result in the Kiro usage log
   - _Requirements: 7.3_
