@@ -83,6 +83,11 @@ def normalize_works(
         if not title:
             stats.skipped["work_without_title"] += 1
             continue
+        if not any(_author_key(a) for a in work.get("authorships") or []):
+            # Req 5.1: a paper must be able to show its authors. Without any author
+            # ID there is no person to connect it to.
+            stats.skipped["work_without_identified_authors"] += 1
+            continue
         stats.works += 1
 
         work_ref = openalex_ref(wid, retrieved_at)
@@ -92,11 +97,11 @@ def normalize_works(
         authors_in_work: list[str] = []
         for authorship in work.get("authorships") or []:
             author = authorship.get("author") or {}
-            aid = short_id(author.get("id"))
-            name = (author.get("display_name") or "").strip()
-            if not aid or not name:
+            key = _author_key(authorship)
+            if not key:
                 stats.skipped["authorship_without_author_id_or_name"] += 1
                 continue
+            aid, name = key
             person_id = make_node_id("person", "openalex", aid)
             attrs = {}
             orcid = short_id(author.get("orcid"), ORCID_PREFIX)
@@ -168,6 +173,14 @@ def normalize_works(
             g.add_edge("COAUTHORED_WITH", a, b, [work_ref], "high", "derived")
 
     return g, stats
+
+
+def _author_key(authorship: dict) -> tuple[str, str] | None:
+    """(OpenAlex author ID, display name) if the authorship identifies a person, else None."""
+    author = authorship.get("author") or {}
+    aid = short_id(author.get("id"))
+    name = (author.get("display_name") or "").strip()
+    return (aid, name) if aid and name else None
 
 
 def _publication_attributes(work: dict) -> dict:

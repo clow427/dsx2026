@@ -51,6 +51,18 @@ def test_untitled_work_and_unidentified_author_are_skipped(works):
     assert len([n for n in g.nodes.values() if n["type"] == "person"]) == 3
 
 
+def test_work_without_any_identified_author_is_skipped():
+    work = {
+        "id": "https://openalex.org/W9000000098",
+        "display_name": "Example Paper With Anonymous Author",
+        "authorships": [{"author": {"id": None, "display_name": "Example Anonymous"}, "institutions": []}],
+        "topics": [{"id": "https://openalex.org/T11396", "display_name": "Artificial Intelligence in Healthcare"}],
+    }
+    g, stats, _ = build([work])
+    assert g.nodes == {} and g.edges == {}
+    assert stats.works == 0 and stats.skipped["work_without_identified_authors"] == 1
+
+
 def test_bu_affiliation_rules(works):
     g, stats, _ = build(works)
     one = g.nodes["person:openalex:A9000000001"]["bu_affiliation"]
