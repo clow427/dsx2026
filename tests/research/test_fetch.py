@@ -39,6 +39,15 @@ def test_cursor_paging_stops_at_cap_and_sends_credentials(config):
     assert first["per-page"] == 3
 
 
+def test_no_cap_pages_until_the_cursor_ends(tmp_path):
+    config = ResearchConfig(cache_dir=tmp_path, max_works=None)
+    client = FakeClient([page(["W1", "W2"], "c2"), page(["W3"], "c3"), page([], None)])
+    result = fetch_works(config, client=client)
+    assert len(result.works) == 3
+    assert client.calls[0][2]["params"]["per-page"] == 200
+    assert len(fetch_works(config, client=FakeClient([])).works) == 3  # cache reused
+
+
 def test_cache_is_reused_and_has_no_api_key(config, tmp_path):
     fetch_works(config, client=FakeClient([page(["W1", "W2", "W3"], None)]), api_key="SECRET")
     cached_text = "".join(p.read_text() for p in tmp_path.rglob("*.json"))

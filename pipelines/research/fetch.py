@@ -58,7 +58,7 @@ def build_query(config: ResearchConfig) -> dict:
         "filter": config.openalex_filter(),
         "sort": "cited_by_count:desc",
         "select": ",".join(WORK_FIELDS),
-        "per-page": min(MAX_PER_PAGE, config.max_works),
+        "per-page": MAX_PER_PAGE if config.max_works is None else min(MAX_PER_PAGE, config.max_works),
         "max_works": config.max_works,
     }
 
@@ -161,7 +161,7 @@ def fetch_works(
     pages: list[str] = []
     cursor = "*"
     total = None
-    while cursor and len(works) < config.max_works:
+    while cursor and (config.max_works is None or len(works) < config.max_works):
         resp = get_client().request("GET", url, params={**params, "cursor": cursor})
         page = resp.json()
         name = f"page_{len(pages) + 1:04d}.json"

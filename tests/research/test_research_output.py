@@ -69,7 +69,9 @@ def test_is_real_research_output(doc):
 
 def test_scope_matches_config(doc, idx):
     pubs = [n for n in doc["nodes"] if n["type"] == "publication"]
-    assert 0 < len(pubs) <= CONFIG.max_works
+    assert pubs
+    if CONFIG.max_works is not None:
+        assert len(pubs) <= CONFIG.max_works
     for p in pubs:
         attrs = p.get("attributes", {})
         if "year" in attrs:

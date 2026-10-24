@@ -43,8 +43,10 @@ class ResearchConfig:
     to_year: int = 2025
     # OpenAlex work types to keep. Conference papers are typed "article".
     work_types: tuple[str, ...] = ("article", "review")
-    # Cap on works (Req 1.2). The most-cited matching works are kept.
-    max_works: int = 150
+    # Optional cap on works (Req 1.2). None keeps every matching work; the topic,
+    # year, and type filters bound the dataset (578 works as of 2026-10-24).
+    # If you clear the topic filter, set a cap: BU has 200k+ works in OpenAlex.
+    max_works: int | None = None
     # Works with more distinct authors than this get AUTHORED edges but no
     # COAUTHORED_WITH edges (Req 3.2).
     max_authors_for_coauthor: int = 25

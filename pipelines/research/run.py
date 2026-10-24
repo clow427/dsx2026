@@ -38,10 +38,13 @@ def build_notes(config: ResearchConfig, matching: int, s2_matched: int | None) -
     s2 = f"Semantic Scholar enrichment matched {s2_matched} publications by DOI." if s2_matched is not None else (
         "Semantic Scholar enrichment not applied."
     )
+    selection = (
+        f"All {matching} matching works." if config.max_works is None else f"Top {matching} by citation count."
+    )
     return (
         f"OpenAlex works with at least one authorship at Boston University ({config.institution_id}) or a BU child "
         f"institution, topics: {topics}, years {config.from_year}-{config.to_year}, types: "
-        f"{', '.join(config.work_types)}. Top {matching} by citation count. Coauthor edges skipped for works with "
+        f"{', '.join(config.work_types)}. {selection} Coauthor edges skipped for works with "
         f"more than {config.max_authors_for_coauthor} authors. {s2}"
     )
 
@@ -93,7 +96,13 @@ def main(argv: list[str] | None = None) -> int:
         s2 = enrich_with_s2(graph, config, api_key=os.environ.get("S2_API_KEY") or None, refresh=args.refresh)
         if not s2.failed:
             s2_matched = s2.matched
-            log.info("Semantic Scholar: matched %d of %d DOIs", s2.matched, s2.requested)
+            log.info(
+                "Semantic Scholar: matched %d of %d DOIs (%d of %d batches failed)",
+                s2.matched,
+                s2.requested,
+                s2.failed_batches,
+                s2.batches,
+            )
 
     doc = graph.to_document(
         "research", generated_at=result.fetched_at, notes=build_notes(config, stats.works, s2_matched)
