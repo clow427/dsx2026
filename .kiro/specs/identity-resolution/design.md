@@ -61,3 +61,16 @@ Unmatched source-level persons pass through the merge unchanged and keep their s
 ## Privacy
 
 Store public, professional information only. Never store contact details. When a fact's evidence URL is removed or disputed, drop the fact.
+
+## Correctness properties (planned)
+
+Implement these as Hypothesis tests in `tests/identity/test_matching_properties.py`. Generators should produce pairs of fictional person records, varying name variants, ORCIDs (equal, conflicting, or missing), affiliations, and coauthors.
+
+| ID | Property: for any pair of person records… | Requirements |
+|---|---|---|
+| I1 | A `low`-confidence result is never `merged` | 3.3, 6 |
+| I2 | Equal ORCIDs give `merged`/`high`. Conflicting ORCIDs give `rejected`, whatever the other signals say | 3.2 |
+| I3 | Matching is symmetric: `match(a, b)` and `match(b, a)` give the same status and confidence | 3 |
+| I4 | Adding a corroborating signal never lowers confidence (monotonicity) | 3.2 |
+| I5 | A `reviews.yaml` override always wins, and it fills in `reviewed` | 3.4 |
+| I6 | Every match lists the signals that produced it, and each signal cites a record of one of the members | 6 |

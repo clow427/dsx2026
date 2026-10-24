@@ -47,6 +47,16 @@ Edges use a solid line for `high` confidence, dashed for `medium`, and dotted fo
    - Add a small bonus for `verified_alumnus`, then for `bu_affiliated_researcher`.
 5. Return the people with the contributing records attached, so that the UI can explain the score.
 
+### Correctness properties (planned, fast-check + Vitest)
+
+| ID | Property: for any graph and topic… | Requirements |
+|---|---|---|
+| F1 | Each person's score equals the weighted sum over the contributing records the ranking returns. Every score traces back to edges | 7 |
+| F2 | Every returned person is connected to the topic through `HAS_TOPIC` plus `AUTHORED`, `INVENTED`, or `RECEIVED_AWARD` | 7 |
+| F3 | Ranking is deterministic, and ties are broken by node ID | 7 |
+| F4 | Upgrading an edge's confidence never lowers that person's score | 7 |
+| F5 | Applying the "Research" or "Patent" filter never shows an edge of an excluded type | 6 |
+
 ## Build-order principle
 
 Build every feature first against `data/mock/graph.sample.json`. Switch to `graph.json` once the merge produces it.

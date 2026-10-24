@@ -1,0 +1,14 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Spec task follow-through",
+      "trigger": "PostTaskExec",
+      "description": "After each spec task, keeps tasks.md, validation, PBT coverage, commit messages, and the Kiro usage log in sync.",
+      "action": {
+        "type": "agent",
+        "prompt": "A spec task just finished. Before moving on: (1) check off the task (and any finished sub-tasks) in that spec's tasks.md; (2) if the task produced or changed a graph file, run `.venv/bin/python scripts/validate_graph.py <file>` and fix any errors; (3) if the task implements a correctness property listed in the spec's design.md, make sure the matching Hypothesis test exists and passes; (4) in any commit message you propose, cite the requirement numbers from the task's `_Requirements:_` line; (5) add one row to the \"Kiro usage log\" table in docs/KIRO_USAGE.md describing what Kiro did for this task."
+      }
+    }
+  ]
+}

@@ -16,5 +16,7 @@
   - _Requirements: 2_
 - [ ] 7. Write fixture-based tests for normalization and the affiliation status rules
   - _Requirements: 1, 3_
+- [ ] 7.5 Write property-based tests for correctness properties N1–N5 in `design.md`
+  - _Requirements: 1, 2, 3, 4_
 - [ ] 8. Produce the final dataset, confirm the validator passes, and spot-check records by hand against their source URLs
   - _Requirements: 4_

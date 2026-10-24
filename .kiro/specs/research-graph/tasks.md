@@ -18,5 +18,7 @@
   - _Requirements: 4_
 - [x] 8. Write fixture-based tests for normalization and the coauthor derivation
   - _Requirements: 2, 3_
+- [x] 8.5 Write property-based tests (Hypothesis) for correctness properties R1–R6 in `design.md`, and mutation-check them against `normalize.py`
+  - _Requirements: 2, 3, 4.2, 5_
 - [x] 9. Produce the final dataset, confirm the validator passes, and spot-check 10 records by hand against their source URLs
   - _Requirements: 5_

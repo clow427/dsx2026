@@ -18,6 +18,8 @@
   - _Requirements: 6_
 - [ ] 8. Build Find My People (ranking and explanations)
   - _Requirements: 7_
+- [ ] 8.5 Write fast-check property tests for correctness properties F1–F5 in `design.md`
+  - _Requirements: 6, 7_
 - [ ] 9. Add loading, empty, and error states, and run an accessibility pass
   - _Requirements: 8.1_
 - [ ] 10. Switch to the merged `graph.json`, deploy, and rehearse the demo journey end to end
