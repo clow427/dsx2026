@@ -1,0 +1,21 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    "strict": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true
+  },
+  "include": [
+    "src/types",
+    "src/data",
+    "src/features",
+    "src/components/graph",
+    "src/components/landing",
+    "src/pages/Explore.tsx",
+    "src/pages/Landing.tsx",
+    "src/lib/graphLabels.ts",
+    "src/App.tsx",
+    "src/test/graphData.test.ts",
+    "src/vite-env.d.ts"
+  ]
+}

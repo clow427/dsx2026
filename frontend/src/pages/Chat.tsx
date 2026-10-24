@@ -15,7 +15,12 @@ import { Shimmer } from "@/components/ai-elements/shimmer";
 import { Suggestion, Suggestions } from "@/components/ai-elements/suggestion";
 import { Tool, ToolContent, ToolHeader, ToolInput, ToolOutput } from "@/components/ai-elements/tool";
 import { AlumCard } from "@/components/chat/AlumCard";
-import { ALUMNI } from "@/lib/alumniGraph";
+import { AffiliationBadge } from "@/components/graph/badges";
+import { useGraph } from "@/data/GraphContext";
+import { defaultTopic } from "@/data/graphIndex";
+import { rankPeople } from "@/data/findMyPeople";
+import { initials } from "@/lib/graphLabels";
+import type { BuStatus } from "@/types/graph";
 import {
   alumniFromMessages,
   deleteThread,
@@ -351,23 +356,46 @@ function RecentAlumni({ threadId, found }: { threadId: string; found: FoundAlum[
         )}
         {found.length === 0 && elsewhere.length === 0 && (
           <section className="space-y-3">
-            <p className="text-sm text-muted-foreground">People you find will show up here. Meanwhile, a few BU alumni from the 6degrees graph:</p>
-            {ALUMNI.slice(0, 8).map((a) => (
-              <div key={a.id} className="flex items-center gap-3 rounded-2xl bg-card border border-border p-3">
-                {a.photo ? (
-                  <img src={a.photo} alt={a.name} className="w-10 h-10 rounded-full object-cover" loading="lazy" />
-                ) : (
-                  <div className="w-10 h-10 rounded-full bg-primary/10" />
-                )}
-                <div className="min-w-0">
-                  <p className="text-sm font-semibold truncate">{a.name}</p>
-                  <p className="text-[10px] font-bold tracking-[0.12em] uppercase text-primary">{a.degree} · {a.field}</p>
-                </div>
-              </div>
-            ))}
+            <p className="text-sm text-muted-foreground">People you find will show up here. Meanwhile, a few BU-linked people from the 6degrees graph:</p>
+            <GraphPeople />
           </section>
         )}
       </div>
     </aside>
+  );
+}
+
+const BU_LINKED: ReadonlySet<BuStatus> = new Set(["verified_alumnus", "bu_affiliated_researcher"]);
+
+/** Top of the Find My People ranking for the default topic, read from the loaded graph. */
+function GraphPeople() {
+  const { state } = useGraph();
+  const people = useMemo(() => {
+    if (state.status !== "ready") return [];
+    const topic = defaultTopic(state.index);
+    return topic ? rankPeople(state.index, [topic], { statuses: BU_LINKED }).slice(0, 8) : [];
+  }, [state]);
+
+  if (state.status === "loading") return <p className="text-sm text-muted-foreground">Loading the graph…</p>;
+  if (state.status === "error") return <p className="text-sm text-destructive">Couldn't load the graph.</p>;
+  if (!people.length) return <p className="text-sm text-muted-foreground">No BU-linked people in the graph yet.</p>;
+  return (
+    <>
+      {people.map((r) => (
+        <Link
+          key={r.person.id}
+          to={`/explore?node=${encodeURIComponent(r.person.id)}`}
+          className="flex items-center gap-3 rounded-2xl bg-card border border-border p-3 hover:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        >
+          <div className="w-10 h-10 shrink-0 rounded-full bg-primary/10 text-primary flex items-center justify-center font-display font-bold text-sm">
+            {initials(r.person.label)}
+          </div>
+          <div className="min-w-0 space-y-1">
+            <p className="text-sm font-semibold truncate">{r.person.label}</p>
+            <AffiliationBadge status={r.status} />
+          </div>
+        </Link>
+      ))}
+    </>
   );
 }

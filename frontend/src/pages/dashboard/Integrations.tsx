@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { toast } from "sonner";
 import {
-  SiGoogledrive, SiGmail, SiHubspot, SiSlack,
-  SiTelegram, SiGooglesheets, SiTwilio, SiGooglecalendar,
+  SiGoogledrive, SiGmail, SiHubspot,
+  SiTelegram, SiGooglesheets, SiGooglecalendar,
 } from "react-icons/si";
-import { Mail, MessagesSquare, HardDrive, Copy, Check } from "lucide-react";
+import { FaSlack } from "react-icons/fa";
+import { Mail, MessagesSquare, HardDrive, Copy, Check, Phone } from "lucide-react";
 
 type Connector = {
   id: string;
@@ -48,7 +49,7 @@ const connectors: Connector[] = [
     id: "slack",
     name: "Slack",
     description: "Drop a message in a channel every time someone registers, hits the waitlist, or checks in.",
-    Icon: SiSlack, brand: "#4A154B", category: "Messaging",
+    Icon: FaSlack, brand: "#4A154B", category: "Messaging",
     prompt: "Connect Slack to eventspark. In an event's Settings tab, let me pick a Slack channel and choose which events trigger notifications: new registration, waitlist join, check-in, and capacity reached. Include the attendee name, ticket type, and event name in each message, with a link back to the event dashboard.",
   },
   {
@@ -69,7 +70,7 @@ const connectors: Connector[] = [
     id: "twilio",
     name: "Twilio SMS",
     description: "Send SMS reminders before the event and check-in confirmations on arrival.",
-    Icon: SiTwilio, brand: "#F22F46", category: "Messaging",
+    Icon: Phone, brand: "#F22F46", category: "Messaging",
     prompt: "Connect Twilio to eventspark to send SMS to attendees who provided a phone number. Add per-event toggles for: 24-hour SMS reminder, 1-hour SMS reminder, and SMS check-in confirmation. Respect timezone and only message attendees with status='registered' or 'checked_in'. Show estimated SMS volume before enabling.",
   },
 

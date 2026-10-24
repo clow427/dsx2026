@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Copied from ../data by scripts/sync-graph.mjs before dev/build
+public/data/
+
 # Env secrets — never commit
 .env
 .env.*

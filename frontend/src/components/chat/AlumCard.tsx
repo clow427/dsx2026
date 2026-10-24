@@ -1,6 +1,6 @@
 import { ExternalLink, Check } from "lucide-react";
 import type { FoundAlum } from "@/lib/chatStore";
-import { initials } from "@/lib/alumniGraph";
+import { initials } from "@/lib/graphLabels";
 
 const tints = ["bg-primary/10 text-primary", "bg-success/15 text-success", "bg-warning/20 text-warning", "bg-secondary text-secondary-foreground"];
 
