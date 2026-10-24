@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  :root {
+    --background: 0 0% 98%;
+    --foreground: 240 30% 14%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 30% 14%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 30% 14%;
+
+    --primary: 340 75% 58%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 10% 94%;
+    --secondary-foreground: 240 30% 14%;
+
+    --muted: 240 10% 96%;
+    --muted-foreground: 240 5% 46%;
+
+    --accent: 240 10% 94%;
+    --accent-foreground: 240 30% 14%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 91%;
+    --input: 0 0% 91%;
+    --ring: 340 75% 58%;
+
+    --radius: 0.5rem;
+
+    --success: 172 50% 40%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 80% 55%;
+    --warning-foreground: 0 0% 100%;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 240 30% 14%;
+    --sidebar-primary: 340 75% 58%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 96%;
+    --sidebar-accent-foreground: 240 30% 14%;
+    --sidebar-border: 0 0% 91%;
+    --sidebar-ring: 340 75% 58%;
+  }
+
+  .dark {
+    --background: 240 25% 8%;
+    --foreground: 240 5% 95%;
+
+    --card: 240 25% 11%;
+    --card-foreground: 240 5% 95%;
+
+    --popover: 240 25% 11%;
+    --popover-foreground: 240 5% 95%;
+
+    --primary: 340 75% 58%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 15% 18%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 240 15% 18%;
+    --muted-foreground: 240 5% 55%;
+
+    --accent: 240 15% 18%;
+    --accent-foreground: 240 5% 95%;
+
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 15% 20%;
+    --input: 240 15% 20%;
+    --ring: 340 75% 58%;
+
+    --sidebar-background: 240 25% 8%;
+    --sidebar-foreground: 240 5% 85%;
+    --sidebar-primary: 340 75% 58%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 15% 14%;
+    --sidebar-accent-foreground: 240 5% 95%;
+    --sidebar-border: 240 15% 16%;
+    --sidebar-ring: 340 75% 58%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'DM Sans', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  }
+}
+
+@layer utilities {
+  .prose-readable {
+    max-width: 70ch;
+  }
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* react-phone-number-input themed to match design system */
+.phone-input-wrapper.PhoneInput {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 2.75rem;
+  padding: 0 1rem;
+  border-radius: 9999px;
+  background: hsl(var(--background));
+  border: 1px solid hsl(var(--input));
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.phone-input-wrapper.PhoneInput:focus-within {
+  border-color: hsl(var(--ring));
+  box-shadow: 0 0 0 2px hsl(var(--ring) / 0.2);
+}
+.phone-input-wrapper .PhoneInputCountry {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+.phone-input-wrapper .PhoneInputCountryIcon {
+  width: 1.25rem;
+  height: 0.9rem;
+  box-shadow: none;
+  background: transparent;
+}
+.phone-input-wrapper .PhoneInputCountrySelectArrow {
+  color: hsl(var(--muted-foreground));
+  opacity: 0.7;
+}
+.phone-input-wrapper .PhoneInputInput {
+  flex: 1;
+  background: transparent;
+  border: 0;
+  outline: none;
+  font-size: 0.875rem;
+  color: hsl(var(--foreground));
+  height: 100%;
+}
+.phone-input-wrapper .PhoneInputInput::placeholder {
+  color: hsl(var(--muted-foreground));
+}
