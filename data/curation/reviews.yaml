@@ -1,0 +1,47 @@
+# Manual match review decisions (identity-resolution Req 3.4).
+#
+# A decision here OVERRIDES the automated match result produced by
+# pipelines/identity/match.py (task 5). When match.py finds a decision whose
+# canonical_id + member_ids match a pair it scored, it replaces the automated
+# status/confidence with the one below and fills in the match's `reviewed` field
+# with this entry's `by` and `at`.
+#
+# Shape of each decision:
+#   canonical_id: person:canonical:<slug>   # must exist in people.json
+#   member_ids:  [ person:<ns>:<id>, ... ]  # source-level records being judged
+#   status:      merged | candidate | rejected
+#   confidence:  high | medium | low        # a `merged` decision is never `low`
+#   by:          reviewer name/handle
+#   at:          YYYY-MM-DD                  # decision date
+#   note:        free-text rationale (optional)
+#
+# This file is a seed fixture so the override logic (task 5) has something real
+# to target. Decisions reference canonical people defined in people.yaml.
+
+- canonical_id: person:canonical:alexa-beiser-biostatistics
+  member_ids:
+    - person:openalex:A5063754448
+  status: merged
+  confidence: high
+  signal: manual_review
+  by: p2-curator
+  at: 2026-10-24
+  note: >-
+    Confirmed by hand: the OpenAlex record A5063754448 ("Alexa Beiser", ORCID
+    0000-0001-8551-7778, BU authorship) is the same person as the curated BU
+    biostatistics alumna. Same ORCID and same BU affiliation; promote the
+    automated result to a confirmed merge.
+
+- canonical_id: person:canonical:michael-lavalley-biostatistics
+  member_ids:
+    - person:openalex:A5075246228
+  status: rejected
+  confidence: high
+  signal: manual_review
+  by: p2-curator
+  at: 2026-10-24
+  note: >-
+    Different person. OpenAlex A5075246228 is "Matthew Lavallee" (no ORCID,
+    health-policy research, most recently at Johns Hopkins); its one BU paper is
+    W4285263396. The curated Michael P. LaValley is A5045583989 by ORCID
+    0000-0002-8488-5170. Shared surname, first initial, and BU affiliation only.

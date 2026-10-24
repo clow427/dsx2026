@@ -26,10 +26,10 @@
   - [x] 5.5.2 `GraphBuilder` invariants: validator-clean, order-independent, provenance-preserving (C4–C7)
   - [x] 5.5.3 Validator rejects mutated graphs (C8–C12)
   - _Requirements: 2, 3, 4, 5, 7.1_
-- [ ] 6. Implement the merge step in `pipelines/merge/` (P2)
-  - [ ] 6.1 ID rewriting and source union for merged matches
-  - [ ] 6.2 `SAME_AS_CANDIDATE` edges for candidate matches
-  - [ ] 6.3 Deduplication, deterministic output, and a validator run on `data/graph.json`
+- [x] 6. Implement the merge step in `pipelines/merge/` (P2)
+  - [x] 6.1 ID rewriting and source union for merged matches
+  - [x] 6.2 `SAME_AS_CANDIDATE` edges for candidate matches
+  - [x] 6.3 Deduplication, deterministic output, and a validator run on `data/graph.json`
   - [ ] 6.4 Property tests: merging never drops a member's source, never leaves a dangling edge, and never merges a `candidate` match
   - _Requirements: 8_
 - [x] 7. Verify that the Kiro hook fires when a file under `data/` is saved, and record the result in the Kiro usage log

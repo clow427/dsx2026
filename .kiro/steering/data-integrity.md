@@ -37,7 +37,8 @@ Never promote a person to `verified_alumnus` because they published from a BU ad
 
 ## Professional profiles and personal data
 
-- Store only public, professional information. Do not store personal email addresses, phone numbers, home addresses, or photos.
+- Store only public, professional information. Do not store personal email addresses, phone numbers, or home addresses.
+- A person photo may be stored only from (a) the person themselves (`user_submitted`), (b) Wikimedia Commons under an open license, or (c) an institutional image with documented permission. Each photo records its source, license or permission, attribution, and a public evidence URL. Photos are never scraped, never inferred, and never used for face matching or identity resolution. When consent or the license is withdrawn, drop the photo.
 - LinkedIn is a discovery and attribution source only. Store profile URLs that were obtained through permitted means: manually found public URLs, user-submitted URLs, or official APIs. Never automate access that bypasses login, rate limits, or anti-bot protections.
 - User-submitted and manually curated facts must record who supplied them (`source: user_submitted` or `manual_curation`) and include a public URL as evidence.
 

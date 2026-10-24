@@ -1,0 +1,108 @@
+{
+  "schema_version": "0.1.0",
+  "generated_at": "2026-10-24T00:00:00Z",
+  "producer": "mock",
+  "notes": "MOCK DATA. Stand-in for P3's data/modules/innovation.json, used only to exercise identity matching (identity-resolution task 6). All names, patents, awards, and organizations are fictional and all URLs point to example domains. One deliberate exception: person:patentsview:mock-inv-0001 carries the real ORCID 0000-0002-1185-8331 of curated person person:canonical:howard-cabral-biostatistics, as the planted ORCID-merge key; its name is fictional so the merge is driven by ORCID alone. person:patentsview:mock-inv-0002 is the planted non-match (fictional name and fictional ORCID 0000-0000-0000-0001). Never copy this file into data/modules/ or merge it into data/graph.json.",
+  "nodes": [
+    {
+      "id": "person:patentsview:mock-inv-0001",
+      "type": "person",
+      "label": "Example Inventor A",
+      "sources": [
+        { "source": "patentsview", "record_id": "mock-inv-0001", "url": "https://example.org/patentsview/inventors/mock-inv-0001", "note": "MOCK: planted ORCID merge with person:canonical:howard-cabral-biostatistics" }
+      ],
+      "bu_affiliation": { "status": "unverified", "evidence": [] },
+      "attributes": {
+        "orcid": "0000-0002-1185-8331",
+        "location": "Example City, MA",
+        "assignee": "Example Assignee Corp"
+      }
+    },
+    {
+      "id": "person:patentsview:mock-inv-0002",
+      "type": "person",
+      "label": "Example Inventor B",
+      "sources": [
+        { "source": "patentsview", "record_id": "mock-inv-0002", "url": "https://example.org/patentsview/inventors/mock-inv-0002", "note": "MOCK: planted non-match; must not merge with any curated person" }
+      ],
+      "bu_affiliation": { "status": "unverified", "evidence": [] },
+      "attributes": {
+        "orcid": "0000-0000-0000-0001",
+        "location": "Example Town, CA",
+        "assignee": "Example Assignee Corp"
+      }
+    },
+    {
+      "id": "patent:uspto:US0000002B1",
+      "type": "patent",
+      "label": "Example Method for Statistical Signal Triage",
+      "sources": [
+        { "source": "patentsview", "record_id": "US0000002B1", "url": "https://example.org/patentsview/patents/US0000002B1", "note": "MOCK" }
+      ],
+      "attributes": { "patent_number": "US0000002B1", "grant_date": "2024-03-05" }
+    },
+    {
+      "id": "organization:patentsview:mock-asg-0001",
+      "type": "organization",
+      "label": "Example Assignee Corp",
+      "sources": [
+        { "source": "patentsview", "record_id": "mock-asg-0001", "url": "https://example.com/patentsview/assignees/mock-asg-0001", "note": "MOCK" }
+      ]
+    },
+    {
+      "id": "award:nih:R00EX000002",
+      "type": "award",
+      "label": "Example Award: Statistical Methods for Example Cohorts",
+      "sources": [
+        { "source": "nih_reporter", "record_id": "R00EX000002", "url": "https://example.org/reporter/R00EX000002", "note": "MOCK" }
+      ],
+      "attributes": { "agency": "Example Funding Agency", "award_number": "R00EX000002", "fiscal_year": 2023 }
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge:invented:person:patentsview:mock-inv-0001|patent:uspto:US0000002B1",
+      "type": "INVENTED",
+      "source": "person:patentsview:mock-inv-0001",
+      "target": "patent:uspto:US0000002B1",
+      "evidence": [
+        { "source": "patentsview", "record_id": "US0000002B1", "url": "https://example.org/patentsview/patents/US0000002B1", "note": "MOCK" }
+      ],
+      "confidence": "high",
+      "derivation": "source_record"
+    },
+    {
+      "id": "edge:invented:person:patentsview:mock-inv-0002|patent:uspto:US0000002B1",
+      "type": "INVENTED",
+      "source": "person:patentsview:mock-inv-0002",
+      "target": "patent:uspto:US0000002B1",
+      "evidence": [
+        { "source": "patentsview", "record_id": "US0000002B1", "url": "https://example.org/patentsview/patents/US0000002B1", "note": "MOCK" }
+      ],
+      "confidence": "high",
+      "derivation": "source_record"
+    },
+    {
+      "id": "edge:assigned_to:patent:uspto:US0000002B1|organization:patentsview:mock-asg-0001",
+      "type": "ASSIGNED_TO",
+      "source": "patent:uspto:US0000002B1",
+      "target": "organization:patentsview:mock-asg-0001",
+      "evidence": [
+        { "source": "patentsview", "record_id": "US0000002B1", "url": "https://example.org/patentsview/patents/US0000002B1", "note": "MOCK" }
+      ],
+      "confidence": "high",
+      "derivation": "source_record"
+    },
+    {
+      "id": "edge:received_award:person:patentsview:mock-inv-0002|award:nih:R00EX000002",
+      "type": "RECEIVED_AWARD",
+      "source": "person:patentsview:mock-inv-0002",
+      "target": "award:nih:R00EX000002",
+      "evidence": [
+        { "source": "nih_reporter", "record_id": "R00EX000002", "url": "https://example.org/reporter/R00EX000002", "note": "MOCK" }
+      ],
+      "confidence": "high",
+      "derivation": "source_record"
+    }
+  ]
+}

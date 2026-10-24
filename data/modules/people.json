@@ -1,0 +1,200 @@
+{
+  "schema_version": "0.1.0",
+  "generated_at": "2026-10-24T22:42:16Z",
+  "producer": "identity",
+  "notes": "Canonical person directory built from data/curation/people.yaml (6 hand-curated, evidence-backed people). BU degree, department, and graduation year are recorded only where a cited public source states them.",
+  "nodes": [
+    {
+      "id": "person:canonical:alexa-beiser-biostatistics",
+      "type": "person",
+      "label": "Alexa Beiser",
+      "sources": [
+        {
+          "source": "institutional_bio",
+          "url": "https://www.bu.edu/sph/profile/alexa-beiser/",
+          "note": "BU SPH faculty profile"
+        },
+        {
+          "source": "manual_curation",
+          "url": "https://www.bu.edu/academics/archive/2013-2014/grs/faculty/biostatistics/",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "institutional_bio",
+            "url": "https://www.bu.edu/academics/archive/2013-2014/grs/faculty/biostatistics/"
+          },
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0001-8551-7778"
+          }
+        ],
+        "details": {
+          "degree": "PhD"
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0001-8551-7778"
+      }
+    },
+    {
+      "id": "person:canonical:david-gagnon-biostatistics",
+      "type": "person",
+      "label": "David R. Gagnon",
+      "sources": [
+        {
+          "source": "manual_curation",
+          "url": "https://orcid.org/0000-0002-6367-3179",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "institutional_bio",
+            "url": "https://www.bu.edu/academics/archive/2013-2014/grs/faculty/biostatistics/"
+          },
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-6367-3179"
+          }
+        ],
+        "details": {
+          "degree": "PhD",
+          "department": "Biostatistics",
+          "graduation_year": 1998
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-6367-3179"
+      }
+    },
+    {
+      "id": "person:canonical:howard-cabral-biostatistics",
+      "type": "person",
+      "label": "Howard Cabral",
+      "sources": [
+        {
+          "source": "manual_curation",
+          "url": "https://orcid.org/0000-0002-1185-8331",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "institutional_bio",
+            "url": "https://www.bu.edu/academics/archive/2013-2014/grs/faculty/biostatistics/"
+          },
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-1185-8331"
+          }
+        ],
+        "details": {
+          "degree": "PhD",
+          "department": "Biostatistics",
+          "graduation_year": 1998
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-1185-8331"
+      }
+    },
+    {
+      "id": "person:canonical:kathryn-lunetta-biostatistics",
+      "type": "person",
+      "label": "Kathryn L. Lunetta",
+      "sources": [
+        {
+          "source": "manual_curation",
+          "url": "https://orcid.org/0000-0002-9268-810X",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "bu_affiliated_researcher",
+        "evidence": [
+          {
+            "source": "institutional_bio",
+            "url": "https://www.bu.edu/academics/archive/2013-2014/grs/faculty/biostatistics/"
+          },
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-9268-810X"
+          }
+        ],
+        "details": {
+          "department": "Biostatistics"
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-9268-810X"
+      }
+    },
+    {
+      "id": "person:canonical:michael-lavalley-biostatistics",
+      "type": "person",
+      "label": "Michael P. LaValley",
+      "sources": [
+        {
+          "source": "manual_curation",
+          "url": "https://orcid.org/0000-0002-8488-5170",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "bu_affiliated_researcher",
+        "evidence": [
+          {
+            "source": "institutional_bio",
+            "url": "https://www.bu.edu/academics/archive/2013-2014/grs/faculty/biostatistics/"
+          },
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-8488-5170"
+          }
+        ],
+        "details": {
+          "department": "Biostatistics"
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-8488-5170"
+      }
+    },
+    {
+      "id": "person:canonical:serkalem-demissie-biostatistics",
+      "type": "person",
+      "label": "Serkalem Demissie",
+      "sources": [
+        {
+          "source": "manual_curation",
+          "url": "https://www.bu.edu/academics/archive/2013-2014/grs/faculty/biostatistics/",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "institutional_bio",
+            "url": "https://www.bu.edu/academics/archive/2013-2014/grs/faculty/biostatistics/"
+          }
+        ],
+        "details": {
+          "degree": "PhD"
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-8009-0987"
+      }
+    }
+  ],
+  "edges": []
+}

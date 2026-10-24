@@ -1,0 +1,136 @@
+# Curated person directory (identity-resolution Req 1.2, 1.3, 2.1).
+#
+# Hand-curated, evidence-backed people. Each entry becomes a canonical person
+# node (`person:canonical:<slug>`) in data/modules/people.json via
+# pipelines/identity/directory.py (task 2).
+#
+# Data-integrity rules (.kiro/steering/data-integrity.md) that this file obeys:
+#   - Never invent facts. Every degree, department, graduation year, or employer
+#     below is stated by the public source in its `evidence` URL. If a source did
+#     not state a field, the field is omitted rather than guessed.
+#   - `status: verified_alumnus` is used ONLY where a public source explicitly
+#     states a Boston University degree. Everyone else is
+#     `bu_affiliated_researcher` (published/worked at BU, degree not confirmed).
+#   - Every entry carries at least one evidence URL and
+#     `submitted_by: manual_curation`.
+#
+# Candidates were surfaced from P1's data/modules/research.json via
+# `python -m pipelines.identity.shortlist`, then each fact was verified against a
+# public source: the person's ORCID record (https://orcid.org/<id>) and/or the
+# Boston University academics faculty archive, which lists faculty degrees.
+#
+# Evidence source types map to the schema `source` enum:
+#   institutional_bio  -> a bu.edu faculty/profile page
+#   user_submitted     -> an ORCID record (public, self-asserted professional record)
+
+# ---------------------------------------------------------------------------
+# verified_alumnus: a public source explicitly states a Boston University degree
+# ---------------------------------------------------------------------------
+
+- slug: howard-cabral-biostatistics
+  name: Howard Cabral
+  orcid: 0000-0002-1185-8331
+  # photo omitted: no openly licensed photo found (checked Wikidata P18 by ORCID,
+  # Q34445925, 2026-10-24); ask the person for a user-submitted photo or BU for permission.
+  bu:
+    status: verified_alumnus
+    degree: PhD
+    department: Biostatistics
+    graduation_year: 1998
+    evidence:
+      # ORCID education entry: Ph.D., Biostatistics, Boston University, 1998.
+      - { source: user_submitted, url: "https://orcid.org/0000-0002-1185-8331" }
+      # BU academics archive lists: "MPH, PhD, Boston University".
+      - { source: institutional_bio, url: "https://www.bu.edu/academics/archive/2013-2014/grs/faculty/biostatistics/" }
+  submitted_by: manual_curation
+
+- slug: david-gagnon-biostatistics
+  name: David R. Gagnon
+  orcid: 0000-0002-6367-3179
+  # photo omitted: no openly licensed photo found (checked Wikidata P18 by ORCID,
+  # Q42132642, 2026-10-24); ask the person for a user-submitted photo or BU for permission.
+  bu:
+    status: verified_alumnus
+    degree: PhD
+    department: Biostatistics
+    graduation_year: 1998
+    evidence:
+      # ORCID education entries: PhD in Biostatistics (1998) and MPH (1989),
+      # both Boston University.
+      - { source: user_submitted, url: "https://orcid.org/0000-0002-6367-3179" }
+      # BU academics archive lists: "MD, Tufts University; MPH, PhD, Boston University".
+      - { source: institutional_bio, url: "https://www.bu.edu/academics/archive/2013-2014/grs/faculty/biostatistics/" }
+  submitted_by: manual_curation
+
+- slug: alexa-beiser-biostatistics
+  name: Alexa Beiser
+  orcid: 0000-0001-8551-7778
+  # photo omitted: no openly licensed photo found (checked Wikidata P18 by ORCID,
+  # Q42561271, 2026-10-24); ask the person for a user-submitted photo or BU for permission.
+  bu:
+    status: verified_alumnus
+    degree: PhD
+    # graduation_year omitted: no source consulted states the year.
+    evidence:
+      # BU academics archive lists: "MA, University of California, San Diego;
+      # PhD, Boston University".
+      - { source: institutional_bio, url: "https://www.bu.edu/academics/archive/2013-2014/grs/faculty/biostatistics/" }
+      # ORCID corroborates Boston University affiliation (does not itself state
+      # the degree, so it is evidence of affiliation only).
+      - { source: user_submitted, url: "https://orcid.org/0000-0001-8551-7778" }
+  profiles:
+    - { source: institutional_bio, url: "https://www.bu.edu/sph/profile/alexa-beiser/", note: "BU SPH faculty profile" }
+  submitted_by: manual_curation
+
+- slug: serkalem-demissie-biostatistics
+  name: Serkalem Demissie
+  orcid: 0000-0002-8009-0987
+  # photo omitted: no openly licensed photo found (checked Wikidata P18 by ORCID,
+  # Q37389793, 2026-10-24); ask the person for a user-submitted photo or BU for permission.
+  bu:
+    status: verified_alumnus
+    degree: PhD
+    # department/graduation_year omitted: the degree is stated, the year is not.
+    evidence:
+      # BU academics archive lists: "MPH, PhD, Boston University".
+      - { source: institutional_bio, url: "https://www.bu.edu/academics/archive/2013-2014/grs/faculty/biostatistics/" }
+  submitted_by: manual_curation
+
+# ---------------------------------------------------------------------------
+# bu_affiliated_researcher: BU affiliation is documented, but no source consulted
+# states a Boston University *degree*, so we do NOT promote to verified_alumnus.
+# ---------------------------------------------------------------------------
+
+- slug: kathryn-lunetta-biostatistics
+  name: Kathryn L. Lunetta
+  orcid: 0000-0002-9268-810X
+  # photo omitted: no openly licensed photo found (checked Wikidata P18 by ORCID,
+  # Q37630755, 2026-10-24; name-only item Q102259135 also has no P18 and was not
+  # used); ask the person for a user-submitted photo or BU for permission.
+  bu:
+    status: bu_affiliated_researcher
+    # No BU degree: ORCID states PhD/MS from University of Michigan. We record the
+    # BU affiliation only (Professor of Biostatistics at BU SPH).
+    department: Biostatistics
+    evidence:
+      # ORCID employment: Professor, Biostatistics, Boston University SPH.
+      - { source: user_submitted, url: "https://orcid.org/0000-0002-9268-810X" }
+      # BU academics archive lists her degrees as "MS, PhD, University of Michigan".
+      - { source: institutional_bio, url: "https://www.bu.edu/academics/archive/2013-2014/grs/faculty/biostatistics/" }
+  submitted_by: manual_curation
+
+- slug: michael-lavalley-biostatistics
+  name: Michael P. LaValley
+  orcid: 0000-0002-8488-5170
+  # photo omitted: no openly licensed photo found (checked Wikidata P18 by ORCID,
+  # Q37839673, 2026-10-24); ask the person for a user-submitted photo or BU for permission.
+  bu:
+    status: bu_affiliated_researcher
+    # No BU degree: ORCID/BU archive state PhD, Pennsylvania State University.
+    department: Biostatistics
+    evidence:
+      # ORCID employment: Professor, Biostatistics, Boston University SPH.
+      - { source: user_submitted, url: "https://orcid.org/0000-0002-8488-5170" }
+      # BU academics archive lists his degree as "PhD, Pennsylvania State University".
+      - { source: institutional_bio, url: "https://www.bu.edu/academics/archive/2013-2014/grs/faculty/biostatistics/" }
+  submitted_by: manual_curation

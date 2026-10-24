@@ -1,0 +1,251 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1.1 Write a read-only shortlist extractor": [
+      {
+        "executionId": "49804cac-d68f-4095-99fc-6461899b8b65",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792878939029
+      },
+      {
+        "executionId": "49804cac-d68f-4095-99fc-6461899b8b65",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792878944050
+      },
+      {
+        "executionId": "49804cac-d68f-4095-99fc-6461899b8b65",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792879176361
+      }
+    ],
+    "1.2 Verify candidates and author `data/curation/people.yaml` and `data/curation/reviews.yaml`": [
+      {
+        "executionId": "49804cac-d68f-4095-99fc-6461899b8b65",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792878939117
+      },
+      {
+        "executionId": "49804cac-d68f-4095-99fc-6461899b8b65",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792879179160
+      },
+      {
+        "executionId": "49804cac-d68f-4095-99fc-6461899b8b65",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792879633489
+      }
+    ],
+    "2. Implement directory building that turns curation entries into canonical person nodes (`people.json`)": [
+      {
+        "executionId": "49804cac-d68f-4095-99fc-6461899b8b65",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792878939195
+      },
+      {
+        "executionId": "49804cac-d68f-4095-99fc-6461899b8b65",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792879636219
+      },
+      {
+        "executionId": "fbf66a39-8cd7-4d3f-ba64-c90659c4c227",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792880382510
+      },
+      {
+        "executionId": "fbf66a39-8cd7-4d3f-ba64-c90659c4c227",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792880387702
+      },
+      {
+        "executionId": "fbf66a39-8cd7-4d3f-ba64-c90659c4c227",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792880476803
+      }
+    ],
+    "3. Implement name normalization and blocking": [
+      {
+        "executionId": "49804cac-d68f-4095-99fc-6461899b8b65",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792878939259
+      },
+      {
+        "executionId": "fbf66a39-8cd7-4d3f-ba64-c90659c4c227",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792880382613
+      },
+      {
+        "executionId": "fbf66a39-8cd7-4d3f-ba64-c90659c4c227",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792880479763
+      },
+      {
+        "executionId": "fbf66a39-8cd7-4d3f-ba64-c90659c4c227",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792880707301
+      }
+    ],
+    "4. Implement signal scoring and the decision rules": [
+      {
+        "executionId": "49804cac-d68f-4095-99fc-6461899b8b65",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792878939325
+      },
+      {
+        "executionId": "fbf66a39-8cd7-4d3f-ba64-c90659c4c227",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792880382692
+      },
+      {
+        "executionId": "fbf66a39-8cd7-4d3f-ba64-c90659c4c227",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792880710414
+      },
+      {
+        "executionId": "fbf66a39-8cd7-4d3f-ba64-c90659c4c227",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792881100335
+      }
+    ],
+    "5. Implement manual review overrides": [
+      {
+        "executionId": "49804cac-d68f-4095-99fc-6461899b8b65",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792878939381
+      },
+      {
+        "executionId": "fbf66a39-8cd7-4d3f-ba64-c90659c4c227",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792880382730
+      },
+      {
+        "executionId": "fbf66a39-8cd7-4d3f-ba64-c90659c4c227",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792881104297
+      },
+      {
+        "executionId": "fbf66a39-8cd7-4d3f-ba64-c90659c4c227",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792881312127
+      }
+    ],
+    "6.1 Add a clearly-labeled mock `innovation.json` stand-in": [
+      {
+        "executionId": "49804cac-d68f-4095-99fc-6461899b8b65",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792878939446
+      },
+      {
+        "executionId": "fbf66a39-8cd7-4d3f-ba64-c90659c4c227",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792880382766
+      },
+      {
+        "executionId": "fbf66a39-8cd7-4d3f-ba64-c90659c4c227",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792881315035
+      },
+      {
+        "executionId": "fbf66a39-8cd7-4d3f-ba64-c90659c4c227",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792881477164
+      }
+    ],
+    "6.2 Run matching across research + mock innovation and review candidates by hand": [
+      {
+        "executionId": "49804cac-d68f-4095-99fc-6461899b8b65",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792878939507
+      },
+      {
+        "executionId": "fbf66a39-8cd7-4d3f-ba64-c90659c4c227",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792880382799
+      },
+      {
+        "executionId": "fbf66a39-8cd7-4d3f-ba64-c90659c4c227",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792881480245
+      },
+      {
+        "executionId": "fbf66a39-8cd7-4d3f-ba64-c90659c4c227",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792881778309
+      }
+    ],
+    "7. Implement and run the merge step (see shared-data-contract task 6)": [
+      {
+        "executionId": "49804cac-d68f-4095-99fc-6461899b8b65",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792878939576
+      },
+      {
+        "executionId": "fbf66a39-8cd7-4d3f-ba64-c90659c4c227",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792880382831
+      },
+      {
+        "executionId": "fbf66a39-8cd7-4d3f-ba64-c90659c4c227",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792881784969
+      },
+      {
+        "executionId": "fbf66a39-8cd7-4d3f-ba64-c90659c4c227",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792882202950
+      }
+    ],
+    "8. Write tests: ORCID merge, name-only candidate, rejection on ORCID conflict, low-confidence matches never merged": [
+      {
+        "executionId": "49804cac-d68f-4095-99fc-6461899b8b65",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792878939629
+      },
+      {
+        "executionId": "fbf66a39-8cd7-4d3f-ba64-c90659c4c227",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792880382883
+      },
+      {
+        "executionId": "fbf66a39-8cd7-4d3f-ba64-c90659c4c227",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792882206117
+      },
+      {
+        "executionId": "fbf66a39-8cd7-4d3f-ba64-c90659c4c227",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792882542513
+      }
+    ],
+    "1. Extract a candidate shortlist from `research.json` and author the curation files, then seed them with 5 to 10 real, publicly documented people relevant to the demo topic": [
+      {
+        "executionId": "49804cac-d68f-4095-99fc-6461899b8b65",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792879633666
+      }
+    ],
+    "9. Source photos for curated people": [
+      {
+        "executionId": "fbf66a39-8cd7-4d3f-ba64-c90659c4c227",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792880382916
+      },
+      {
+        "executionId": "fbf66a39-8cd7-4d3f-ba64-c90659c4c227",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792882545482
+      },
+      {
+        "executionId": "fbf66a39-8cd7-4d3f-ba64-c90659c4c227",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792882684287
+      }
+    ],
+    "6. Run matching against a mock innovation batch end-to-end, then review candidate matches by hand (swap in P3's real batch when available)": [
+      {
+        "executionId": "fbf66a39-8cd7-4d3f-ba64-c90659c4c227",
+        "chatSessionId": "sess_9e6b423c-0bc9-4c1b-b15b-581fd9063ec6",
+        "timestamp": 1792881778435
+      }
+    ]
+  }
+}
