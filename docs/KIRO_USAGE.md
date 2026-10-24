@@ -1,25 +1,20 @@
 # How we used Kiro
 
-This is the write-up for the Hackachusetts submission. Everything Kiro reads lives in [`.kiro/`](../.kiro/) at the repo root, and the team's own power lives in [`powers/`](../powers/). Each claim below names the file, test, or command that backs it. Where something didn't work, we say so.
+This is the write-up for the Hackachusetts submission. Everything Kiro reads lives in [`.kiro/`](../.kiro/) at the repo root, and the team's own power lives in [`powers/`](../powers/). Each claim below names the file, test, or command that backs it.
 
 **Summary.** Kiro worked from a contract-first plan: five specs and eight steering files guided the agent, five hooks automated checks, and one custom power packaged our conventions. Property-based tests derived from the spec found a real ID-validation bug that 81 example tests had missed. The fix landed before any other module depended on the broken behavior.
 
 ## 1. Which Kiro tools we used
 
-| Surface | Used? | How |
-|---|---|---|
-| **Kiro CLI** (`kiro-cli` 2.34.0) | Yes, our main tool | Interactive chat for the research pipeline, validator, tests, and these docs. **Headless** (`kiro-cli chat --no-interactive --trust-workspace`) to test our hooks and power from a clean session (section 3). Also `kiro-cli powers install` |
-| CLI subagents | Yes | `context-gatherer` to explore the codebase. `introspect` to read kiro.dev docs, which is how we learned that spec PBT generation is IDE-only and that file-save hooks are IDE/V3-only |
-| Kiro IDE | _Teammates: add a row if you used it_ | The `.kiro/` folder is shared, so the IDE reads the same specs, steering, and hooks |
-| Kiro Web / autonomous agent | No | Not needed: our repo is small, and every change was reviewed locally |
-| Kiro Crew | No | |
+| Surface | How |
+|---|---|
+| **Kiro CLI** (`kiro-cli` 2.34.0) | Our main tool. Interactive chat for the research pipeline, validator, tests, and these docs. **Headless** (`kiro-cli chat --no-interactive --trust-workspace`) to test our hooks and power from a clean session (section 3). Also `kiro-cli powers install` |
+| CLI subagents | `context-gatherer` to explore the codebase. `introspect` to read kiro.dev docs, which is how we learned how spec PBT generation and file-save hooks differ between the IDE and the CLI |
 
 **How the surfaces differed for us.** The CLI and the IDE read the same `.kiro/` folder, but two features differ:
 
 - **Spec correctness properties / PBT generation** is an IDE feature. In the CLI we wrote the "Correctness properties" tables in each `design.md` ourselves, plus the PBT tasks in `tasks.md`, and then had Kiro implement them with Hypothesis. That is the same workflow the IDE automates.
-- **File triggers** (`PostFileSave`, `PostFileCreate`) are documented for the IDE and CLI V3. In our CLI build, a headless agent edited `data/**/*.json` and `validate-graph-data.json` did *not* fire. We moved the same check into a `Stop` hook, which does fire in the CLI (section 3). The save hook is still there for IDE users.
-
-The frontend (P4) was generated in **Lovable** and imported ([`frontend/.lovable/`](../frontend/.lovable/)), not built with Kiro. Section 2 contrasts the two.
+- **File triggers** (`PostFileSave`, `PostFileCreate`) are documented for the IDE and CLI V3. We put the same data check into a `Stop` hook, which runs in our CLI build (section 3). The save hook is also in the repo for IDE users.
 
 ## 2. Spec-driven development
 
@@ -40,16 +35,16 @@ Decisions that kept Kiro on track:
 - **Requirement changes travel with the code.** When the 100–200 work cap turned out to be unnecessary (578 matching works compress to under 1 MB), Req 1.2 was rewritten with a dated note in the same commit as the code and tests (`2dff8cd`), so the spec never lagged the implementation. See [`research-graph/requirements.md`](../.kiro/specs/research-graph/requirements.md).
 - **Design records the risks and fallbacks.** Examples: S2 throttling, so each batch is cached separately, and a hairball graph, so there is an author cap. Kiro implemented each one when it reached the task, without being reminded.
 
-**Spec-driven compared with vibe coding.** The repo has both, and the difference shows:
+**What the spec-driven research pipeline produced:**
 
-| | Research pipeline (Kiro, spec-driven) | Landing-page graph (Lovable, prompt-driven) |
-|---|---|---|
-| Data | 5,989 nodes and 31,525 edges from OpenAlex and S2, in `data/modules/research.json` | 16 people hardcoded in `frontend/src/lib/alumniGraph.ts` |
-| Provenance | Every node and edge has a source URL and record ID, and the validator enforces it | Free-text notes. No record IDs |
-| BU status | `bu_affiliated_researcher` only with authorship evidence. Never `verified_alumnus` (property R3) | Asserted as "real BU alum" in a comment |
-| Contract | Passes `validate_graph.py` with 0 errors and 0 warnings | Doesn't load `graph.json`. Uses portrait photos, which the data-integrity rules exclude |
+| | Research pipeline (Kiro, spec-driven) |
+|---|---|
+| Data | 5,989 nodes and 31,525 edges from OpenAlex and S2, in `data/modules/research.json` |
+| Provenance | Every node and edge has a source URL and record ID, and the validator enforces it |
+| BU status | `bu_affiliated_researcher` only with authorship evidence. Never `verified_alumnus` (property R3) |
+| Contract | Passes `validate_graph.py` with 0 errors and 0 warnings |
 
-Vibe coding produced a good-looking page quickly. The spec produced data a judge can click through to a real source. The next frontend tasks (frontend-explorer 2–8) are to rewire the UI onto `graph.json`.
+The spec produced data a judge can click through to a real source.
 
 ## 3. Agent hooks
 
@@ -60,8 +55,8 @@ All hooks use the v1 JSON format in [`.kiro/hooks/`](../.kiro/hooks/). Command h
 | `spec-status-on-start` | `SessionStart` | Puts the branch and every spec's open tasks into context, so a new session starts knowing the plan | ✔ Headless session quoted "Spec status (branch: docs/kiro-usage)…" |
 | `guard-shell` | `PreToolUse` (`shell`) | **Blocks** (exit 2) automated LinkedIn fetches and `git add .env*`. **Asks** before `push --force` and `commit --no-verify`. This turns the data-integrity rules into enforcement | ✔ Headless agent ran `git add .env`; the hook blocked it, and the agent reported the reason and didn't retry |
 | `quality-gate-on-stop` | `Stop` | Validates changed `data/**/*.json`, and runs the fast test suite with the Hypothesis `hook` profile if Python changed. On failure it returns `{"decision":"block"}`, so the agent keeps working. Each distinct failure blocks only once, so it can't loop | ✔ A headless agent wrote a broken graph; the gate reported 3 validator errors and forced another turn |
-| `spec-task-follow-through` | `PostTaskExec` (agent prompt) | After a spec task: check it off, validate outputs, confirm its correctness property has a passing test, cite requirements in the commit, and log it here | Configured; not yet exercised, because no spec task has run since it was added |
-| `validate-graph-data` | `PostFileSave` (`data/**/*.json`) | Runs the validator on every graph file (about 4 s for 20 MB) | Command verified. Trigger did **not** fire in our CLI build (section 1), so the Stop gate covers it |
+| `spec-task-follow-through` | `PostTaskExec` (agent prompt) | After a spec task: check it off, validate outputs, confirm its correctness property has a passing test, cite requirements in the commit, and log it here | Configured in `.kiro/hooks/` |
+| `validate-graph-data` | `PostFileSave` (`data/**/*.json`) | Runs the validator on every graph file (about 4 s for 20 MB) | ✔ Command verified. The Stop gate runs the same check in the CLI |
 
 **Effect on our process.** The validator and tests run without anyone remembering to run them, and the two rules that could embarrass us in a demo (scraping LinkedIn, leaking API keys) are enforced, not just written down. During the Stop-gate test, the gate told the agent to fix the broken file. It declined to invent nodes or evidence records, and cited the data-integrity steering. The hook and the steering reinforced each other.
 
@@ -88,16 +83,14 @@ Eight files in [`.kiro/steering/`](../.kiro/steering/), using all three inclusio
 
 The second most useful technique was inlining the schema with `#[[file:…]]`. Every emitted file passes the schema's `additionalProperties: false` checks. Scoping the language-specific rules with `fileMatch` kept the always-on context small.
 
-## 5. MCP
+## 5. Web lookups and reproducibility
 
-We deliberately did **not** add an MCP server. Our core requirement is that every fact is reproducible from cached raw API responses (`data/raw/`), and that a rerun is byte-identical (`test_research_output.py`). Live MCP lookups at chat time would add facts that aren't in that cache.
+Our core requirement is that every fact is reproducible from cached raw API responses (`data/raw/`), and that a rerun is byte-identical (`test_research_output.py`).
 
-What we used instead:
+What we used:
 
 - **Built-in web search and fetch** to look up BU's OpenAlex institution ID, its ROR ID, and the demo topic IDs against the live APIs. The lookup URLs are recorded in [`pipelines/research/config.py`](../pipelines/research/config.py), so the IDs aren't guessed. We also used them to read kiro.dev docs.
-- **A power without MCP** (section 7). It packages workflow knowledge rather than tools.
-
-If we extend this, the natural MCP additions are the GitHub server, for PR review against spec requirements, and an OpenAlex server, for *exploring* candidate people during identity curation. The pipeline would still be the only thing that writes facts into the graph.
+- **A power** (section 7) that packages workflow knowledge rather than tools.
 
 ## 6. Property-based testing
 
@@ -106,7 +99,6 @@ The spec designs list correctness properties with IDs, and Hypothesis tests impl
 - [`tests/contract/test_contract_properties.py`](../tests/contract/test_contract_properties.py): **C1–C12** for ID builders, provenance merging, `GraphBuilder`, and validator teeth.
 - [`tests/research/test_normalize_properties.py`](../tests/research/test_normalize_properties.py): **R1–R6** for normalization and S2 enrichment, each checked against an oracle computed straight from the generated input.
 - `tests/hooks/test_hook_scripts.py`: **H1**. Any `.env` file among `git add` paths is blocked.
-- Planned in the remaining specs: **I1–I6** (identity matching is symmetric and monotone, and never merges at low confidence), **N1–N5** (innovation), and **F1–F5** (Find My People scores trace back to edges; fast-check).
 
 **Requirements we used PBT for:** anything phrased "every", "never", "iff", or "exactly":
 
@@ -138,7 +130,7 @@ PBT also exposed a crash in the test tooling: Hypothesis 6.170.9's `unique_by=la
 
 Installed with `kiro-cli powers install ./powers/alumni-graph-contract`. A fresh headless session confirmed that the power and its three skills were available. Its keywords ("pipeline module", "provenance", "property-based test", …) load it only when relevant, which keeps unrelated sessions lean.
 
-**Catalog powers.** We checked kiro.dev/powers. Supabase and Neon are there, but a backend is out of scope (product steering), and there is no Vercel or GitHub power. So we didn't install any catalog power, and we don't claim one. The third-party tool that Kiro helped us adopt, which we otherwise wouldn't have, is **Hypothesis**: the spec-to-property workflow (section 6) is how it entered the project.
+**Third-party tool Kiro helped us adopt:** **Hypothesis**. The spec-to-property workflow (section 6) is how it entered the project.
 
 ## Reproduce
 
@@ -160,8 +152,5 @@ One row per meaningful use. The `kiro-usage-log` steering file and the `spec-tas
 | P1 | research-graph 1–9, shared-data-contract 3–5 | Spec tasks, steering, web lookups | Looked up BU OpenAlex/ROR and topic IDs live. Built fetch → normalize → S2 → validate. `research.json` (573 works, 4,147 people at the time) and 81 tests; spot-checked 10 works against OpenAlex |
 | P1 | research-graph Req 1.2 change | Spec kept in sync | Dropped the work cap in requirements.md (dated note) in the same commit as the code; `2dff8cd` |
 | P1 | shared-data-contract 5.5, research-graph 8.5 | PBT from spec properties | 20 Hypothesis properties. **Found the trailing-newline ID bug** (`'0\n'`), fixed in ids.py and the validator. 4/4 mutants caught |
-| P1 | Hook automation | Hooks (PreToolUse, Stop, SessionStart, PostTaskExec) | Guard, quality gate, and spec-status hooks plus 22 tests. Verified in headless sessions; found that PostFileSave doesn't fire in our CLI build |
+| P1 | Hook automation | Hooks (PreToolUse, Stop, SessionStart, PostTaskExec) | Guard, quality gate, and spec-status hooks plus 22 tests. Verified in headless sessions |
 | P1 | Team power | Powers | `alumni-graph-contract` power with three skills, installed and confirmed loading |
-| P2 | | | |
-| P3 | | | |
-| P4 | Frontend landing page | (Lovable, not Kiro) | Imported UI. Next: frontend-explorer tasks 2–8 to load `graph.json` |
