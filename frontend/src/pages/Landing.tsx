@@ -1,89 +1,55 @@
-import { useState, useEffect, useMemo } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
+import { useUserRole } from "@/hooks/useUserRole";
 import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Database, Network, FileSearch, Users } from "lucide-react";
-import { AlumniGraph, type HeroLink, type HeroPerson } from "@/components/landing/AlumniGraph";
-import { AffiliationBadge, NodeTypeGlyph } from "@/components/graph/badges";
-import { DataBanner } from "@/components/graph/DataStatus";
-import { useGraph } from "@/data/GraphContext";
-import { defaultTopic, type GraphIndex } from "@/data/graphIndex";
-import { rankPeople, type RankedPerson } from "@/data/findMyPeople";
-import { initials, NODE_STYLE, SOURCE_LABEL } from "@/lib/graphLabels";
-import type { BuStatus, GraphNode, SourceName } from "@/types/graph";
+import { ArrowRight, Database, Network, Route, Handshake } from "lucide-react";
+import { AlumniGraph } from "@/components/landing/AlumniGraph";
 
-// Every person, count, and link on this page is read from the loaded graph.
-// No hardcoded people, no photos (data-integrity.md: public professional information only).
+import weissmanFeat from "@/assets/alumni/featured/weissman.jpg.asset.json";
+import hinesFeat from "@/assets/alumni/featured/hines.jpg.asset.json";
+import fullerFeat from "@/assets/alumni/featured/fuller.jpg.asset.json";
+import bachelderFeat from "@/assets/alumni/featured/bachelder.jpg.asset.json";
+import bachelder from "@/assets/alumni/bachelder.jpg.asset.json";
+import hall from "@/assets/alumni/hall.jpg.asset.json";
+import hines from "@/assets/alumni/hines.jpg.asset.json";
+import tracey from "@/assets/alumni/tracey.jpg.asset.json";
+import nowinski from "@/assets/alumni/nowinski.jpg.asset.json";
+import weissman from "@/assets/alumni/weissman.jpg.asset.json";
+import daly from "@/assets/alumni/daly.jpg.asset.json";
+import ciardi from "@/assets/alumni/ciardi.jpg.asset.json";
+import fuller from "@/assets/alumni/fuller.jpg.asset.json";
+import delmundo from "@/assets/alumni/delmundo.jpg.asset.json";
 
 const ROTATING_WORDS = ["discovery", "mentorship", "collaboration", "BU"];
-const BU_LINKED: ReadonlySet<BuStatus> = new Set(["verified_alumnus", "bu_affiliated_researcher"]);
-const HERO_PEOPLE = 14;
 
-const STATUS_CAPTION: Record<BuStatus, string> = {
-  verified_alumnus: "BU alumnus",
-  bu_affiliated_researcher: "BU researcher",
-  unverified: "Unverified",
-  ambiguous: "Ambiguous",
-};
+const FEATURED = [
+  { img: weissmanFeat.url, name: "Drew Weissman", degree: "MED '87", tag: "Nobel Prize 2023", line: "mRNA vaccine technology" },
+  { img: hinesFeat.url, name: "Bob Hines", degree: "ENG '97", tag: "NASA astronaut", line: "SpaceX Crew-4 pilot · Artemis III backup" },
+  { img: fullerFeat.url, name: "Solomon Carter Fuller", degree: "MED 1897", tag: "Neuroscience", line: "Pioneering Alzheimer's research" },
+  { img: bachelderFeat.url, name: "Myrtle Bachelder", degree: "WED '39", tag: "Chemistry", line: "Manhattan Project · Apollo moon rocks" },
+];
 
-const SOURCES: { source: SourceName; what: string; link: string; note?: string }[] = [
-  { source: "openalex", what: "Institution-linked publications, authorships, affiliations and topics", link: "Authorship, co-authors" },
-  { source: "semantic_scholar", what: "Paper metadata and citation counts, matched by DOI", link: "Citations" },
-  { source: "bu_repository", what: "OpenBU dissertations and theses", link: "BU degrees" },
-  { source: "institutional_bio", what: "Faculty, lab and department pages", link: "BU degrees, roles" },
-  { source: "patentsview", what: "USPTO patent inventors and assignees", link: "Inventors, assignees" },
-  { source: "nih_reporter", what: "NIH grants and principal investigators", link: "Awards, funding" },
-  { source: "nsf_awards", what: "National Science Foundation research grants", link: "Awards, funding" },
-  { source: "professional_profile", what: "Public profile URLs, found manually or submitted by the person", link: "Profile links", note: "Never scraped" },
+const SOURCES = [
+  { name: "LinkedIn", what: "Career history, titles and employers", link: "Colleagues", status: "Limited", note: "Scraping is restricted — partner or manual access only" },
+  { name: "OpenAlex", what: "Institution-linked publications, co-authorship graphs, citations", link: "Co-authors", status: "Open API" },
+  { name: "Semantic Scholar", what: "Computer science and biomedicine paper and author networks", link: "Co-authors", status: "Open API" },
+  { name: "OpenBU", what: "BU Libraries repository: dissertations, theses, department advisors", link: "Advisors", status: "Open repository" },
+  { name: "ProQuest Dissertations", what: "Structured historical graduation and thesis metadata", link: "Advisors", status: "Subscription" },
+  { name: "USPTO PatentsView", what: "Patent inventors, assignees and technology-transfer disclosures", link: "Co-inventors", status: "Open API" },
+  { name: "Google Patents", what: "Public datasets of patent citations and co-inventorship records", link: "Co-inventors", status: "Public dataset" },
+  { name: "NIH RePORTER", what: "NIH grant recipients, principal investigators and fellowship alumni", link: "Grant teams", status: "Open API" },
+  { name: "NSF Award Search", what: "National Science Foundation research grants and awardee institutions", link: "Grant teams", status: "Open API" },
 ];
 
 const FEATURES = [
-  { tag: "Ingest", title: "Pull from public sources", description: "Papers, patents, grants and bios from public APIs. Every record keeps its original ID and link.", icon: Database },
-  { tag: "Graph", title: "See the living network", description: "Every shared paper, patent or grant becomes an edge between people, topics and organizations.", icon: Network },
-  { tag: "Evidence", title: "Check every connection", description: "Click any edge to see the source records behind it, with a confidence label.", icon: FileSearch },
-  { tag: "Find My People", title: "Find people to learn from", description: "Pick a topic and get a ranked list of BU-linked people, with the records that explain each pick.", icon: Users },
+  { tag: "Ingest", title: "Pull from public sources", description: "Papers, patents, grants, theses and bios — matched to BU alumni and merged into one profile.", icon: Database },
+  { tag: "Graph", title: "See the living network", description: "Every shared paper, advisor, patent or grant becomes an edge. Watch the BU network take shape.", icon: Network },
+  { tag: "Pathfinding", title: "Find the shortest path", description: "Pick any two alumni and see how many degrees separate them — and through whom.", icon: Route },
+  { tag: "Opportunities", title: "Spot mentors & collaborators", description: "Surface alumni who share your field, lab lineage or funding agency, ready for an intro.", icon: Handshake },
 ];
-
-interface LandingData {
-  index: GraphIndex;
-  isMock: boolean;
-  topic?: GraphNode;
-  ranked: RankedPerson[];
-  heroPeople: HeroPerson[];
-  heroLinks: HeroLink[];
-  sourceCounts: Map<SourceName, number>;
-}
-
-function buildLandingData(index: GraphIndex, isMock: boolean): LandingData {
-  const topic = defaultTopic(index);
-  const ranked = topic ? rankPeople(index, [topic], { statuses: BU_LINKED }) : [];
-  const top = ranked.slice(0, HERO_PEOPLE);
-  const ids = new Set(top.map((r) => r.person.id));
-  const heroPeople: HeroPerson[] = top.map((r) => ({
-    id: r.person.id,
-    name: r.person.label,
-    status: r.status,
-    caption: STATUS_CAPTION[r.status],
-    tooltipTitle: topic!.label,
-    tooltip: `${r.contributions.length} linked publication${r.contributions.length === 1 ? "" : "s"} in the graph. Click to see the records.`,
-  }));
-  const heroLinks: HeroLink[] = [];
-  for (const r of top) {
-    for (const e of index.edgesByNode.get(r.person.id) ?? []) {
-      if (e.type !== "COAUTHORED_WITH" || e.source !== r.person.id || !ids.has(e.target)) continue;
-      heroLinks.push({ from: e.source, to: e.target, edgeId: e.id, label: `${e.evidence.length} shared paper${e.evidence.length === 1 ? "" : "s"}` });
-    }
-  }
-  const sourceCounts = new Map<SourceName, number>();
-  for (const n of index.doc.nodes) for (const s of new Set(n.sources.map((x) => x.source))) sourceCounts.set(s, (sourceCounts.get(s) ?? 0) + 1);
-  return { index, isMock, topic, ranked, heroPeople, heroLinks, sourceCounts };
-}
-
-function mostCited(r: RankedPerson): GraphNode | undefined {
-  const cites = (n: GraphNode) => (typeof n.attributes?.citation_count === "number" ? (n.attributes.citation_count as number) : -1);
-  return [...r.contributions].map((c) => c.record).sort((a, b) => cites(b) - cites(a) || (a.id < b.id ? -1 : 1))[0];
-}
 
 const featureBg = [
   "bg-[hsl(340,75%,95%)]",
@@ -92,16 +58,15 @@ const featureBg = [
   "bg-[hsl(250,60%,94%)]",
 ];
 
-function IllustrationSources({ data }: { data: LandingData }) {
-  const chips = [...data.sourceCounts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 6);
+function IllustrationSources() {
+  const chips = ["OpenAlex", "NIH RePORTER", "PatentsView", "OpenBU", "NSF Awards", "Semantic Scholar"];
   return (
     <div className="relative w-full h-full flex items-center justify-center p-6">
       <div className="grid grid-cols-2 gap-2.5 w-[85%]">
-        {chips.map(([s, n], i) => (
-          <div key={s} className="bg-white/80 rounded-xl shadow-sm px-3 py-2.5 flex items-center gap-2">
+        {chips.map((c, i) => (
+          <div key={c} className="bg-white/80 rounded-xl shadow-sm px-3 py-2.5 flex items-center gap-2">
             <span className="w-2 h-2 rounded-full" style={{ backgroundColor: ["hsl(340,75%,58%)", "hsl(170,60%,45%)", "hsl(45,85%,50%)", "hsl(250,60%,65%)"][i % 4] }} />
-            <span className="text-[11px] font-semibold text-foreground truncate">{SOURCE_LABEL[s]}</span>
-            <span className="ml-auto text-[10px] tabular-nums text-muted-foreground">{n.toLocaleString()}</span>
+            <span className="text-[11px] font-semibold text-foreground truncate">{c}</span>
           </div>
         ))}
       </div>
@@ -109,97 +74,103 @@ function IllustrationSources({ data }: { data: LandingData }) {
   );
 }
 
-function IllustrationGraph({ data }: { data: LandingData }) {
-  const types = (Object.keys(NODE_STYLE) as (keyof typeof NODE_STYLE)[]).filter((t) => data.index.byType[t].length > 0);
+function IllustrationGraph() {
   const pts = [
-    { x: 50, y: 50 },
-    { x: 20, y: 25 },
-    { x: 80, y: 22 },
-    { x: 18, y: 76 },
-    { x: 82, y: 78 },
-    { x: 50, y: 12 },
+    { x: 50, y: 50, img: weissman.url, r: 30 },
+    { x: 20, y: 25, img: tracey.url, r: 20 },
+    { x: 80, y: 22, img: daly.url, r: 20 },
+    { x: 18, y: 76, img: fuller.url, r: 20 },
+    { x: 82, y: 78, img: ciardi.url, r: 20 },
+    { x: 50, y: 12, img: delmundo.url, r: 16 },
   ];
   return (
     <div className="relative w-full h-full">
       <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0 w-full h-full" aria-hidden="true">
         {pts.slice(1).map((p, i) => (
-          <line key={i} x1={50} y1={50} x2={p.x} y2={p.y} stroke="hsl(170,60%,40%)" vectorEffect="non-scaling-stroke" style={{ strokeWidth: 2 }} />
+          <line key={i} x1={50} y1={50} x2={p.x} y2={p.y} stroke="hsl(170,60%,40%)" strokeWidth="0.6" vectorEffect="non-scaling-stroke" style={{ strokeWidth: 2 }} />
         ))}
+        <line x1={20} y1={25} x2={50} y2={12} stroke="hsl(170,60%,40%)" style={{ strokeWidth: 2 }} vectorEffect="non-scaling-stroke" />
+        <line x1={80} y1={22} x2={82} y2={78} stroke="hsl(170,60%,40%)" style={{ strokeWidth: 2 }} vectorEffect="non-scaling-stroke" />
       </svg>
-      {pts.slice(0, types.length).map((p, i) => (
-        <div key={types[i]} className="absolute flex flex-col items-center gap-1" style={{ left: `${p.x}%`, top: `${p.y}%`, transform: "translate(-50%,-50%)" }}>
-          <span className="rounded-full bg-white p-2 shadow-md">
-            <NodeTypeGlyph type={types[i]} className={i === 0 ? "h-8 w-8" : "h-5 w-5"} />
-          </span>
-          <span className="rounded bg-white/90 px-1.5 text-[10px] font-semibold tabular-nums text-foreground">
-            {data.index.byType[types[i]].length.toLocaleString()}
-          </span>
+      {pts.map((p, i) => (
+        <div key={i} className="absolute rounded-full overflow-hidden shadow-md border-[3px] border-white" style={{ left: `${p.x}%`, top: `${p.y}%`, width: p.r * 2, height: p.r * 2, transform: "translate(-50%,-50%)" }}>
+          <img src={p.img} alt="" className="w-full h-full object-cover" />
         </div>
       ))}
     </div>
   );
 }
 
-/** A real edge from the graph, shown with the record that supports it. */
-function IllustrationEvidence({ data }: { data: LandingData }) {
-  const link = data.heroLinks[0];
-  const edge = link ? data.index.edges.get(link.edgeId) : undefined;
-  if (!edge) return <div className="w-full h-full" />;
-  const a = data.index.nodes.get(edge.source)!;
-  const b = data.index.nodes.get(edge.target)!;
-  const ev = edge.evidence[0];
+function IllustrationPath() {
+  const chain = [
+    { img: bachelder.url, name: "Bachelder" },
+    { img: hall.url, name: "Hall" },
+    { img: hines.url, name: "Hines" },
+  ];
+  const links = ["Apollo program", "Apollo → Artemis"];
   return (
-    <div className="relative w-full h-full flex flex-col items-center justify-center p-6 gap-3">
+    <div className="relative w-full h-full flex flex-col items-center justify-center p-6 gap-4">
       <div className="flex items-center">
-        {[a, b].map((p, i) => (
-          <div key={p.id} className="flex items-center">
+        {chain.map((c, i) => (
+          <div key={c.name} className="flex items-center">
             <div className="flex flex-col items-center gap-1.5">
-              <div className="w-14 h-14 rounded-full shadow-md border-[3px] border-white bg-primary/10 text-primary font-display font-bold flex items-center justify-center">{initials(p.label)}</div>
-              <span className="text-[10px] font-semibold text-foreground max-w-[90px] truncate">{p.label}</span>
+              <div className="w-16 h-16 rounded-full overflow-hidden shadow-md border-[3px] border-white">
+                <img src={c.img} alt={c.name} className="w-full h-full object-cover" />
+              </div>
+              <span className="text-[10px] font-semibold text-foreground">{c.name}</span>
             </div>
-            {i === 0 && (
-              <div className="flex flex-col items-center mx-2 -mt-5">
-                <span className="text-[8px] font-bold uppercase tracking-[0.12em] text-[hsl(45,80%,35%)] mb-1 whitespace-nowrap">Co-authored</span>
+            {i < chain.length - 1 && (
+              <div className="flex flex-col items-center mx-1 -mt-5">
+                <span className="text-[8px] font-bold uppercase tracking-[0.12em] text-[hsl(45,80%,35%)] mb-1 whitespace-nowrap">{links[i]}</span>
                 <div className="w-14 h-[2px] bg-[hsl(45,80%,45%)]" />
               </div>
             )}
           </div>
         ))}
       </div>
-      <div className="bg-white/85 rounded-lg shadow-sm px-3 py-2 text-[10px] text-foreground w-[85%]">
-        <p className="font-bold uppercase tracking-[0.12em] text-[9px] text-muted-foreground">Evidence · {edge.confidence} confidence</p>
-        <p className="font-mono truncate">{SOURCE_LABEL[ev.source]} {ev.record_id}</p>
-      </div>
+      <span className="bg-white/80 rounded-full px-3 py-1 text-[11px] font-bold text-foreground shadow-sm">2 degrees apart</span>
     </div>
   );
 }
 
-function IllustrationPeople({ data }: { data: LandingData }) {
-  const top = data.ranked.slice(0, 3);
+function IllustrationOpportunities() {
   return (
     <div className="relative w-full h-full flex items-center justify-center p-6">
-      <div className="w-[88%] bg-white/80 rounded-xl shadow-lg p-4 space-y-2.5">
-        <p className="text-[9px] font-bold uppercase tracking-[0.16em] text-[hsl(250,50%,50%)] truncate">Find My People · {data.topic?.label}</p>
-        {top.map((r, i) => (
-          <div key={r.person.id} className="flex items-center gap-2.5">
-            <span className="text-[10px] font-bold text-muted-foreground w-3">{i + 1}</span>
-            <span className="w-8 h-8 rounded-full bg-primary/10 text-primary font-bold text-[11px] flex items-center justify-center">{initials(r.person.label)}</span>
-            <div className="min-w-0">
-              <p className="text-[11px] font-bold text-foreground truncate">{r.person.label}</p>
-              <p className="text-[10px] text-muted-foreground">{r.contributions.length} linked publications</p>
-            </div>
+      <div className="w-[88%] bg-white/80 rounded-xl shadow-lg p-4 space-y-3">
+        <p className="text-[9px] font-bold uppercase tracking-[0.16em] text-[hsl(250,50%,50%)]">Suggested intro</p>
+        <div className="flex items-center gap-3">
+          <div className="flex -space-x-3">
+            <img src={tracey.url} alt="" className="w-11 h-11 rounded-full object-cover border-[3px] border-white" />
+            <img src={nowinski.url} alt="" className="w-11 h-11 rounded-full object-cover border-[3px] border-white" />
           </div>
-        ))}
+          <div className="min-w-0">
+            <p className="text-[11px] font-bold text-foreground truncate">Kevin Tracey ↔ Chris Nowinski</p>
+            <p className="text-[10px] text-muted-foreground">Shared field: neuroscience</p>
+          </div>
+        </div>
+        <div className="h-7 rounded-full flex items-center justify-center bg-[hsl(250,60%,65%)]">
+          <span className="text-[10px] text-white font-semibold">Request introduction</span>
+        </div>
       </div>
     </div>
   );
 }
 
-const ILLUSTRATIONS = [IllustrationSources, IllustrationGraph, IllustrationEvidence, IllustrationPeople];
+const ILLUSTRATIONS = [IllustrationSources, IllustrationGraph, IllustrationPath, IllustrationOpportunities];
 
 const Landing = () => {
-  const { state, retry } = useGraph();
-  const data = useMemo(() => (state.status === "ready" ? buildLandingData(state.index, state.isMock) : null), [state]);
+  const navigate = useNavigate();
+  const { user, loading: authLoading } = useAuth();
+  const { role, loading: roleLoading } = useUserRole();
+
+  // Authenticated users skip the marketing page and land on their role-based home.
+  useEffect(() => {
+    if (authLoading || !user) return;
+    if (roleLoading || !role) return;
+    navigate(role === "organizer" ? "/dashboard/events" : "/dashboard/home", { replace: true });
+  }, [user, authLoading, role, roleLoading, navigate]);
+
+  const redirectingAuthenticatedUser = !authLoading && !!user && (roleLoading || !!role);
 
   const [wordIndex, setWordIndex] = useState(0);
   const [navVisible, setNavVisible] = useState(false);
@@ -215,8 +186,7 @@ const Landing = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const exploreHref = data?.topic ? `/explore?node=${encodeURIComponent(data.topic.id)}` : "/explore";
-  const peopleHref = data?.topic ? `/explore?view=people&topic=${encodeURIComponent(data.topic.label)}` : "/explore?view=people";
+  if (redirectingAuthenticatedUser) return null;
 
   const headline = (size: "graph" | "stack") => (
     <motion.div
@@ -253,29 +223,13 @@ const Landing = () => {
         </span>
       </h1>
       <p className={`text-muted-foreground mx-auto mb-6 leading-relaxed ${size === "graph" ? "text-sm xl:text-base max-w-[340px]" : "text-lg max-w-md"}`}>
-        Boston University researchers and alumni, connected through the papers, patents and grants they share.
+        Boston University alumni, connected through the papers, patents, grants and theses they share.
       </p>
-      <div className="flex flex-wrap items-center justify-center gap-3">
-        <Button size="lg" className={`font-semibold shadow-xl shadow-foreground/10 ${size === "graph" ? "h-12 px-7" : "h-14 px-9 text-base"}`} asChild>
-          <Link to={exploreHref}>Explore the network <ArrowRight className="ml-2 w-4 h-4" /></Link>
-        </Button>
-        <Button size="lg" variant="outline" className={`font-semibold ${size === "graph" ? "h-12 px-5" : "h-14 px-7 text-base"}`} asChild>
-          <Link to={peopleHref}>Find My People</Link>
-        </Button>
-      </div>
+      <Button size="lg" className={`font-semibold shadow-xl shadow-foreground/10 ${size === "graph" ? "h-12 px-7" : "h-14 px-9 text-base"}`} asChild>
+        <Link to="/chat">Explore the network <ArrowRight className="ml-2 w-4 h-4" /></Link>
+      </Button>
     </motion.div>
   );
-
-  const heroGraph = (center?: React.ReactNode) =>
-    data ? (
-      <AlumniGraph people={data.heroPeople} links={data.heroLinks} center={center} />
-    ) : (
-      <div className="flex min-h-[420px] items-center justify-center">{center}</div>
-    );
-
-  const heroCaption = data?.topic
-    ? `The ${data.heroPeople.length} most connected BU-linked people in “${data.topic.label}”, with links for shared papers. Hover or focus anyone; click to open their records.`
-    : "";
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
@@ -290,22 +244,14 @@ const Landing = () => {
           <Link to="/"><Logo size="md" /></Link>
           <div className="flex items-center gap-3">
             <Button variant="ghost" className="text-sm font-medium" asChild>
-              <Link to={peopleHref}>Find My People</Link>
+              <Link to="/chat">Ask 6degrees</Link>
             </Button>
-            <Button className="text-sm font-semibold" asChild>
-              <Link to={exploreHref}>Explore</Link>
+            <Button className="hidden sm:inline-flex text-sm font-semibold" asChild>
+              <Link to="/chat">Find alumni</Link>
             </Button>
           </div>
         </div>
       </motion.nav>
-
-      {data && <DataBanner index={data.index} isMock={data.isMock} />}
-      {state.status === "error" && (
-        <div role="alert" className="bg-destructive/10 border-b border-destructive/30 px-4 py-2 text-sm text-destructive">
-          The graph could not be loaded: {state.message}{" "}
-          <button type="button" className="underline" onClick={retry}>Try again</button>
-        </div>
-      )}
 
       {/* Hero — the network graph */}
       <section className="relative overflow-hidden">
@@ -315,75 +261,72 @@ const Landing = () => {
 
         {/* Desktop: headline sits in the middle of the graph */}
         <div className="hidden lg:block max-w-7xl mx-auto px-6 lg:px-8 pt-14 pb-16 relative">
-          {heroGraph(headline("graph"))}
-          <p className="text-center text-xs text-muted-foreground mt-6">{heroCaption}</p>
+          <AlumniGraph center={headline("graph")} />
+          <p className="text-center text-xs text-muted-foreground mt-6">
+            Hover anyone to see their connections. All people shown are real BU alumni, from public sources.
+          </p>
         </div>
 
         {/* Mobile / tablet: headline first, graph scrolls sideways */}
         <div className="lg:hidden relative pt-16 pb-12">
           <div className="px-6">{headline("stack")}</div>
-          {data && (
-            <div className="mt-12 overflow-x-auto scrollbar-none">
-              <div className="min-w-[960px] px-6">{heroGraph()}</div>
+          <div className="mt-12 overflow-x-auto scrollbar-none">
+            <div className="min-w-[960px] px-6">
+              <AlumniGraph />
             </div>
-          )}
-          <p className="text-center text-xs text-muted-foreground mt-4 px-6">{heroCaption}</p>
+          </div>
+          <p className="text-center text-xs text-muted-foreground mt-4 px-6">Swipe to explore · real BU alumni from public sources</p>
         </div>
       </section>
 
-      {/* Featured people: the top of the Find My People ranking for the demo topic */}
-      {data && data.ranked.length > 0 && (
-        <section className="py-20 lg:py-28 bg-muted/40">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-4">
-              <div className="max-w-xl">
-                <h2 className="text-3xl sm:text-5xl font-display font-bold text-foreground tracking-[-0.03em] leading-[1.05] mb-3">
-                  People to learn from
-                </h2>
-                <p className="text-muted-foreground text-base lg:text-lg">
-                  The top of the Find My People ranking for “{data.topic?.label}”. Each card links to the records behind it.
-                </p>
-              </div>
-              <Link to={peopleHref} className="group inline-flex items-center gap-2 text-primary font-semibold text-sm self-start md:self-end">
-                See the full ranking
-                <span className="w-9 h-9 rounded-full bg-primary text-primary-foreground inline-flex items-center justify-center group-hover:translate-x-1 transition-transform">
-                  <ArrowRight className="w-4 h-4" />
-                </span>
-              </Link>
+      {/* Featured alumni */}
+      <section className="py-20 lg:py-28 bg-muted/40">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-4">
+            <div className="max-w-xl">
+              <h2 className="text-3xl sm:text-5xl font-display font-bold text-foreground tracking-[-0.03em] leading-[1.05] mb-3">
+                Achievements hiding
+                <br />
+                in plain sight
+              </h2>
+              <p className="text-muted-foreground text-base lg:text-lg">
+                Nobel laureates, astronauts and pioneers — each one a node in the BU graph.
+              </p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {data.ranked.slice(0, 4).map((r, i) => {
-                const paper = mostCited(r);
-                return (
-                  <motion.div
-                    key={r.person.id}
-                    initial={{ opacity: 0, y: 24 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.2 }}
-                    transition={{ duration: 0.55, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                    whileHover={{ y: -6 }}
-                  >
-                    <Link to={`/explore?node=${encodeURIComponent(r.person.id)}`} className="group block rounded-3xl bg-card p-6 shadow-sm h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-                      <div className="flex items-center justify-between mb-5">
-                        <span className="w-16 h-16 rounded-full bg-primary/10 text-primary font-display font-bold text-xl flex items-center justify-center" aria-hidden="true">
-                          {initials(r.person.label)}
-                        </span>
-                        <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-muted-foreground">#{i + 1}</span>
-                      </div>
-                      <AffiliationBadge status={r.status} />
-                      <h3 className="mt-2 font-display font-semibold text-lg text-foreground group-hover:text-primary transition-colors tracking-[-0.01em]">{r.person.label}</h3>
-                      <p className="text-sm text-muted-foreground mt-0.5">
-                        {r.contributions.length} linked publication{r.contributions.length === 1 ? "" : "s"}
-                      </p>
-                      {paper && <p className="mt-3 text-xs text-foreground/80 line-clamp-3">Most cited: {paper.label}</p>}
-                    </Link>
-                  </motion.div>
-                );
-              })}
-            </div>
+            <Link to="/chat" className="group inline-flex items-center gap-2 text-primary font-semibold text-sm self-start md:self-end">
+              Browse alumni
+              <span className="w-9 h-9 rounded-full bg-primary text-primary-foreground inline-flex items-center justify-center group-hover:translate-x-1 transition-transform">
+                <ArrowRight className="w-4 h-4" />
+              </span>
+            </Link>
           </div>
-        </section>
-      )}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {FEATURED.map((a, i) => (
+              <motion.div
+                key={a.name}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.55, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ y: -6 }}
+              >
+                <div className="group cursor-pointer">
+                  <div className="relative rounded-3xl overflow-hidden mb-4 aspect-[4/5]">
+                    <img src={a.img} alt={a.name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-foreground/40 via-transparent to-transparent" />
+                    <span className="absolute top-4 left-4 bg-background/95 backdrop-blur text-foreground text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-[0.15em] shadow-sm">
+                      {a.tag}
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-primary font-bold uppercase tracking-[0.18em] mb-1.5">{a.degree}</p>
+                  <h3 className="font-display font-semibold text-lg text-foreground group-hover:text-primary transition-colors tracking-[-0.01em]">{a.name}</h3>
+                  <p className="text-sm text-muted-foreground mt-0.5">{a.line}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Features */}
       <section id="features" className="py-24 lg:py-32 relative overflow-hidden">
@@ -403,7 +346,7 @@ const Landing = () => {
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold mb-5 text-foreground tracking-[-0.035em] leading-[1.02]">
               Connect the dots
               <br />
-              across BU research
+              between alumni
             </h2>
             <p className="text-muted-foreground text-lg max-w-xl mx-auto">
               Public records already describe who worked with whom. 6degrees turns them into a map.
@@ -445,7 +388,7 @@ const Landing = () => {
                       >
                         <div className={`h-full rounded-[2rem] overflow-hidden flex flex-col shadow-sm ${bodyTones[i]}`}>
                           <div className={`${featureBg[i]} aspect-[5/3] flex items-center justify-center`}>
-                            {data && <Illust data={data} />}
+                            <Illust />
                           </div>
                           <div className="p-7 lg:p-8">
                             <span className={`inline-block text-[10px] font-bold tracking-[0.18em] uppercase px-2.5 py-1 rounded-full mb-4 ${tagTones[i]}`}>{feature.tag}</span>
@@ -474,7 +417,7 @@ const Landing = () => {
                       >
                         <div className={`h-full rounded-[2rem] overflow-hidden flex ${isWide ? "flex-col sm:flex-row" : "flex-col"} shadow-sm ${bodyTones[i]}`}>
                           <div className={`${featureBg[i]} ${isWide ? "sm:w-1/2 aspect-[5/3] sm:aspect-auto" : "aspect-[5/3]"} flex items-center justify-center relative flex-shrink-0`}>
-                            {data && <Illust data={data} />}
+                            <Illust />
                           </div>
                           <div className="p-7 lg:p-8 flex flex-col justify-center">
                             <span className={`inline-block self-start text-[10px] font-bold tracking-[0.18em] uppercase px-2.5 py-1 rounded-full mb-4 ${tagTones[i]}`}>{feature.tag}</span>
@@ -504,34 +447,34 @@ const Landing = () => {
           >
             <span className="inline-block text-[11px] font-bold tracking-[0.2em] uppercase text-primary mb-4">Data sources</span>
             <h2 className="text-3xl sm:text-5xl font-display font-bold text-foreground tracking-[-0.03em] leading-[1.05] mb-4">
-              Public sources,
+              Nine public sources,
               <br />
               one graph
             </h2>
             <p className="text-muted-foreground text-base lg:text-lg">
-              Each source adds a different kind of connection. Counts show how many records in the loaded graph cite it.
+              Each source adds a different kind of connection between alumni.
             </p>
           </motion.div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {SOURCES.map((s, i) => {
-              const n = data?.sourceCounts.get(s.source) ?? 0;
+              const limited = s.status === "Limited";
               return (
                 <motion.div
-                  key={s.source}
+                  key={s.name}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.5, delay: (i % 4) * 0.06, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 0.5, delay: (i % 3) * 0.06, ease: [0.22, 1, 0.36, 1] }}
                   className="bg-card rounded-2xl p-6 shadow-sm flex flex-col"
                 >
                   <div className="flex items-start justify-between gap-3 mb-3">
-                    <h3 className="font-display font-bold text-lg text-foreground tracking-[-0.01em]">{SOURCE_LABEL[s.source]}</h3>
-                    <span className={`shrink-0 text-[10px] font-bold uppercase tracking-[0.14em] px-2.5 py-1 rounded-full ${n ? "bg-success/10 text-success" : "bg-muted text-muted-foreground"}`}>
-                      {n ? `${n.toLocaleString()} records` : "Not loaded yet"}
+                    <h3 className="font-display font-bold text-lg text-foreground tracking-[-0.01em]">{s.name}</h3>
+                    <span className={`shrink-0 text-[10px] font-bold uppercase tracking-[0.14em] px-2.5 py-1 rounded-full ${limited ? "bg-warning/15 text-warning" : s.status === "Subscription" ? "bg-muted text-muted-foreground" : "bg-success/10 text-success"}`}>
+                      {s.status}
                     </span>
                   </div>
                   <p className="text-sm text-muted-foreground leading-relaxed flex-1">{s.what}</p>
-                  {s.note && <p className="text-xs text-muted-foreground mt-2 italic">{s.note}</p>}
+                  {s.note && <p className="text-xs text-warning mt-2">{s.note}</p>}
                   <div className="mt-4 pt-4 border-t border-border flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-primary" />
                     <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-foreground/70">Edges: {s.link}</span>
@@ -613,7 +556,7 @@ const Landing = () => {
                     Start with Boston University. See who's closer than you think.
                   </p>
                   <Button size="lg" className="text-base font-semibold px-8 h-12 bg-primary text-primary-foreground hover:bg-primary/90" asChild>
-                    <Link to={exploreHref}>Explore the network <ArrowRight className="ml-2 w-4 h-4" /></Link>
+                    <Link to="/chat">Explore the network <ArrowRight className="ml-2 w-4 h-4" /></Link>
                   </Button>
                 </motion.div>
               </div>
@@ -625,7 +568,7 @@ const Landing = () => {
       <footer className="py-12 px-6 lg:px-8">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <Logo size="md" />
-          <p className="text-sm text-muted-foreground">© 2026 6degrees. Every connection links to its public source record.</p>
+          <p className="text-sm text-muted-foreground">© 2026 6degrees. Portraits via Wikimedia Commons.</p>
         </div>
       </footer>
     </div>

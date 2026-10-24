@@ -1,7 +1,7 @@
 # AGENTS.md
 
-- All people, counts, and links come from the loaded graph (`src/data/GraphContext.tsx`). Never hardcode records or use photos of real people (`.kiro/steering/data-integrity.md`).
-- `scripts/sync-graph.mjs` runs before `dev` and `build`. It copies `data/graph.json`, or, until the merge exists, `data/modules/research.json`, into `public/data/graph.json`, plus the mock as `public/data/graph.sample.json`.
-- Routes: `/` (landing, `src/pages/Landing.tsx`) and `/explore` (`src/pages/Explore.tsx`, URL state `node`, `sel`, `edge`, `view`, `topic`).
-- The event-studio pages imported from Lovable (auth, dashboard, registration, tickets, Supabase) are no longer routed. Their files are still in `src/` pending a decision to delete them.
-- `npm run typecheck` runs strict TypeScript over the explorer code only. The rest of the app predates strict mode.
+- Landing page content is hardcoded in `src/pages/Landing.tsx`; graph people/edges live in `src/lib/alumniGraph.ts` — the old landing CMS (`useLandingContent`) no longer drives the public landing page.
+- Alumni portraits are CDN assets (`src/assets/alumni/*.asset.json`), cropped square for graph nodes and 4:5 under `featured/` — keeps binaries out of the repo.
+- The alumni chatbot (`/chat/:threadId`, `src/pages/Chat.tsx`) streams from the `alumni-chat` edge function; `/auth` redirects to it and the real sign-in page lives at `/login` — keeps organizer login reachable while the chatbot replaces the login page.
+- `alumni-chat` only shows profiles returned by its own `search_linkedin` tool in the same request (Firecrawl web search, `site:linkedin.com/in "Boston University"`) — so the model can never present invented people.
+- Chat threads are stored in browser localStorage via `src/lib/chatStore.ts` (no database) — matches the chosen "remember in this browser" storage.

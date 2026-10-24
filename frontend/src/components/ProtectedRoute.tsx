@@ -17,7 +17,7 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
     const redirectTarget = `${location.pathname}${location.search}${location.hash}`;
     return (
       <Navigate
-        to={`/auth?redirect=${encodeURIComponent(redirectTarget)}`}
+        to={`/login?redirect=${encodeURIComponent(redirectTarget)}`}
         replace
       />
     );
