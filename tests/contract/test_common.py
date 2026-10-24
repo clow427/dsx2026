@@ -17,11 +17,23 @@ def test_make_node_id_keeps_local_casing():
 
 @pytest.mark.parametrize(
     "args",
-    [("paper", "openalex", "W1"), ("person", "OpenAlex", "A1"), ("person", "openalex", "A 1")],
+    [
+        ("paper", "openalex", "W1"),
+        ("person", "OpenAlex", "A1"),
+        ("person", "openalex", "A 1"),
+        # Regression for the bug PBT property C2 found: `$` in re.match() accepted a trailing newline.
+        ("person", "openalex", "A1\n"),
+        ("person", "openalex\n", "A1"),
+    ],
 )
 def test_make_node_id_rejects_invalid_parts(args):
     with pytest.raises(ValueError):
         make_node_id(*args)
+
+
+def test_parse_node_id_rejects_trailing_newline():
+    with pytest.raises(ValueError):
+        parse_node_id("person:openalex:A1\n")
 
 
 def test_parse_node_id_round_trip():

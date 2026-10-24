@@ -19,6 +19,7 @@ from .contract import (
     IDENTITY_SCHEMA_PATH,
     SYMMETRIC_EDGE_TYPES,
 )
+from .ids import NODE_ID_RE
 from .sources import is_http_url
 
 
@@ -125,6 +126,11 @@ def validate_graph(doc: object) -> ValidationResult:
             result.errors.append(f"duplicate node id: {node_id}")
             continue
         node_types[node_id] = node.get("type")
+
+        # jsonschema checks `pattern` with re.search, where `$` also matches before a
+        # trailing newline. Enforce the full-match semantics the frontend (JavaScript) uses.
+        if not NODE_ID_RE.fullmatch(node_id):
+            result.errors.append(f"node {node_id!r}: id does not fully match the contract pattern")
 
         prefix = node_id.split(":", 1)[0]
         if prefix != node.get("type"):
