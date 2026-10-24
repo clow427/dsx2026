@@ -13,7 +13,7 @@ This module builds the academic research network: BU-related publications, their
 **User story:** As a student exploring AI in healthcare, I want relevant BU-linked papers, so that the graph shows real research I can follow.
 
 1. THE pipeline SHALL fetch works where at least one authorship institution is Boston University, filtered by the configured demo topic or topics and date range.
-2. THE pipeline SHALL cap the dataset at a configurable size (proposed: 100 to 200 works). Reliability takes priority over volume.
+2. THE pipeline SHALL keep every work that matches the configured filters by default. It SHALL support an optional, configurable cap on the number of works, for use when the filters are broad. (Changed 2026-10-24: originally a proposed cap of 100 to 200 works. With the AI-in-healthcare filters, all 578 matching works compress to under 1 MB, and the frontend renders search-scoped neighborhoods, so the cap was dropped.)
 3. THE pipeline SHALL cache raw responses under `data/raw/research/` and reuse them on reruns.
 4. THE pipeline SHALL respect OpenAlex usage guidelines, including a contact email, polite rate limiting, and cursor-based paging.
 

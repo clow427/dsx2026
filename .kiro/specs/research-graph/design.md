@@ -35,4 +35,5 @@ Person nodes stay source-level (`person:openalex:*`). Include the ORCID in `attr
 
 - **API throttling.** Cached pages keep reruns offline.
 - **Topic too broad.** Tighten the filter by topic ID or year.
-- **Too many authors.** The author cap and a cap on total work count keep the graph readable.
+- **Too many authors.** The author cap keeps coauthor edges readable. An optional cap on total work count (`max_works`, off by default) is available if the topic filter is widened or removed.
+- **Semantic Scholar throttling.** DOIs are sent in batches of 100, each cached separately, so a throttled batch is skipped and retried on the next run without losing the others.

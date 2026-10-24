@@ -8,7 +8,7 @@
       "matcher": "(^|/)data/.*\\.json$",
       "action": {
         "type": "command",
-        "command": "if [ -f scripts/validate_graph.py ]; then python3 scripts/validate_graph.py data/mock/graph.sample.json $(ls data/modules/*.json data/graph.json 2>/dev/null | grep -v identity_matches); else echo \"Graph validator not implemented yet - see .kiro/specs/shared-data-contract/tasks.md (task 4).\"; fi",
+        "command": "PY=python3; [ -x .venv/bin/python ] && PY=.venv/bin/python; if [ -f scripts/validate_graph.py ]; then $PY scripts/validate_graph.py data/mock/graph.sample.json $(ls data/modules/*.json data/graph.json 2>/dev/null | grep -v identity_matches); else echo \"Graph validator not implemented yet - see .kiro/specs/shared-data-contract/tasks.md (task 4).\"; fi",
         "timeout": 60
       }
     }

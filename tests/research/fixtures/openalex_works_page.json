@@ -1,0 +1,88 @@
+{
+  "_note": "MOCK fixture in the shape of an OpenAlex /works response page. All names, IDs, and institutions are fictional.",
+  "meta": {"count": 4, "per_page": 200, "next_cursor": null},
+  "results": [
+    {
+      "id": "https://openalex.org/W9000000001",
+      "doi": "https://doi.org/10.0000/example.0001",
+      "display_name": "Example Study of Machine Learning for Clinical Triage",
+      "publication_year": 2021,
+      "type": "article",
+      "cited_by_count": 42,
+      "primary_location": {"source": {"id": "https://openalex.org/S9000000001", "display_name": "Example Journal of Medical AI"}},
+      "authorships": [
+        {
+          "author_position": "first",
+          "is_corresponding": true,
+          "author": {"id": "https://openalex.org/A9000000001", "display_name": "Example Author One", "orcid": "https://orcid.org/0000-0000-0000-0001"},
+          "institutions": [
+            {"id": "https://openalex.org/I111088046", "display_name": "Boston University", "ror": "https://ror.org/05qwgg493", "country_code": "US", "type": "education", "lineage": ["https://openalex.org/I111088046"]}
+          ]
+        },
+        {
+          "author_position": "middle",
+          "is_corresponding": false,
+          "author": {"id": "https://openalex.org/A9000000002", "display_name": "Example Author Two", "orcid": null},
+          "institutions": [
+            {"id": "https://openalex.org/I9000000010", "display_name": "Example BU Child Study", "ror": null, "country_code": "US", "type": "facility", "lineage": ["https://openalex.org/I111088046", "https://openalex.org/I9000000010"]}
+          ]
+        },
+        {
+          "author_position": "last",
+          "is_corresponding": false,
+          "author": {"id": "https://openalex.org/A9000000003", "display_name": "Example Author Three", "orcid": null},
+          "institutions": [
+            {"id": "https://openalex.org/I9000000020", "display_name": "Example Medical School", "ror": "https://ror.org/00example1", "country_code": "US", "type": "education", "lineage": ["https://openalex.org/I9000000020"]}
+          ]
+        }
+      ],
+      "topics": [
+        {"id": "https://openalex.org/T11396", "display_name": "Artificial Intelligence in Healthcare", "score": 0.9876, "subfield": {"display_name": "Health Information Management"}, "field": {"display_name": "Health Professions"}, "domain": {"display_name": "Health Sciences"}},
+        {"id": "https://openalex.org/T9000001", "display_name": "Example Secondary Topic", "score": 0.5}
+      ],
+      "primary_topic": {"id": "https://openalex.org/T11396"}
+    },
+    {
+      "id": "https://openalex.org/W9000000002",
+      "doi": null,
+      "display_name": "Example Follow-up on Clinical Triage Models",
+      "publication_year": 2022,
+      "type": "article",
+      "cited_by_count": 7,
+      "primary_location": null,
+      "authorships": [
+        {
+          "author_position": "first",
+          "author": {"id": "https://openalex.org/A9000000003", "display_name": "Example Author Three", "orcid": null},
+          "institutions": [
+            {"id": "https://openalex.org/I9000000030", "display_name": "Example Related Hospital", "ror": null, "country_code": "US", "type": "healthcare", "lineage": ["https://openalex.org/I9000000030"]}
+          ]
+        },
+        {
+          "author_position": "middle",
+          "author": {"id": null, "display_name": "Example Unidentified Author"},
+          "institutions": []
+        },
+        {
+          "author_position": "last",
+          "author": {"id": "https://openalex.org/A9000000001", "display_name": "Example Author One", "orcid": "https://orcid.org/0000-0000-0000-0001"},
+          "institutions": [
+            {"id": "https://openalex.org/I111088046", "display_name": "Boston University", "ror": "https://ror.org/05qwgg493", "country_code": "US", "type": "education", "lineage": ["https://openalex.org/I111088046"]}
+          ]
+        }
+      ],
+      "topics": [
+        {"id": "https://openalex.org/T11396", "display_name": "Artificial Intelligence in Healthcare", "score": 0.91}
+      ],
+      "primary_topic": {"id": "https://openalex.org/T11396"}
+    },
+    {
+      "id": "https://openalex.org/W9000000003",
+      "doi": null,
+      "display_name": "",
+      "publication_year": 2023,
+      "authorships": [],
+      "topics": []
+    }
+  ]
+}
