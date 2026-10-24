@@ -1,73 +1,20 @@
-# Welcome to your Lovable project
+# Frontend explorer (P4)
 
-## Project info
+Static React + Vite app that loads the shared graph and implements the demo journey: search, graph explorer, detail and evidence panels, filters, and Find My People. Spec: `.kiro/specs/frontend-explorer/`.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
-
-## How can I edit this code?
-
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```bash
+npm ci
+npm run dev        # syncs ../data into public/data, then serves on :8080
+npm test           # Vitest: loader shape checks, search, filters, ranking
+npm run typecheck  # strict TypeScript over the explorer code
+npm run build      # syncs data, then builds dist/ (static; no backend, no auth)
 ```
 
-**Edit a file directly in GitHub**
+## Data
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+`scripts/sync-graph.mjs` picks the first file that exists:
 
-**Use GitHub Codespaces**
+1. `data/graph.json`: the merged graph (P2 merge step).
+2. `data/modules/research.json`: interim. The app shows a "Partial data" banner.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+The mock (`data/mock/graph.sample.json`) is always copied. The app falls back to it, with a "Mock data" banner, when no real graph is served. A graph that fails the shape checks in `src/data/loadGraph.ts` shows an error state instead of rendering.
