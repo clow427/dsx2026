@@ -1,0 +1,23 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "alumni-graph-contract",
+  "version": "0.1.0",
+  "description": "Build, validate, and property-test pipeline modules for the dsx2026 evidence-backed alumni graph contract (schema 0.1.0): provenance on every node and edge, BU affiliation status rules, and deterministic output.",
+  "author": {
+    "name": "dsx2026 team"
+  },
+  "keywords": [
+    "alumni graph",
+    "graph contract",
+    "graph.schema.json",
+    "validate_graph",
+    "pipeline module",
+    "provenance",
+    "evidence",
+    "bu_affiliation",
+    "property-based test",
+    "hypothesis"
+  ],
+  "repository": "https://github.com/clow427/dsx2026",
+  "license": "Apache-2.0"
+}
