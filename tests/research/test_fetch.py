@@ -62,6 +62,26 @@ def test_incomplete_cache_is_refetched(config, tmp_path):
     assert fetch_works(config, client=client).works[0]["id"].endswith("W2")
 
 
+def truncated_work(wid, n):
+    return {"id": f"https://openalex.org/{wid}", "authorships": [{"author": {"id": f"A{i}"}} for i in range(n)]}
+
+
+def test_works_at_the_authorship_limit_are_completed_and_cached(config, tmp_path):
+    listing = {"meta": {"count": 2, "next_cursor": None}, "results": [truncated_work("W1", 100), truncated_work("W2", 5)]}
+    full = truncated_work("W1", 250)
+    client = FakeClient([listing, full])
+    result = fetch_works(config, client=client, api_key="SECRET")
+
+    assert [len(w["authorships"]) for w in result.works] == [250, 5]
+    method, url, kwargs = client.calls[1]
+    assert url.endswith("/works/W1") and kwargs["params"]["api_key"] == "SECRET"
+    assert "SECRET" not in (next(tmp_path.rglob("full_W1.json"))).read_text()
+
+    offline = FakeClient([])
+    again = fetch_works(config, client=offline)
+    assert again.from_cache and len(again.works[0]["authorships"]) == 250 and offline.calls == []
+
+
 class SequenceSession:
     def __init__(self, items):
         self.items = list(items)
