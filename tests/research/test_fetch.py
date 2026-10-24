@@ -1,0 +1,91 @@
+import json
+from dataclasses import replace
+
+import pytest
+import requests
+
+from pipelines.research.config import ResearchConfig
+from pipelines.research.fetch import fetch_works
+from pipelines.research.http import PoliteClient
+
+from .conftest import FakeClient, FakeResponse
+
+
+def page(ids, next_cursor):
+    return {"meta": {"count": 5, "next_cursor": next_cursor}, "results": [{"id": f"https://openalex.org/{i}"} for i in ids]}
+
+
+@pytest.fixture
+def config(tmp_path):
+    return ResearchConfig(cache_dir=tmp_path, max_works=3)
+
+
+def test_filter_uses_bu_lineage_topics_and_years():
+    f = ResearchConfig().openalex_filter()
+    assert "authorships.institutions.lineage:I111088046" in f
+    assert "publication_year:2019-2025" in f
+    assert "topics.id:T11396|" in f
+    assert "topics.id" not in replace(ResearchConfig(), topic_ids=()).openalex_filter()
+
+
+def test_cursor_paging_stops_at_cap_and_sends_credentials(config):
+    client = FakeClient([page(["W1", "W2"], "c2"), page(["W3", "W4"], "c3")])
+    result = fetch_works(config, client=client, api_key="SECRET", mailto="team@example.org")
+    assert [w["id"][-2:] for w in result.works] == ["W1", "W2", "W3"]
+    assert len(client.calls) == 2
+    first, second = (c[2]["params"] for c in client.calls)
+    assert first["cursor"] == "*" and second["cursor"] == "c2"
+    assert first["api_key"] == "SECRET" and first["mailto"] == "team@example.org"
+    assert first["per-page"] == 3
+
+
+def test_cache_is_reused_and_has_no_api_key(config, tmp_path):
+    fetch_works(config, client=FakeClient([page(["W1", "W2", "W3"], None)]), api_key="SECRET")
+    cached_text = "".join(p.read_text() for p in tmp_path.rglob("*.json"))
+    assert "SECRET" not in cached_text
+
+    offline = FakeClient([])  # any request would fail
+    result = fetch_works(config, client=offline)
+    assert result.from_cache and len(result.works) == 3 and offline.calls == []
+
+    refreshed = fetch_works(config, client=FakeClient([page(["W9"], None)]), refresh=True)
+    assert [w["id"] for w in refreshed.works] == ["https://openalex.org/W9"]
+
+
+def test_incomplete_cache_is_refetched(config, tmp_path):
+    fetch_works(config, client=FakeClient([page(["W1"], None)]))
+    (manifest,) = tmp_path.rglob("manifest.json")
+    data = json.loads(manifest.read_text())
+    data["complete"] = False
+    manifest.write_text(json.dumps(data))
+    client = FakeClient([page(["W2"], None)])
+    assert fetch_works(config, client=client).works[0]["id"].endswith("W2")
+
+
+class SequenceSession:
+    def __init__(self, items):
+        self.items = list(items)
+        self.headers = {}
+
+    def request(self, method, url, **kwargs):
+        item = self.items.pop(0)
+        if isinstance(item, Exception):
+            raise item
+        return item
+
+
+def test_polite_client_retries_throttling_then_succeeds():
+    sleeps = []
+    session = SequenceSession(
+        [FakeResponse({}, 429, {"Retry-After": "3"}), requests.ConnectionError("boom"), FakeResponse({"ok": True})]
+    )
+    client = PoliteClient(session=session, interval=0, sleep=sleeps.append)
+    assert client.request("GET", "https://example.org").json() == {"ok": True}
+    assert sleeps == [3.0, 2]
+
+
+def test_polite_client_raises_after_retries():
+    session = SequenceSession([FakeResponse({}, 503)] * 3)
+    client = PoliteClient(session=session, interval=0, max_retries=2, sleep=lambda s: None)
+    with pytest.raises(requests.HTTPError):
+        client.request("GET", "https://example.org")
