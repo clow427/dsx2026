@@ -1,0 +1,16 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Guard shell commands against data-integrity and git-safety violations",
+      "trigger": "PreToolUse",
+      "description": "Blocks automated LinkedIn access and staging .env files (exit 2), and asks for confirmation before force pushes or --no-verify commits. Logic and tests: scripts/hooks/guard_shell.py, tests/hooks/.",
+      "matcher": "shell",
+      "action": {
+        "type": "command",
+        "command": "PY=python3; [ -x .venv/bin/python ] && PY=.venv/bin/python; $PY scripts/hooks/guard_shell.py",
+        "timeout": 10
+      }
+    }
+  ]
+}
