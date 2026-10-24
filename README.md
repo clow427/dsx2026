@@ -2,7 +2,7 @@
 
 An evidence-backed, explorable map of Boston University's alumni and research network. It connects people to publications, patents, funding awards, organizations, and research topics, so students can discover relevant people to learn from. Every connection links back to a real source record. Verified alumni are clearly distinguished from BU-affiliated researchers, and uncertain identity matches are flagged instead of being silently merged.
 
-> **Status:** Scaffolding only. The specs, steering files, data contract, and mock data are in place. No pipeline or frontend code has been written yet.
+> **Status:** The shared contract, validator, and research pipeline (P1) are implemented, and `data/modules/research.json` holds real OpenAlex data. The identity, innovation, merge, and frontend modules haven't been written yet.
 
 ## Demo journey
 
@@ -101,8 +101,15 @@ brainstorm.md    original planning notes
 
 Setup commands will be added as each module is implemented.
 
-- **Pipelines:** `python -m pipelines.<module>.run` (planned)
-- **Validate:** `python scripts/validate_graph.py data/mock/graph.sample.json` (planned)
+```bash
+uv venv --python 3.11 .venv && uv pip install --python .venv/bin/python -r pipelines/requirements.txt
+cp .env.example .env            # optional: OPENALEX_API_KEY, OPENALEX_MAILTO, S2_API_KEY
+.venv/bin/python -m pytest      # fixture-based tests, no network
+```
+
+- **Research pipeline:** `.venv/bin/python -m pipelines.research.run` writes `data/modules/research.json`. Raw API responses are cached in `data/raw/research/`, so reruns are offline and byte-identical. Flags: `--refresh`, `--skip-s2`, `--max-works N`. The scope (BU institution, topics, years, caps) lives in `pipelines/research/config.py`.
+- **Other pipelines:** `python -m pipelines.<module>.run` (planned)
+- **Validate:** `.venv/bin/python scripts/validate_graph.py data/mock/graph.sample.json data/modules/research.json`
 - **Frontend:** `cd frontend && npm install && npm run dev` (planned)
 
 ## Kiro usage (for the submission write-up)
@@ -112,7 +119,7 @@ Hackachusetts requires that `.kiro/` sit in the repo root and that the submissio
 | Who | Task | How Kiro helped | Outcome |
 |---|---|---|---|
 | Team | Project scaffolding | Turned the brainstorm into steering files, five specs, the JSON Schema contract, mock data, and a validation hook | This repo structure |
-| P1 | | | |
+| P1 | Research graph pipeline, shared helpers, validator | Looked up BU's OpenAlex/ROR IDs and topic IDs live, implemented fetch → normalize → S2 enrichment → validate, wrote fixture tests, spot-checked 10 works against OpenAlex | `data/modules/research.json` (150 works, 1,586 people), 52 passing tests |
 | P2 | | | |
 | P3 | | | |
 | P4 | | | |
