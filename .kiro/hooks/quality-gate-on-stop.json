@@ -1,0 +1,15 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Quality gate: validate changed graph files and run fast tests when the agent stops",
+      "trigger": "Stop",
+      "description": "Validates changed data/**/*.json files and runs the fast pytest suite (Hypothesis 'hook' profile) when Python changed. On failure it returns a Stop 'block' decision so the agent keeps working; the same failure only blocks once.",
+      "action": {
+        "type": "command",
+        "command": "PY=python3; [ -x .venv/bin/python ] && PY=.venv/bin/python; $PY scripts/hooks/stop_gate.py",
+        "timeout": 120
+      }
+    }
+  ]
+}

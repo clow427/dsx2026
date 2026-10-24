@@ -45,7 +45,7 @@ def short_id(value: str | None, prefix: str = OPENALEX_PREFIX) -> str | None:
     if not value or not isinstance(value, str):
         return None
     local = value[len(prefix) :] if value.startswith(prefix) else value
-    return local if LOCAL_ID_RE.match(local) else None
+    return local if LOCAL_ID_RE.fullmatch(local) else None
 
 
 def openalex_ref(local_id: str, retrieved_at: str, note: str | None = None) -> dict:

@@ -73,3 +73,5 @@
   - Otherwise leave the photo out (optionally note who to ask for a user-submitted or permissioned photo). Never scrape.
   - _Test:_ lint check in `tests/identity/test_curation_lint.py` that any `photo` block has all required fields and an allowed `source`.
   - _Requirements: 7_
+- [ ] 10. Write property-based tests for correctness properties I1–I6 in `design.md`
+  - _Requirements: 3, 6_

@@ -18,10 +18,10 @@ data/modules/identity_matches.json    # P2
 data/modules/innovation.json          # P3
 data/graph.json                       # merge output, consumed by the frontend
 data/raw/                             # API response caches (gitignored)
-scripts/validate_graph.py             # validator CLI (planned)
-pipelines/common/                     # shared helpers: IDs, source refs, writer (planned)
+scripts/validate_graph.py             # validator CLI
+pipelines/common/                     # shared helpers: IDs, source refs, writer
 pipelines/merge/                      # merge step (planned, P2)
-tests/contract/                       # contract tests (planned)
+tests/contract/                       # contract tests, including property-based tests
 ```
 
 ## ID scheme
@@ -102,10 +102,35 @@ Command: `python scripts/validate_graph.py <file>... [--identity data/modules/id
 
 The validator prints a summary and exits with code 1 if any failure check fails.
 
-## Kiro hook
+Node IDs are also checked with a full match against the ID pattern. JSON Schema's `pattern` keyword is evaluated with Python's `re.search`, where `$` also matches just before a trailing newline, so the schema alone accepts `person:openalex:A1\n`. The frontend's JavaScript regex would reject that ID, so the two sides would disagree about which nodes exist.
 
-`.kiro/hooks/validate-graph-data.json` (PostFileSave on `data/**/*.json`) runs the validator once it exists. Until then, it prints a reminder.
+## Correctness properties
+
+These properties come from the requirements above. Each one is a Hypothesis test in `tests/contract/test_contract_properties.py`, and the test docstring repeats the property ID. Generators build fictional (MOCK) graphs with `example.org` URLs.
+
+| ID | Property: for any valid input… | Requirements |
+|---|---|---|
+| C1 | `parse_node_id(make_node_id(t, ns, id)) == (t, ns, id)`, and the source casing is preserved | 2.1 |
+| C2 | `make_node_id` succeeds **iff** `namespace` and `local_id` fully match the contract pattern. Otherwise it raises, and it never rewrites the ID | 2.1 |
+| C3 | Symmetric edge IDs are independent of endpoint order. Directed edge IDs are not | 2.2 |
+| C4 | `merge_refs` is a deduplicated, order-preserving, idempotent union | 4, 8.4 |
+| C5 | Any graph built through `GraphBuilder` from valid parts has zero validator errors and is sorted by ID | 1, 2, 3, 4 |
+| C6 | Shuffling the order of node and edge adds gives an identical document | 2.2 |
+| C7 | Every source and evidence ref passed in survives the build, with nothing dropped | 4, 8.4 |
+| C8 | Removing a referenced node always produces a "references missing node" error | 3.1 |
+| C9 | A duplicated node ID is always an error | 2.3 |
+| C10 | An edge with empty evidence is always an error | 4.1 |
+| C11 | `verified_alumnus` and `bu_affiliated_researcher` with no evidence are always errors | 5.2 |
+| C12 | A node ID with characters outside the pattern (including a trailing `\n`) is an error, even when every edge that references it is renamed consistently | 2.1, 7.1 |
+
+**Bug found by PBT.** C2 and C12 failed on the first run, with falsifying examples `local_id='0\n'` and `suffix='\n'`. Both `make_node_id` and the validator accepted IDs ending in a newline. The fix uses `re.fullmatch` in `pipelines/common/ids.py`, plus an explicit full-match check in the validator. The example-based tests never tried a trailing newline.
+
+## Kiro hooks
+
+- `.kiro/hooks/validate-graph-data.json` (PostFileSave on `data/**/*.json`) runs the validator on the mock file and every module output.
+- `.kiro/hooks/quality-gate-on-stop.json` (Stop) validates changed graph files and runs the fast test suite, including these properties with the `hook` profile, before the agent hands control back to the user.
 
 ## Changelog
 
 - **0.1.0** (2026-10-24): Initial draft.
+- **0.1.0** (2026-10-24, no schema change): The validator now rejects node IDs that only match the pattern because of a trailing newline (found by property C2/C12). This tightens existing behavior to match the schema's intent, so `schema_version` is unchanged.

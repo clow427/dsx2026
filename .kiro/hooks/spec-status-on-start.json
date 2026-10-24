@@ -1,0 +1,15 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Load spec task status into context at session start",
+      "trigger": "SessionStart",
+      "description": "Prints the current branch and the open top-level tasks of every spec, so each session starts aware of the plan.",
+      "action": {
+        "type": "command",
+        "command": "PY=python3; [ -x .venv/bin/python ] && PY=.venv/bin/python; $PY scripts/hooks/spec_status.py",
+        "timeout": 10
+      }
+    }
+  ]
+}
