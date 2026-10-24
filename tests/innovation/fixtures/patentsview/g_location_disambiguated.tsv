@@ -1,0 +1,3 @@
+location_id	disambig_city	disambig_state	disambig_country	latitude	longitude	county	state_fips	county_fips
+loc-1	Example City	MA	US	0	0			
+loc-2	Example Town	CA	US	0	0			
