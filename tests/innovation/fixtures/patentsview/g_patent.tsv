@@ -1,0 +1,5 @@
+patent_id	patent_type	patent_date	patent_title	wipo_kind	num_claims	withdrawn	filename
+9000001	utility	2022-05-03	MOCK Example System for Machine Learning Triage	B2	20	0	mock.xml
+9000002	utility	2023-01-10	MOCK Example Assay Unrelated to AI	B1	5	0	mock.xml
+9000003	utility	2021-07-20	MOCK Example Imaging Classifier	B2	12	0	mock.xml
+9000004	utility	2020-02-02	MOCK Example Non-BU Device	B2	3	0	mock.xml

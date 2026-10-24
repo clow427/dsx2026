@@ -1,0 +1,6 @@
+patent_id	assignee_sequence	assignee_id	disambig_assignee_individual_name_first	disambig_assignee_individual_name_last	disambig_assignee_organization	assignee_type	location_id
+9000001	0	mockasg-bu			Trustees of Boston University	2	loc-1
+9000001	1	mockasg-co			Example Partner Corp	2	loc-2
+9000002	0	mockasg-bu			Trustees of Boston University	2	loc-1
+9000003	0	mockasg-bu2			Boston University	2	loc-1
+9000004	0	mockasg-co			Example Partner Corp	2	loc-2

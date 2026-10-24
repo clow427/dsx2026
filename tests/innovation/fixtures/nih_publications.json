@@ -1,0 +1,30 @@
+{
+ "_comment": "MOCK NIH publication links",
+ "results": [
+  {
+   "coreproject": "R01EX000001",
+   "pmid": 10000001,
+   "applid": 1001
+  },
+  {
+   "coreproject": "R01EX000001",
+   "pmid": 10000002,
+   "applid": 1002
+  },
+  {
+   "coreproject": "R21EX000002",
+   "pmid": 10000001,
+   "applid": 1003
+  },
+  {
+   "coreproject": "R01EX000001",
+   "pmid": 10000009,
+   "applid": 1002
+  },
+  {
+   "coreproject": "R01EX000003",
+   "pmid": 10000003,
+   "applid": 1004
+  }
+ ]
+}

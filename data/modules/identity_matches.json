@@ -1,7 +1,7 @@
 {
   "schema_version": "0.1.0",
-  "generated_at": "2026-10-24T22:42:16Z",
-  "notes": "Automated identity matches: canonical people (people.json) vs source-level persons, blocked by name and ORCID and scored per design.md. 6 merged, 0 candidate, 0 rejected. Pairs not shown because the canonical person has a stronger match: person:canonical:michael-lavalley-biostatistics ~ person:openalex:A5075246228 (rejected/high, reviewed by p2-curator 2026-10-24). 2 pair(s) overridden by manual review (data/curation/reviews.yaml).",
+  "generated_at": "2026-10-24T23:24:28Z",
+  "notes": "Automated identity matches: canonical people (people.json) vs source-level persons, blocked by name and ORCID and scored per design.md. 6 merged, 0 candidate, 0 rejected. Pairs not shown because the canonical person has a stronger match: person:canonical:michael-lavalley-biostatistics ~ person:nih:8631908 (candidate/low); person:canonical:michael-lavalley-biostatistics ~ person:openalex:A5075246228 (rejected/high, reviewed by p2-curator 2026-10-24). 2 pair(s) overridden by manual review (data/curation/reviews.yaml).",
   "matches": [
     {
       "canonical_id": "person:canonical:alexa-beiser-biostatistics",
