@@ -52,7 +52,11 @@ The full details are in [`.kiro/specs/shared-data-contract/design.md`](.kiro/spe
   steering/      product, data-integrity, architecture, data-contract (always loaded);
                  python-pipelines (pipelines/**), frontend (frontend/**)
   specs/         one spec per module + shared-data-contract (requirements → design → tasks)
-  hooks/         validate-graph-data.json: runs the validator when data/**/*.json is saved
+  steering/      (also) testing (tests/**, pipelines/**, scripts/**); kiro-usage-log (auto)
+  hooks/         spec status on start, shell guard (PreToolUse), quality gate (Stop),
+                 task follow-through (PostTaskExec), validator on data/**/*.json save
+powers/          alumni-graph-contract: team power (plugin.json + 3 skills)
+docs/            KIRO_USAGE.md: the Kiro usage write-up for the submission
 schema/          graph.schema.json, identity_matches.schema.json
 data/
   mock/          graph.sample.json (fictional, example.org URLs)
@@ -61,8 +65,8 @@ data/
   raw/           API response caches (gitignored)
   graph.json     merged graph consumed by the frontend (generated)
 pipelines/       common/, research/, identity/, innovation/, merge/   (Python, planned)
-scripts/         validate_graph.py (planned)
-tests/           contract/, research/, identity/, innovation/          (pytest, planned)
+scripts/         validate_graph.py, inspect_graph.py, hooks/ (scripts behind the Kiro hooks)
+tests/           contract/, research/, hooks/ (pytest + Hypothesis); identity/, innovation/ planned
 frontend/        React + TypeScript + Vite + Cytoscape.js app (planned)
 brainstorm.md    original planning notes
 ```
@@ -104,7 +108,8 @@ Setup commands will be added as each module is implemented.
 ```bash
 uv venv --python 3.11 .venv && uv pip install --python .venv/bin/python -r pipelines/requirements.txt
 cp .env.example .env            # optional: OPENALEX_API_KEY, OPENALEX_MAILTO, S2_API_KEY
-.venv/bin/python -m pytest      # fixture-based tests, no network
+.venv/bin/python -m pytest      # fixture-based + Hypothesis property tests, no network
+kiro-cli powers install ./powers/alumni-graph-contract   # optional: team power for Kiro
 ```
 
 - **Research pipeline:** `.venv/bin/python -m pipelines.research.run` writes `data/modules/research.json`. Raw API responses are cached in `data/raw/research/`, so reruns are offline and byte-identical. Flags: `--refresh`, `--skip-s2`, `--max-works N` (optional cap; by default every matching work is kept). The scope (BU institution, topics, years) lives in `pipelines/research/config.py`.
@@ -116,7 +121,7 @@ cp .env.example .env            # optional: OPENALEX_API_KEY, OPENALEX_MAILTO, S
 
 ## Kiro usage (for the submission write-up)
 
-Hackachusetts requires that `.kiro/` sit in the repo root and that the submission include a Kiro usage write-up. Each person logs concrete uses here as they happen.
+Hackachusetts requires that `.kiro/` sit in the repo root and that the submission include a Kiro usage write-up. **The full write-up is [`docs/KIRO_USAGE.md`](docs/KIRO_USAGE.md)**. It covers the CLI, specs, hooks, steering, MCP, property-based testing, and powers. Log new uses in its "Kiro usage log" table. The summary below is kept for quick reference.
 
 | Who | Task | How Kiro helped | Outcome |
 |---|---|---|---|
