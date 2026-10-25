@@ -108,6 +108,11 @@ const STYLE: StylesheetJson = [
 const MOVE_MS = 650;
 const FADE_MS = 260;
 const MAX_ZOOM = 1.3;
+/** Clicking a person zooms in by this factor, up to CLICK_MAX_ZOOM. */
+const CLICK_ZOOM = 1.3;
+const CLICK_MAX_ZOOM = 1.8;
+/** A re-center ends slightly closer than "fit". */
+const CENTER_PUSH_IN = 1.1;
 
 function prefersReducedMotion(): boolean {
   return typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches === true;
@@ -130,8 +135,6 @@ export function PeopleGraph({ index, personIds, links, focusId, hub, expanded, s
     cy.on("tap", "node", (evt) => {
       if (evt.target.data("kind") === "hub") return handlers.current.onSelect(null);
       handlers.current.onSelect({ kind: "person", id: evt.target.id() });
-      // Glide the clicked person to the middle of the view.
-      if (!prefersReducedMotion()) cy.animate({ center: { eles: evt.target } }, { duration: 450, easing: "ease-in-out-cubic" });
     });
     cy.on("tap", "edge", (evt) => {
       // A spoke stands for the person's papers on the topic, so it selects the person.
@@ -256,13 +259,17 @@ export function PeopleGraph({ index, personIds, links, focusId, hub, expanded, s
     const scene = cy.elements().not(departing);
     const finish = () => {
       if (hub) cy.getElementById(hub.id).data({ w: 190, h: 64 });
-      if (animate) added.animate({ style: { opacity: 1 } }, { duration: FADE_MS });
-      if (cy.zoom() > MAX_ZOOM) {
-        if (animate) cy.animate({ zoom: MAX_ZOOM, center: { eles: scene } }, { duration: FADE_MS });
-        else {
-          cy.zoom(MAX_ZOOM);
-          cy.center(scene);
-        }
+      if (animate) {
+        added.animate({ style: { opacity: 1 } }, { duration: FADE_MS });
+        // Finish a re-center with a small push in toward the new center.
+        const center = cy.getElementById(focusId);
+        cy.animate(
+          { zoom: Math.min(cy.zoom() * CENTER_PUSH_IN, MAX_ZOOM), center: { eles: center.nonempty() ? center : scene } },
+          { duration: 380, easing: "ease-out-cubic" },
+        );
+      } else if (cy.zoom() > MAX_ZOOM) {
+        cy.zoom(MAX_ZOOM);
+        cy.center(scene);
       }
     };
     const motion = animate ? { animate: true, animationDuration: MOVE_MS, animationEasing: "ease-in-out-cubic" } : { animate: false };
@@ -281,6 +288,21 @@ export function PeopleGraph({ index, personIds, links, focusId, hub, expanded, s
     layout.one("layoutstop", finish);
     layout.run();
   }, [index, personIds, links, focusId, hub, expanded]);
+
+  // Selecting a person (on the canvas or in the side panel) glides them to the middle and zooms in a little.
+  const lastSelected = useRef<string | null>(null);
+  useEffect(() => {
+    const cy = cyRef.current;
+    const id = selection?.kind === "person" ? selection.id : null;
+    if (!cy || id === lastSelected.current) return;
+    lastSelected.current = id;
+    const el = id ? cy.getElementById(id) : null;
+    if (!el || el.empty() || prefersReducedMotion()) return;
+    cy.animate(
+      { center: { eles: el }, zoom: Math.min(Math.max(cy.zoom() * CLICK_ZOOM, cy.zoom()), CLICK_MAX_ZOOM) },
+      { duration: 500, easing: "ease-in-out-cubic" },
+    );
+  }, [selection, personIds]);
 
   useEffect(() => {
     const cy = cyRef.current;
