@@ -14,7 +14,7 @@ npm run build      # syncs data, then builds dist/ (static; no backend, no auth)
 
 | View | URL | What it shows |
 |---|---|---|
-| People network (default) | `/explore?node=<topic or person id>` | Search a topic to see the BU people working on it around it, or a person to see who they work with. People only, colored by BU status. Verified alumni sit on the inner ring, then BU researchers, then others. Links are shared papers and NIH grants; click one to see the records behind it. |
+| People network (default) | `/explore?node=<topic or person id>` | Search a topic to see it at the top with its BU people in rows below (alumni first), or a person to see who they work with. People only, colored by BU status. Verified alumni sit on the inner ring, then BU researchers, then others. Links are shared papers and NIH grants; click one to see the records behind it. |
 | How are we connected? | `?view=connect&from=<id>&to=<id>` | Shortest chain of real collaborations between two people (up to 6 steps), with the record behind every step. |
 | Topics | `?view=topics&field=<field>&topic=<topic id>` | Field → subfield → topic, then the BU people working on a topic, alumni first. |
 | Find My People | `?view=people&topic=<query>` | Ranked people for a topic, with the records that explain each rank. |

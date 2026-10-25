@@ -2,7 +2,8 @@ import { useEffect, useRef } from "react";
 import cytoscape, { type Core, type ElementDefinition, type StylesheetJson } from "cytoscape";
 import type { GraphIndex } from "@/data/graphIndex";
 import { linkCounts, linkStrength, statusOf, STATUS_RANK, type PersonLink } from "@/data/people";
-import { STATUS_COLOR } from "./shared";
+import { STATUS_COLOR, STATUS_SHORT } from "./shared";
+import type { BuStatus } from "@/types/graph";
 
 // People-only network. Nodes are people colored by BU status; edges are the shared
 // records between them (width = how many). A fresh scene uses rings around the focus
@@ -10,7 +11,7 @@ import { STATUS_COLOR } from "./shared";
 
 export type PeopleSelection = { kind: "person"; id: string } | { kind: "link"; id: string } | null;
 
-/** A topic drawn at the center, with a spoke to each person who has papers on it. */
+/** A topic drawn at the top, with the people who have papers on it in rows below. */
 export interface TopicHub {
   id: string;
   label: string;
@@ -71,13 +72,33 @@ const STYLE: StylesheetJson = [
       "border-width": 4,
       color: "#ffffff",
       "font-family": "Bricolage Grotesque, system-ui, sans-serif",
-      "font-size": 14,
+      "font-size": 15,
       "font-weight": 700,
       "text-valign": "center",
       "text-margin-y": 0,
       "text-wrap": "wrap",
       "text-max-width": "170px",
       "text-background-opacity": 0,
+    },
+  },
+  {
+    selector: 'node[kind = "tier"]',
+    style: {
+      label: "data(label)",
+      width: 1,
+      height: 1,
+      "background-opacity": 0,
+      "border-width": 0,
+      color: PRIMARY,
+      "font-family": "DM Sans, system-ui, sans-serif",
+      "font-size": 12,
+      "font-weight": 700,
+      "text-transform": "uppercase",
+      "text-valign": "center",
+      "text-halign": "right",
+      "text-margin-y": 0,
+      "text-background-opacity": 0,
+      events: "no",
     },
   },
   { selector: "node.focus", style: { "border-color": INK, "border-width": 4, "font-size": 13, "font-weight": 700, "z-index": 20 } },
@@ -95,12 +116,54 @@ const STYLE: StylesheetJson = [
     },
   },
   { selector: "edge[grantOnly = 1]", style: { "line-color": "hsl(38, 80%, 55%)", "line-style": "dashed", "curve-style": "bezier", opacity: 0.6 } },
-  { selector: 'edge[kind = "spoke"]', style: { "line-color": "hsl(340, 75%, 80%)", opacity: 0.7, "curve-style": "straight" } },
   { selector: "edge.focus-edge", style: { "line-color": "hsl(240, 10%, 62%)", opacity: 0.9 } },
   { selector: "edge.faded", style: { opacity: 0.08 } },
   // The side panel describes the selected connection, so the line itself carries no label.
   { selector: "edge.selected-el", style: { "line-color": PRIMARY, "curve-style": "bezier", opacity: 1, "z-index": 25 } },
 ];
+
+// Topic scenes are laid out top-down: the topic, then one block of rows per BU status.
+const ROW_GAP = 105;
+const COL_GAP = 125;
+const TIER_GAP = 60;
+const MAX_PER_ROW = 6;
+
+interface TopicLayout {
+  positions: Map<string, { x: number; y: number }>;
+  tiers: { id: string; label: string; x: number; y: number }[];
+}
+
+function topicLayout(index: GraphIndex, hub: TopicHub, personIds: string[]): TopicLayout {
+  const papers = new Map(hub.spokes.map((sp, i) => [sp.personId, { n: sp.papers, i }]));
+  const order = (id: string) => papers.get(id)?.i ?? Number.MAX_SAFE_INTEGER;
+  // People reached by "Expand" (no spoke) go in a final "Also connected" block.
+  const groups = new Map<string, string[]>();
+  for (const id of [...personIds].sort((a, b) => order(a) - order(b))) {
+    const key = papers.has(id) ? statusOf(index.nodes.get(id)) : "expanded";
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key)!.push(id);
+  }
+  const keys = [...(Object.keys(STATUS_RANK) as BuStatus[]).sort((a, b) => STATUS_RANK[a] - STATUS_RANK[b]), "expanded"].filter((k) => groups.has(k));
+  const positions = new Map<string, { x: number; y: number }>();
+  const tiers: TopicLayout["tiers"] = [];
+  const width = (Math.min(MAX_PER_ROW, Math.max(...[...groups.values()].map((g) => g.length), 1)) - 1) * COL_GAP;
+  positions.set(hub.id, { x: 0, y: 0 });
+  let y = 110;
+  for (const key of keys) {
+    const ids = groups.get(key)!;
+    const label = key === "expanded" ? "Also connected" : STATUS_SHORT[key as BuStatus];
+    tiers.push({ id: `tier|${key}`, label: `${label} · ${ids.length}`, x: -width / 2 - 20, y });
+    y += 45;
+    for (let r = 0; r * MAX_PER_ROW < ids.length; r++) {
+      const row = ids.slice(r * MAX_PER_ROW, (r + 1) * MAX_PER_ROW);
+      const rowWidth = (row.length - 1) * COL_GAP;
+      row.forEach((id, c) => positions.set(id, { x: -rowWidth / 2 + c * COL_GAP, y }));
+      y += ROW_GAP;
+    }
+    y += TIER_GAP - ROW_GAP / 2;
+  }
+  return { positions, tiers };
+}
 
 function short(label: string): string {
   return label.length > 32 ? `${label.slice(0, 30)}…` : label;
@@ -120,11 +183,7 @@ export function PeopleGraph({ index, personIds, links, focusId, hub, expanded, s
       if (evt.target.data("kind") === "hub") handlers.current.onSelect(null);
       else handlers.current.onSelect({ kind: "person", id: evt.target.id() });
     });
-    cy.on("tap", "edge", (evt) => {
-      // A spoke stands for the person's papers on the topic, so it selects the person.
-      if (evt.target.data("kind") === "spoke") handlers.current.onSelect({ kind: "person", id: evt.target.data("target") });
-      else handlers.current.onSelect({ kind: "link", id: evt.target.id() });
-    });
+    cy.on("tap", "edge", (evt) => handlers.current.onSelect({ kind: "link", id: evt.target.id() }));
     cy.on("dbltap", "node", (evt) => {
       if (evt.target.data("kind") !== "hub") handlers.current.onExpand(evt.target.id());
     });
@@ -157,12 +216,12 @@ export function PeopleGraph({ index, personIds, links, focusId, hub, expanded, s
       cy.elements().remove();
       lastFocus.current = focusId;
     }
-    const spokeId = (personId: string) => `spoke|${personId}`;
     const wanted = new Set(personIds);
     const wantedLinks = new Set(links.map((l) => l.id));
+    const layout = hub ? topicLayout(index, hub, personIds) : null;
     if (hub) {
       wanted.add(hub.id);
-      hub.spokes.forEach((sp) => wantedLinks.add(spokeId(sp.personId)));
+      layout!.tiers.forEach((t) => wanted.add(t.id));
     }
     cy.batch(() => {
       cy.elements().forEach((el) => {
@@ -177,8 +236,12 @@ export function PeopleGraph({ index, personIds, links, focusId, hub, expanded, s
     }
     const toAdd: ElementDefinition[] = [];
     if (hub && cy.getElementById(hub.id).empty()) {
-      // Laid out at person size (the ring layout spaces every ring by the largest node), then enlarged.
-      toAdd.push({ group: "nodes", data: { id: hub.id, label: hub.label, kind: "hub", ring: 20, w: 54, h: 54 }, position: { x: 0, y: 0 } });
+      toAdd.push({ group: "nodes", data: { id: hub.id, label: hub.label, kind: "hub", w: 220, h: 64 }, position: { x: 0, y: 0 } });
+    }
+    for (const t of layout?.tiers ?? []) {
+      const el = cy.getElementById(t.id);
+      if (el.nonempty()) el.data({ label: t.label });
+      else toAdd.push({ group: "nodes", data: { id: t.id, label: t.label, kind: "tier" }, position: { x: t.x, y: t.y } });
     }
     for (const id of personIds) {
       const existing = cy.getElementById(id);
@@ -213,13 +276,23 @@ export function PeopleGraph({ index, personIds, links, focusId, hub, expanded, s
         },
       });
     }
-    for (const sp of hub?.spokes ?? []) {
-      if (cy.getElementById(spokeId(sp.personId)).nonempty()) continue;
-      toAdd.push({ group: "edges", data: { id: spokeId(sp.personId), source: hub!.id, target: sp.personId, kind: "spoke", width: Math.min(5, 1 + sp.papers * 0.6) } });
-    }
     const kept = cy.nodes().length;
     const added = cy.add(toAdd);
-    if (added.nodes().length || added.edges().length) {
+    if (layout) {
+      // Topic scenes: fixed top-down positions, recomputed whenever the people change.
+      const tierPos = new Map(layout.tiers.map((t) => [t.id, { x: t.x, y: t.y }]));
+      cy.layout({
+        name: "preset",
+        positions: (node: cytoscape.NodeSingular) => layout.positions.get(node.id()) ?? tierPos.get(node.id()) ?? node.position(),
+        animate: false,
+        fit: false,
+      } as never).run();
+      // Fit the width (not the height) and pin the topic to the top; lower rows are reached by panning.
+      const box = cy.elements().boundingBox({});
+      const zoom = Math.max(0.35, Math.min(1.15, (cy.width() - 48) / Math.max(box.w, 1)));
+      cy.zoom(zoom);
+      cy.pan({ x: cy.width() / 2 - ((box.x1 + box.x2) / 2) * zoom, y: 28 - box.y1 * zoom });
+    } else if (added.nodes().length || added.edges().length) {
       const fresh = kept < 2;
       if (fresh && expanded.length === 0) {
         cy.layout({
@@ -234,7 +307,6 @@ export function PeopleGraph({ index, personIds, links, focusId, hub, expanded, s
       } else {
         cy.layout({ name: "cose", animate: false, randomize: fresh, nodeRepulsion: () => 24000, idealEdgeLength: () => 120, nodeOverlap: 24, numIter: 1500, fit: true, padding: 48 } as never).run();
       }
-      if (hub) cy.getElementById(hub.id).data({ w: 190, h: 64 });
       if (cy.zoom() > 1.3) {
         cy.zoom(1.3);
         cy.center();
