@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { ArrowRight, Crosshair, ExternalLink, GraduationCap, Route, UsersRound } from "lucide-react";
+import { ArrowRight, Briefcase, Crosshair, ExternalLink, GraduationCap, Route, Search, UsersRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AffiliationBadge, SourceLink } from "@/components/graph/badges";
 import type { GraphIndex } from "@/data/graphIndex";
@@ -8,6 +8,8 @@ import {
   describeLink,
   personRecords,
   rankNeighbors,
+  readProfile,
+  type PersonProfile,
   statusOf,
   type LinkKind,
   type PeopleIndex,
@@ -39,6 +41,7 @@ export function PersonPanel({ index, pidx, personId, isFocus, kinds, onSelectPer
   const status = statusOf(person);
   const degree = degreeLine(person);
   const orcid = typeof person.attributes?.orcid === "string" ? (person.attributes.orcid as string) : null;
+  const profile = readProfile(person);
   const papers = records.filter((r) => r.record.type === "publication").length;
   const grants = records.filter((r) => r.record.type === "award").length;
   const alumni = neighbors.filter((n) => n.status === "verified_alumnus").length;
@@ -57,13 +60,15 @@ export function PersonPanel({ index, pidx, personId, isFocus, kinds, onSelectPer
                 <GraduationCap className="h-4 w-4 text-success" aria-hidden="true" /> {degree}
               </p>
             )}
-            {orcid && (
-              <a href={`https://orcid.org/${orcid}`} target="_blank" rel="noopener noreferrer" className="mt-1 inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline">
-                ORCID {orcid} <ExternalLink className="h-3 w-3" aria-hidden="true" />
-              </a>
+            {profile?.position && (
+              <p className="mt-1 flex items-start gap-1.5 text-sm text-foreground/80" title={profile.position.department}>
+                <Briefcase className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+                <span>{[profile.position.title, profile.position.organization].filter(Boolean).join(" · ")}</span>
+              </p>
             )}
           </div>
         </div>
+        <ProfileLinks name={person.label} orcid={orcid} profile={profile} />
         <dl className="mt-5 grid grid-cols-3 gap-2 text-center">
           {[
             [neighbors.length, "Connections"],
@@ -76,6 +81,13 @@ export function PersonPanel({ index, pidx, personId, isFocus, kinds, onSelectPer
             </div>
           ))}
         </dl>
+        {profile?.metrics?.works !== undefined && (
+          <p className="mt-2 text-center text-[11px] text-muted-foreground">
+            All-time on OpenAlex: {compact(profile.metrics.works)} papers
+            {profile.metrics.citations !== undefined && ` · ${compact(profile.metrics.citations)} citations`}
+            {profile.metrics.h_index !== undefined && ` · h-index ${profile.metrics.h_index}`}
+          </p>
+        )}
         <div className="mt-5 flex flex-wrap gap-2">
           {!isFocus && (
             <Button size="sm" className="rounded-full" onClick={() => onFocus(personId)}>
@@ -90,6 +102,8 @@ export function PersonPanel({ index, pidx, personId, isFocus, kinds, onSelectPer
           </Button>
         </div>
       </section>
+
+      {profile && (profile.biography || profile.topics?.length || profile.keywords?.length) && <About profile={profile} />}
 
       {topicWork && topicWork.records.length > 0 && (
         <section>
@@ -277,5 +291,81 @@ export function TopicPanel({ index, topic, ranked, onSelectPerson }: TopicPanelP
         )}
       </section>
     </div>
+  );
+}
+
+function compact(n: number): string {
+  return n >= 100_000 ? `${Math.round(n / 1000)}k` : n >= 1000 ? `${(n / 1000).toFixed(1)}k` : String(n);
+}
+
+const CHIP =
+  "inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
+
+/**
+ * Profile links where the ORCID iD used to sit: the person's ORCID and OpenAlex records, the
+ * websites they list on ORCID, then name searches (Google Scholar, LinkedIn) that open in the
+ * viewer's browser. Searches are labeled as searches: they are not confirmed profiles.
+ */
+function ProfileLinks({ name, orcid, profile }: { name: string; orcid: string | null; profile: PersonProfile | null }) {
+  const records: { label: string; url: string; title: string }[] = [];
+  if (orcid) records.push({ label: "ORCID", url: `https://orcid.org/${orcid}`, title: `ORCID ${orcid}` });
+  if (profile?.openalex_id) records.push({ label: "OpenAlex", url: `https://openalex.org/${profile.openalex_id}`, title: "OpenAlex author profile" });
+  for (const l of profile?.links ?? []) records.push({ label: l.label, url: l.url, title: `${l.label} (listed on their ORCID record)` });
+  const q = encodeURIComponent(name);
+  const searches = [
+    { label: "Google Scholar", url: `https://scholar.google.com/scholar?q=%22${q}%22`, title: `Search Google Scholar for “${name}”` },
+    { label: "LinkedIn", url: `https://www.linkedin.com/search/results/people/?keywords=${q}%20Boston%20University`, title: `Search LinkedIn for “${name}” and Boston University` },
+  ];
+  return (
+    <div className="mt-4">
+      <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-muted-foreground">Profiles</span>
+      <div className="mt-1.5 flex flex-wrap gap-1.5">
+        {records.map((r) => (
+          <a key={r.url} href={r.url} target="_blank" rel="noopener noreferrer" title={r.title} className={`${CHIP} border-primary/30 bg-primary/5 text-primary hover:bg-primary/10`}>
+            <span className="max-w-[11rem] truncate">{r.label}</span>
+            <ExternalLink className="h-3 w-3 shrink-0" aria-hidden="true" />
+            <span className="sr-only">(opens in a new tab)</span>
+          </a>
+        ))}
+        {searches.map((r) => (
+          <a key={r.label} href={r.url} target="_blank" rel="noopener noreferrer" title={r.title} className={`${CHIP} border-border bg-card text-muted-foreground hover:border-primary/40 hover:text-foreground`}>
+            <Search className="h-3 w-3 shrink-0" aria-hidden="true" />
+            {r.label}
+            <span className="sr-only">(search, opens in a new tab)</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function About({ profile }: { profile: PersonProfile }) {
+  const [open, setOpen] = useState(false);
+  const tags = [...(profile.topics ?? []), ...(profile.keywords ?? [])].filter((t, i, a) => a.findIndex((x) => x.toLowerCase() === t.toLowerCase()) === i);
+  return (
+    <section>
+      <Eyebrow>About</Eyebrow>
+      {profile.biography && (
+        <>
+          <p className={`mt-2 text-sm leading-relaxed text-foreground/85 ${open ? "" : "line-clamp-4"}`}>{profile.biography}</p>
+          {profile.biography.length > 220 && (
+            <button type="button" onClick={() => setOpen((v) => !v)} className="mt-1 text-xs font-semibold text-primary hover:underline">
+              {open ? "Show less" : "Read more"}
+            </button>
+          )}
+          <p className="mt-1 text-[11px] text-muted-foreground">From their public ORCID record.</p>
+        </>
+      )}
+      {tags.length > 0 && (
+        <div className="mt-3 flex flex-wrap gap-1.5">
+          {tags.slice(0, 8).map((t) => (
+            <span key={t} className="rounded-full bg-muted px-2.5 py-1 text-xs font-medium text-foreground/80">{t}</span>
+          ))}
+        </div>
+      )}
+      {profile.institutions && profile.institutions.length > 0 && (
+        <p className="mt-3 text-xs text-muted-foreground">Recent institutions (OpenAlex): {profile.institutions.join(", ")}</p>
+      )}
+    </section>
   );
 }

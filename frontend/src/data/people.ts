@@ -263,3 +263,53 @@ export function personRecords(index: GraphIndex, id: string): { record: GraphNod
   };
   return out.sort((x, y) => year(y.record) - year(x.record) || (x.record.label < y.record.label ? -1 : 1));
 }
+
+export interface PersonProfile {
+  position?: { title?: string; organization: string; department?: string; since?: number };
+  biography?: string;
+  keywords?: string[];
+  links?: { label: string; url: string }[];
+  metrics?: { works?: number; citations?: number; h_index?: number; i10_index?: number };
+  institutions?: string[];
+  topics?: string[];
+  openalex_id?: string;
+  retrieved_at?: string;
+}
+
+const isStr = (v: unknown): v is string => typeof v === "string" && v.length > 0;
+const strList = (v: unknown): string[] | undefined => (Array.isArray(v) ? v.filter(isStr) : undefined);
+const isHttp = (u: unknown): u is string => isStr(u) && /^https?:\/\//.test(u);
+
+/** attributes.profile (pipelines/profiles), with every field checked before the UI renders it. */
+export function readProfile(node: GraphNode): PersonProfile | null {
+  const raw = node.attributes?.profile;
+  if (!raw || typeof raw !== "object") return null;
+  const p = raw as Record<string, unknown>;
+  const out: PersonProfile = {};
+  const pos = p.position as Record<string, unknown> | undefined;
+  if (pos && isStr(pos.organization)) {
+    out.position = {
+      organization: pos.organization,
+      title: isStr(pos.title) ? pos.title : undefined,
+      department: isStr(pos.department) ? pos.department : undefined,
+      since: typeof pos.since === "number" ? pos.since : undefined,
+    };
+  }
+  if (isStr(p.biography)) out.biography = p.biography;
+  out.keywords = strList(p.keywords);
+  out.institutions = strList(p.institutions);
+  out.topics = strList(p.topics);
+  if (Array.isArray(p.links)) {
+    out.links = p.links
+      .filter((l): l is { label: string; url: string } => !!l && isStr((l as { label?: unknown }).label) && isHttp((l as { url?: unknown }).url))
+      .map((l) => ({ label: l.label, url: l.url }));
+  }
+  const m = p.metrics as Record<string, unknown> | undefined;
+  if (m) {
+    const num = (v: unknown) => (typeof v === "number" ? v : undefined);
+    out.metrics = { works: num(m.works), citations: num(m.citations), h_index: num(m.h_index), i10_index: num(m.i10_index) };
+  }
+  if (isStr(p.openalex_id) && /^A\d+$/.test(p.openalex_id)) out.openalex_id = p.openalex_id;
+  if (isStr(p.retrieved_at)) out.retrieved_at = p.retrieved_at;
+  return out;
+}

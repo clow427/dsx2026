@@ -8,6 +8,7 @@ import {
   describeLink,
   linkKey,
   rankNeighbors,
+  readProfile,
   shortestPath,
   STATUS_RANK,
   statusOf,
@@ -128,5 +129,35 @@ describe.skipIf(!existsSync(graphPath))("people index on the real graph", () => 
     const topics = fields.flatMap((f) => f.subfields.flatMap((s) => s.topics));
     expect(topics.length).toBe(index.byType.topic.filter((t) => index.edgesByNode.get(t.id)!.some((e) => e.type === "HAS_TOPIC")).length);
     expect(fields[0].records).toBeGreaterThanOrEqual(fields[fields.length - 1].records);
+  });
+});
+
+describe("readProfile", () => {
+  it("keeps well-formed fields and drops unsafe or malformed ones", () => {
+    const node = person(P("Z"), "verified_alumnus");
+    node.attributes = {
+      profile: {
+        position: { title: "Associate Professor", organization: "Example University", since: 2019 },
+        links: [
+          { label: "Lab website", url: "https://example.org/lab" },
+          { label: "Bad", url: "javascript:alert(1)" },
+          { label: "", url: "https://example.org/x" },
+          "not an object",
+        ],
+        metrics: { works: 120, citations: "lots" },
+        openalex_id: "A9000000001",
+        topics: ["Example Topic", 7],
+      },
+    };
+    expect(readProfile(node)).toEqual({
+      position: { title: "Associate Professor", organization: "Example University", department: undefined, since: 2019 },
+      links: [{ label: "Lab website", url: "https://example.org/lab" }],
+      metrics: { works: 120, citations: undefined, h_index: undefined, i10_index: undefined },
+      openalex_id: "A9000000001",
+      topics: ["Example Topic"],
+      keywords: undefined,
+      institutions: undefined,
+    });
+    expect(readProfile(person(P("Y"), "unverified"))).toBeNull();
   });
 });
