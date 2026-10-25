@@ -21,12 +21,14 @@ This is the write-up for the Hackachusetts submission. Everything Kiro reads liv
 **Structure.** Each of the five specs has `requirements.md` (EARS: "WHEN … THE pipeline SHALL …"), then `design.md`, then `tasks.md`. There is one spec per owner, plus a shared contract that the other four depend on:
 
 ```
-shared-data-contract   P2 leads, all sign off   schema, IDs, validator, merge      ← everything depends on this
+shared-data-contract   P2 leads, all sign off   schema, IDs, validator, merge      ← everything depends on this   merge step 6.1–6.3 done
 research-graph         P1                        OpenAlex + Semantic Scholar        ✔ 10/10 tasks
-identity-resolution    P2                        curation, matching, merge
-innovation-funding     P3                        PatentsView, NIH/NSF
-frontend-explorer      P4                        search, graph, evidence panels
+identity-resolution    P2                        curation, matching, merge          13/14 tasks (I1–I6 property tests open)
+innovation-funding     P3                        PatentsView, NIH/NSF               8/9 tasks (final dataset + spot-check open)
+frontend-explorer      P4                        search, graph, evidence panels     8/12 tasks
 ```
+
+Spec task execution leaves a trace: [`identity-resolution/tasks.meta.json`](../.kiro/specs/identity-resolution/tasks.meta.json) records Kiro running all 13 completed identity-resolution tasks from the spec, in one chat session.
 
 Decisions that kept Kiro on track:
 
@@ -35,16 +37,18 @@ Decisions that kept Kiro on track:
 - **Requirement changes travel with the code.** When the 100–200 work cap turned out to be unnecessary (578 matching works compress to under 1 MB), Req 1.2 was rewritten with a dated note in the same commit as the code and tests (`2dff8cd`), so the spec never lagged the implementation. See [`research-graph/requirements.md`](../.kiro/specs/research-graph/requirements.md).
 - **Design records the risks and fallbacks.** Examples: S2 throttling, so each batch is cached separately, and a hairball graph, so there is an author cap. Kiro implemented each one when it reached the task, without being reminded.
 
-**What the spec-driven research pipeline produced:**
+**What the spec-driven pipelines produced:**
 
-| | Research pipeline (Kiro, spec-driven) |
+| | Output |
 |---|---|
-| Data | 5,989 nodes and 31,525 edges from OpenAlex and S2, in `data/modules/research.json` |
+| Research (P1) | 5,989 nodes and 31,525 edges from OpenAlex and S2, in `data/modules/research.json`. Passes `validate_graph.py` with 0 errors and 0 warnings |
+| Identity (P2) | Curated people and reviews (`data/curation/`), `data/modules/people.json`, and `data/modules/identity_matches.json` |
+| Innovation (P3) | 162 NIH awards to BU in the demo topic and 178 people, in `data/modules/innovation.json`. Patents need PatentsView bulk tables downloaded by hand, because the PatentSearch API was retired on 2026-03-20 ([`pipelines/innovation/README.md`](../pipelines/innovation/README.md)) |
+| Merge (P2) | `data/graph.json`: 6,329 nodes and 32,222 edges (person, organization, publication, topic, award). The frontend loads this file |
 | Provenance | Every node and edge has a source URL and record ID, and the validator enforces it |
-| BU status | `bu_affiliated_researcher` only with authorship evidence. Never `verified_alumnus` (property R3) |
-| Contract | Passes `validate_graph.py` with 0 errors and 0 warnings |
+| BU status | `bu_affiliated_researcher` only with authorship evidence. Never `verified_alumnus` from a publication (properties R3, N4) |
 
-The spec produced data a judge can click through to a real source.
+The specs produced data a judge can click through to a real source.
 
 ## 3. Agent hooks
 
@@ -98,7 +102,10 @@ The spec designs list correctness properties with IDs, and Hypothesis tests impl
 
 - [`tests/contract/test_contract_properties.py`](../tests/contract/test_contract_properties.py): **C1–C12** for ID builders, provenance merging, `GraphBuilder`, and validator teeth.
 - [`tests/research/test_normalize_properties.py`](../tests/research/test_normalize_properties.py): **R1–R6** for normalization and S2 enrichment, each checked against an oracle computed straight from the generated input.
+- [`tests/innovation/test_normalize_properties.py`](../tests/innovation/test_normalize_properties.py): **N1–N5**. Output is always validator-clean, `INVENTED`/`ASSIGNED_TO` edges are exactly the listings, a publication `FUNDED_BY` edge exists iff NIH lists the PMID, no person is `verified_alumnus`, and normalization is deterministic.
 - `tests/hooks/test_hook_scripts.py`: **H1**. Any `.env` file among `git add` paths is blocked.
+
+Still open: identity properties **I1–I6** (identity-resolution task 10) and the merge properties (shared-data-contract task 6.4).
 
 **Requirements we used PBT for:** anything phrased "every", "never", "iff", or "exactly":
 
@@ -136,7 +143,7 @@ Installed with `kiro-cli powers install ./powers/alumni-graph-contract`. A fresh
 
 ```bash
 uv venv --python 3.11 .venv && uv pip install --python .venv/bin/python -r pipelines/requirements.txt
-.venv/bin/python -m pytest                                   # 125 tests, including 20 properties
+.venv/bin/python -m pytest                                   # full suite, including 25 properties
 HYPOTHESIS_PROFILE=ci .venv/bin/python -m pytest              # 1,000 examples per property
 kiro-cli powers install ./powers/alumni-graph-contract
 kiro-cli chat --no-interactive --trust-workspace --trust-tools=execute_bash "Run: git add .env"   # guard-shell blocks it
@@ -155,3 +162,5 @@ One row per meaningful use. The `kiro-usage-log` steering file and the `spec-tas
 | P1 | Hook automation | Hooks (PreToolUse, Stop, SessionStart, PostTaskExec) | Guard, quality gate, and spec-status hooks plus 22 tests. Verified in headless sessions |
 | P1 | Team power | Powers | `alumni-graph-contract` power with three skills, installed and confirmed loading |
 | P4 | frontend-explorer 1–8 | Spec tasks, steering (`frontend.md`, `data-integrity.md`), context-gatherer subagent, PreToolUse shell guard | Frontend now runs on `research.json` with no Supabase. 17 Vitest tests, strict typecheck clean, and a headless-browser run of the demo journey with 0 console errors. Steering flagged the imported landing page (real alumni photos, unsourced edges), which was replaced with data from the graph. The shell guard blocked starting a dev server, so the smoke run served `dist/` in-process instead |
+| P2 | identity-resolution 1–9, shared-data-contract 6.1–6.3 | Spec task execution (13 runs in `tasks.meta.json`), steering (`data-integrity.md`) | Shortlist, name normalization, matching, curation lint, and the merge step. Produced `people.json`, `identity_matches.json`, and the merged `data/graph.json`, with tests in `tests/identity/` and `tests/merge/`; `ff00532`. Photo rule added to `data-integrity.md` (open-license or consented photos only, never used for matching) |
+| P3 | innovation-funding 1–7 | Spec tasks, PBT from spec properties | NIH awards and the PatentsView normalizer, with properties N1–N5 citing `design.md`. `innovation.json` (162 awards) merged into `graph.json` (now 6,329 nodes, 32,222 edges); `a252455`. Patents are blocked until the bulk tables are downloaded |
