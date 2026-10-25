@@ -108,7 +108,7 @@ const STYLE: StylesheetJson = [
 const MOVE_MS = 650;
 const FADE_MS = 260;
 const MAX_ZOOM = 1.3;
-/** Clicking a person zooms in by this factor, up to CLICK_MAX_ZOOM. */
+/** Selecting a person zooms to this factor of the scene's starting zoom (one step, never more), up to CLICK_MAX_ZOOM. */
 const CLICK_ZOOM = 1.3;
 const CLICK_MAX_ZOOM = 1.8;
 /** A re-center ends slightly closer than "fit". */
@@ -126,6 +126,8 @@ export function PeopleGraph({ index, personIds, links, focusId, hub, expanded, s
   const containerRef = useRef<HTMLDivElement>(null);
   const cyRef = useRef<Core | null>(null);
   const lastFocus = useRef<string | null>(null);
+  /** The zoom a scene settled at after its layout; selection zoom is one step from here. */
+  const baseZoom = useRef(1);
   const handlers = useRef({ onSelect, onFocus });
   handlers.current = { onSelect, onFocus };
 
@@ -263,13 +265,15 @@ export function PeopleGraph({ index, personIds, links, focusId, hub, expanded, s
         added.animate({ style: { opacity: 1 } }, { duration: FADE_MS });
         // Finish a re-center with a small push in toward the new center.
         const center = cy.getElementById(focusId);
-        cy.animate(
-          { zoom: Math.min(cy.zoom() * CENTER_PUSH_IN, MAX_ZOOM), center: { eles: center.nonempty() ? center : scene } },
-          { duration: 380, easing: "ease-out-cubic" },
-        );
-      } else if (cy.zoom() > MAX_ZOOM) {
-        cy.zoom(MAX_ZOOM);
-        cy.center(scene);
+        const settled = Math.min(cy.zoom() * CENTER_PUSH_IN, MAX_ZOOM);
+        baseZoom.current = settled;
+        cy.animate({ zoom: settled, center: { eles: center.nonempty() ? center : scene } }, { duration: 380, easing: "ease-out-cubic" });
+      } else {
+        if (cy.zoom() > MAX_ZOOM) {
+          cy.zoom(MAX_ZOOM);
+          cy.center(scene);
+        }
+        baseZoom.current = cy.zoom();
       }
     };
     const motion = animate ? { animate: true, animationDuration: MOVE_MS, animationEasing: "ease-in-out-cubic" } : { animate: false };
@@ -298,10 +302,10 @@ export function PeopleGraph({ index, personIds, links, focusId, hub, expanded, s
     lastSelected.current = id;
     const el = id ? cy.getElementById(id) : null;
     if (!el || el.empty() || prefersReducedMotion()) return;
-    cy.animate(
-      { center: { eles: el }, zoom: Math.min(Math.max(cy.zoom() * CLICK_ZOOM, cy.zoom()), CLICK_MAX_ZOOM) },
-      { duration: 500, easing: "ease-in-out-cubic" },
-    );
+    // One zoom step from the scene's starting zoom: later selections only glide. A closer zoom the
+    // viewer chose themselves (scroll wheel) is kept.
+    const target = Math.max(cy.zoom(), Math.min(baseZoom.current * CLICK_ZOOM, CLICK_MAX_ZOOM));
+    cy.animate({ center: { eles: el }, zoom: target }, { duration: 500, easing: "ease-in-out-cubic" });
   }, [selection, personIds]);
 
   useEffect(() => {
