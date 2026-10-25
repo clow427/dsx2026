@@ -1,9 +1,69 @@
 {
   "schema_version": "0.1.0",
-  "generated_at": "2026-10-24T22:42:16Z",
+  "generated_at": "2026-10-25T04:22:36Z",
   "producer": "identity",
-  "notes": "Canonical person directory built from data/curation/people.yaml (6 hand-curated, evidence-backed people). BU degree, department, and graduation year are recorded only where a cited public source states them.",
+  "notes": "Canonical person directory: 6 hand-curated people (data/curation/people.yaml) and 90 BU alumni discovered from public ORCID education records and OpenBU theses (data/curation/people.discovered.yaml). BU degree, department, and graduation year are recorded only where a cited public source states them.",
   "nodes": [
+    {
+      "id": "person:canonical:albert-laszlo-barabasi-3522",
+      "type": "person",
+      "label": "Albert-Ĺaszló Barabási",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0002-4028-3522",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-4028-3522",
+            "note": "ORCID education entries: PhD Physics, Physics, Boston University, 1994 (source: Albert Barabasi)"
+          }
+        ],
+        "details": {
+          "degree": "PhD Physics",
+          "department": "Physics",
+          "graduation_year": 1994
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-4028-3522"
+      }
+    },
+    {
+      "id": "person:canonical:alex-hoagland-3445",
+      "type": "person",
+      "label": "Alex Hoagland",
+      "sources": [
+        {
+          "source": "bu_repository",
+          "url": "https://hdl.handle.net/2144/45281",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "bu_repository",
+            "url": "https://hdl.handle.net/2144/45281",
+            "note": "OpenBU thesis/dissertation: Doctor of Philosophy, Economics, Boston University, 2022 (\"Essays on information and innovation in health economics\")"
+          }
+        ],
+        "details": {
+          "degree": "Doctor of Philosophy",
+          "department": "Economics",
+          "graduation_year": 2022
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0001-6947-3445"
+      }
+    },
     {
       "id": "person:canonical:alexa-beiser-biostatistics",
       "type": "person",
@@ -41,6 +101,364 @@
       }
     },
     {
+      "id": "person:canonical:allan-j-walkey-6894",
+      "type": "person",
+      "label": "Allan J. Walkey",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0003-4685-6894",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0003-4685-6894",
+            "note": "ORCID education entries: MSc, Epidemiology, Boston University School of Public Health, 2010 (source: Allan Walkey)"
+          }
+        ],
+        "details": {
+          "degree": "MSc, Epidemiology",
+          "graduation_year": 2010
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0003-4685-6894"
+      }
+    },
+    {
+      "id": "person:canonical:amelia-kent-wesselink-4451",
+      "type": "person",
+      "label": "Amelia Kent Wesselink",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0002-3929-4451",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-3929-4451",
+            "note": "ORCID education entries: PhD, Epidemiology, Boston University School of Public Health, 2018 (source: Amelia Wesselink)"
+          }
+        ],
+        "details": {
+          "degree": "PhD",
+          "department": "Epidemiology",
+          "graduation_year": 2018
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-3929-4451"
+      }
+    },
+    {
+      "id": "person:canonical:ashley-galloway-5386",
+      "type": "person",
+      "label": "Ashley Galloway",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0003-3083-5386",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0003-3083-5386",
+            "note": "ORCID education entries: MPH, Epidemiology & Social and Behavioral Health, Boston University School of Public Health, 2013 (source: Ashley Galloway)"
+          }
+        ],
+        "details": {
+          "degree": "MPH",
+          "department": "Epidemiology & Social and Behavioral Health",
+          "graduation_year": 2013
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0003-3083-5386"
+      }
+    },
+    {
+      "id": "person:canonical:benjamin-j-hescott-9496",
+      "type": "person",
+      "label": "Benjamin J. Hescott",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0002-8179-9496",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-8179-9496",
+            "note": "ORCID education entries: Ph.D., Computer Science, Boston University, 2008 (source: Benjamin Hescott)"
+          }
+        ],
+        "details": {
+          "degree": "Ph.D.",
+          "department": "Computer Science",
+          "graduation_year": 2008
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-8179-9496"
+      }
+    },
+    {
+      "id": "person:canonical:benjamin-m-rader-0193",
+      "type": "person",
+      "label": "Benjamin M. Rader",
+      "sources": [
+        {
+          "source": "bu_repository",
+          "url": "https://hdl.handle.net/2144/48161",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "bu_repository",
+            "url": "https://hdl.handle.net/2144/48161",
+            "note": "OpenBU thesis/dissertation: Doctor of Philosophy, Epidemiology, Boston University, 2023 (\"Spatiotemporal heterogeneity and bias in respiratory infection surveillance\")"
+          }
+        ],
+        "details": {
+          "degree": "Doctor of Philosophy",
+          "department": "Epidemiology",
+          "graduation_year": 2023
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-6095-0193"
+      }
+    },
+    {
+      "id": "person:canonical:boran-hao-0513",
+      "type": "person",
+      "label": "Boran Hao",
+      "sources": [
+        {
+          "source": "bu_repository",
+          "url": "https://hdl.handle.net/2144/49684",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "bu_repository",
+            "url": "https://hdl.handle.net/2144/49684",
+            "note": "OpenBU thesis/dissertation: Doctor of Philosophy, Electrical & Computer Engineering, Boston University, 2025 (\"Towards effective and robust transformer-based models for biomedical applications\")"
+          }
+        ],
+        "details": {
+          "degree": "Doctor of Philosophy",
+          "department": "Electrical & Computer Engineering",
+          "graduation_year": 2025
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0001-7922-0513"
+      }
+    },
+    {
+      "id": "person:canonical:christine-m-gunn-2834",
+      "type": "person",
+      "label": "Christine M. Gunn",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0003-3340-2834",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0003-3340-2834",
+            "note": "ORCID education entries: PhD, Health Law, Policy and Management, Boston University, 2015 (source: Christine Gunn)"
+          }
+        ],
+        "details": {
+          "degree": "PhD",
+          "department": "Health Law, Policy and Management",
+          "graduation_year": 2015
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0003-3340-2834"
+      }
+    },
+    {
+      "id": "person:canonical:chunming-ding-5594",
+      "type": "person",
+      "label": "Chunming Ding",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0002-2063-5594",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-2063-5594",
+            "note": "ORCID education entries: Ph.D., Bioinformatics, Boston University, 2003 (source: Chunming Ding)"
+          }
+        ],
+        "details": {
+          "degree": "Ph.D.",
+          "department": "Bioinformatics",
+          "graduation_year": 2003
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-2063-5594"
+      }
+    },
+    {
+      "id": "person:canonical:daina-b-esposito-0523",
+      "type": "person",
+      "label": "Daina B. Esposito",
+      "sources": [
+        {
+          "source": "bu_repository",
+          "url": "https://hdl.handle.net/2144/44454",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "bu_repository",
+            "url": "https://hdl.handle.net/2144/44454",
+            "note": "OpenBU thesis/dissertation: Doctor of Philosophy, Epidemiology, Boston University, 2022 (\"Stillbirth, ischemic placental disease, and neonatal opioid withdrawal syndrome following exposure to opioid analgesic medication during pregnancy\")"
+          }
+        ],
+        "details": {
+          "degree": "Doctor of Philosophy",
+          "department": "Epidemiology",
+          "graduation_year": 2022
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0003-2894-0523"
+      }
+    },
+    {
+      "id": "person:canonical:daniel-a-levy-8724",
+      "type": "person",
+      "label": "Daniel A Levy",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0003-1843-8724",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0003-1843-8724",
+            "note": "ORCID education entries: Doctor of Medicine, Boston University School of Medicine, 1980 (source: Daniel Levy)"
+          }
+        ],
+        "details": {
+          "degree": "Doctor of Medicine",
+          "graduation_year": 1980
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0003-1843-8724"
+      }
+    },
+    {
+      "id": "person:canonical:daniel-c-posner-6924",
+      "type": "person",
+      "label": "Daniel C. Posner",
+      "sources": [
+        {
+          "source": "bu_repository",
+          "url": "https://hdl.handle.net/2144/39002",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "bu_repository",
+            "url": "https://hdl.handle.net/2144/39002",
+            "note": "OpenBU thesis/dissertation: Doctor of Philosophy, Biostatistics, Boston University, 2019 (\"Multiple testing & optimization-based approaches with applications to genome-wide association studies\")"
+          }
+        ],
+        "details": {
+          "degree": "Doctor of Philosophy",
+          "department": "Biostatistics",
+          "graduation_year": 2019
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-3056-6924"
+      }
+    },
+    {
+      "id": "person:canonical:daniel-gusenleitner-0880",
+      "type": "person",
+      "label": "Daniel Gusenleitner",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0002-7428-0880",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-7428-0880",
+            "note": "ORCID education entries: PhD, Bioinformatics, Boston University, 2015 (source: Daniel Gusenleitner)"
+          }
+        ],
+        "details": {
+          "degree": "PhD",
+          "department": "Bioinformatics",
+          "graduation_year": 2015
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-7428-0880"
+      }
+    },
+    {
       "id": "person:canonical:david-gagnon-biostatistics",
       "type": "person",
       "label": "David R. Gagnon",
@@ -71,6 +489,482 @@
       },
       "attributes": {
         "orcid": "0000-0002-6367-3179"
+      }
+    },
+    {
+      "id": "person:canonical:demetrius-dimucci-5013",
+      "type": "person",
+      "label": "Demetrius DiMucci",
+      "sources": [
+        {
+          "source": "bu_repository",
+          "url": "https://hdl.handle.net/2144/39614",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "bu_repository",
+            "url": "https://hdl.handle.net/2144/39614",
+            "note": "OpenBU thesis/dissertation: Doctor of Philosophy, Bioinformatics GRS, Boston University, 2020 (\"Machine learning for microbial ecology: predicting interactions and identifying their putative mechanisms\")"
+          }
+        ],
+        "details": {
+          "degree": "Doctor of Philosophy",
+          "department": "Bioinformatics GRS",
+          "graduation_year": 2020
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0003-1763-5013"
+      }
+    },
+    {
+      "id": "person:canonical:dhayana-dallmeier-7023",
+      "type": "person",
+      "label": "Dhayana Dallmeier",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0003-3665-7023",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0003-3665-7023",
+            "note": "ORCID education entries: Ph.D., Epidemiology, Boston University School of Public Health, 2015 (source: Dhayana Dallmeier, MD PhD)"
+          }
+        ],
+        "details": {
+          "degree": "Ph.D.",
+          "department": "Epidemiology",
+          "graduation_year": 2015
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0003-3665-7023"
+      }
+    },
+    {
+      "id": "person:canonical:diala-lteif-8795",
+      "type": "person",
+      "label": "Diala Lteif",
+      "sources": [
+        {
+          "source": "bu_repository",
+          "url": "https://hdl.handle.net/2144/53713",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "bu_repository",
+            "url": "https://hdl.handle.net/2144/53713",
+            "note": "OpenBU thesis/dissertation: Doctor of Philosophy, Computer Science, Boston University, 2026 (\"Knowledge-guided representation learning for multimodal neuroimaging analysis\")"
+          }
+        ],
+        "details": {
+          "degree": "Doctor of Philosophy",
+          "department": "Computer Science",
+          "graduation_year": 2026
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-9580-8795"
+      }
+    },
+    {
+      "id": "person:canonical:dylan-steiner-4368",
+      "type": "person",
+      "label": "Dylan Steiner",
+      "sources": [
+        {
+          "source": "bu_repository",
+          "url": "https://hdl.handle.net/2144/51146",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "bu_repository",
+            "url": "https://hdl.handle.net/2144/51146",
+            "note": "OpenBU thesis/dissertation: Doctor of Philosophy, Genetics & Genomics, Boston University, 2024 (\"Applying multi-omics to detect indolent and aggressive early-stage lung adenocarcinoma\")"
+          }
+        ],
+        "details": {
+          "degree": "Doctor of Philosophy",
+          "department": "Genetics & Genomics",
+          "graduation_year": 2024
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0003-1004-4368"
+      }
+    },
+    {
+      "id": "person:canonical:eleanor-h-brown-9213",
+      "type": "person",
+      "label": "Eleanor H. Brown",
+      "sources": [
+        {
+          "source": "bu_repository",
+          "url": "https://hdl.handle.net/2144/52082",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "bu_repository",
+            "url": "https://hdl.handle.net/2144/52082",
+            "note": "OpenBU thesis/dissertation: Doctor of Philosophy, Neuroscience, Boston University, 2025 (\"Multi-fiber photometry reveals 3-dimensional gradients in dopamine trajectory error encoding across the striatum\")"
+          }
+        ],
+        "details": {
+          "degree": "Doctor of Philosophy",
+          "department": "Neuroscience",
+          "graduation_year": 2025
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0001-9564-9213"
+      }
+    },
+    {
+      "id": "person:canonical:emily-m-lord-0976",
+      "type": "person",
+      "label": "Emily M Lord",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0002-1936-0976",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-1936-0976",
+            "note": "ORCID education entries: Master of Public Health, Epidemiology, Boston University School of Public Health, 2017 (source: Emily M Lord)"
+          }
+        ],
+        "details": {
+          "degree": "Master of Public Health",
+          "department": "Epidemiology",
+          "graduation_year": 2017
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-1936-0976"
+      }
+    },
+    {
+      "id": "person:canonical:erika-rodriguez-4180",
+      "type": "person",
+      "label": "Erika Rodriguez",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0003-4684-4180",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0003-4684-4180",
+            "note": "ORCID education entries: MS Medical Science, Boston University, 2019 (source: Erika Rodriguez)"
+          }
+        ],
+        "details": {
+          "degree": "MS Medical Science",
+          "graduation_year": 2019
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0003-4684-4180"
+      }
+    },
+    {
+      "id": "person:canonical:erin-l-ferguson-0001",
+      "type": "person",
+      "label": "Erin L. Ferguson",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0003-3136-0001",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0003-3136-0001",
+            "note": "ORCID education entries: BA, Neuroscience, Boston University, 2018 (source: Erin Ferguson); MPH, School of Public Health, Boston University, 2019 (source: Erin Ferguson)"
+          }
+        ],
+        "details": {
+          "degree": "MPH",
+          "department": "School of Public Health",
+          "graduation_year": 2019
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0003-3136-0001"
+      }
+    },
+    {
+      "id": "person:canonical:esther-s-tung-6907",
+      "type": "person",
+      "label": "Esther S. Tung",
+      "sources": [
+        {
+          "source": "bu_repository",
+          "url": "https://hdl.handle.net/2144/43976",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "bu_repository",
+            "url": "https://hdl.handle.net/2144/43976",
+            "note": "OpenBU thesis/dissertation: Doctor of Philosophy, Psychological & Brain Sciences, Boston University, 2021 (\"Rates and mechanisms of suicidal thoughts and behaviors in young Asian-American women\")"
+          }
+        ],
+        "details": {
+          "degree": "Doctor of Philosophy",
+          "department": "Psychological & Brain Sciences",
+          "graduation_year": 2021
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-6474-6907"
+      }
+    },
+    {
+      "id": "person:canonical:eve-rittenberg-2006",
+      "type": "person",
+      "label": "Eve Rittenberg",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0002-1643-2006",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-1643-2006",
+            "note": "ORCID education entries: MA, Clinical Psychology, Boston University, 1993 (source: Eve Rittenberg)"
+          }
+        ],
+        "details": {
+          "degree": "MA",
+          "department": "Clinical Psychology",
+          "graduation_year": 1993
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-1643-2006"
+      }
+    },
+    {
+      "id": "person:canonical:grace-m-ferri-9129",
+      "type": "person",
+      "label": "Grace M. Ferri",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0001-9377-9129",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0001-9377-9129",
+            "note": "ORCID education entries: BA, Biochemistry and Molecular Biology, Boston University, 2018 (source: Grace Ferri); MD, Boston University School of Medicine, 2022 (source: Grace Ferri)"
+          }
+        ],
+        "details": {
+          "degree": "MD",
+          "graduation_year": 2022
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0001-9377-9129"
+      }
+    },
+    {
+      "id": "person:canonical:haochun-huang-7140",
+      "type": "person",
+      "label": "Haochun Huang",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0009-0005-2270-7140",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0009-0005-2270-7140",
+            "note": "ORCID education entries: Master, Bioinformatics, Boston University, 2025 (source: Haochun Huang)"
+          }
+        ],
+        "details": {
+          "degree": "Master",
+          "department": "Bioinformatics",
+          "graduation_year": 2025
+        }
+      },
+      "attributes": {
+        "orcid": "0009-0005-2270-7140"
+      }
+    },
+    {
+      "id": "person:canonical:heather-thompson-brenner-761x",
+      "type": "person",
+      "label": "Heather Thompson‐Brenner",
+      "sources": [
+        {
+          "source": "bu_repository",
+          "url": "https://hdl.handle.net/2144/48269",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "bu_repository",
+            "url": "https://hdl.handle.net/2144/48269",
+            "note": "OpenBU thesis/dissertation: Master of Fine Arts, English, Boston University, 2024 (\"Role plays\")"
+          }
+        ],
+        "details": {
+          "degree": "Master of Fine Arts",
+          "department": "English",
+          "graduation_year": 2024
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0001-8724-761X"
+      }
+    },
+    {
+      "id": "person:canonical:henghui-zhu-6975",
+      "type": "person",
+      "label": "Henghui Zhu",
+      "sources": [
+        {
+          "source": "bu_repository",
+          "url": "https://hdl.handle.net/2144/39363",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "bu_repository",
+            "url": "https://hdl.handle.net/2144/39363",
+            "note": "OpenBU thesis/dissertation: Doctor of Philosophy, Systems Engineering, Boston University, 2020 (\"Making decisions based on context: models and applications in cognitive sciences and natural language processing\")"
+          }
+        ],
+        "details": {
+          "degree": "Doctor of Philosophy",
+          "department": "Systems Engineering",
+          "graduation_year": 2020
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-4534-6975"
+      }
+    },
+    {
+      "id": "person:canonical:hillary-j-mull-0445",
+      "type": "person",
+      "label": "Hillary J. Mull",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0002-4484-0445",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-4484-0445",
+            "note": "ORCID education entries: PhD, Boston University School of Public Health, 2011 (source: Hillary J. Mull)"
+          }
+        ],
+        "details": {
+          "degree": "PhD",
+          "graduation_year": 2011
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-4484-0445"
+      }
+    },
+    {
+      "id": "person:canonical:hiren-hansraj-patadiya-248x",
+      "type": "person",
+      "label": "Hiren Hansraj Patadiya",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0009-0000-6110-248X",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0009-0000-6110-248X",
+            "note": "ORCID education entries: DMD, Boston University, 2021 (source: Hiren  Patadiya)"
+          }
+        ],
+        "details": {
+          "degree": "DMD",
+          "graduation_year": 2021
+        }
+      },
+      "attributes": {
+        "orcid": "0009-0000-6110-248X"
       }
     },
     {
@@ -107,6 +1001,344 @@
       }
     },
     {
+      "id": "person:canonical:jamie-e-collins-007x",
+      "type": "person",
+      "label": "Jamie E. Collins",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0001-8413-007X",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0001-8413-007X",
+            "note": "ORCID education entries: MA, Mathematics, Boston University, 2005 (source: Jamie Collins); PhD, Biostatistics, Boston University, 2014 (source: Jamie Collins)"
+          }
+        ],
+        "details": {
+          "degree": "PhD",
+          "department": "Biostatistics",
+          "graduation_year": 2014
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0001-8413-007X"
+      }
+    },
+    {
+      "id": "person:canonical:javad-noorbakhsh-8061",
+      "type": "person",
+      "label": "Javad Noorbakhsh",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0002-6196-8061",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-6196-8061",
+            "note": "ORCID education entries: PhD, Physics, Boston University, 2015 (source: Javad Noorbakhsh)"
+          }
+        ],
+        "details": {
+          "degree": "PhD",
+          "department": "Physics",
+          "graduation_year": 2015
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-6196-8061"
+      }
+    },
+    {
+      "id": "person:canonical:jennifer-beane-2132",
+      "type": "person",
+      "label": "Jennifer Beane",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0002-6699-2132",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-6699-2132",
+            "note": "ORCID education entries: Ph.D., Boston University, 2007 (source: Jennifer Beane-Ebel)"
+          }
+        ],
+        "details": {
+          "degree": "Ph.D.",
+          "graduation_year": 2007
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-6699-2132"
+      }
+    },
+    {
+      "id": "person:canonical:jennifer-j-yland-8971",
+      "type": "person",
+      "label": "Jennifer J. Yland",
+      "sources": [
+        {
+          "source": "bu_repository",
+          "url": "https://hdl.handle.net/2144/46189",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "bu_repository",
+            "url": "https://hdl.handle.net/2144/46189",
+            "note": "OpenBU thesis/dissertation: Doctor of Philosophy, Epidemiology, Boston University, 2023 (\"Application of a target trial framework to questions in reproductive and perinatal pharmacoepidemiology\")"
+          }
+        ],
+        "details": {
+          "degree": "Doctor of Philosophy",
+          "department": "Epidemiology",
+          "graduation_year": 2023
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0001-7870-8971"
+      }
+    },
+    {
+      "id": "person:canonical:jennifer-m-vojtech-0228",
+      "type": "person",
+      "label": "Jennifer M. Vojtech",
+      "sources": [
+        {
+          "source": "bu_repository",
+          "url": "https://hdl.handle.net/2144/41482",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "bu_repository",
+            "url": "https://hdl.handle.net/2144/41482",
+            "note": "OpenBU thesis/dissertation: Doctor of Philosophy, Biomedical Engineering, Boston University, 2020 (\"Acoustic and videoendoscopic techniques to improve voice assessment via relative fundamental frequency\")"
+          },
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-0583-0228",
+            "note": "ORCID education entries: Ph.D., Department of Biomedical Engineering, Boston University, 2020 (source: Jenny Vojtech)"
+          }
+        ],
+        "details": {
+          "degree": "Doctor of Philosophy",
+          "department": "Biomedical Engineering",
+          "graduation_year": 2020
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-0583-0228"
+      }
+    },
+    {
+      "id": "person:canonical:jennifer-r-fonda-2918",
+      "type": "person",
+      "label": "Jennifer R. Fonda",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0001-9482-2918",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0001-9482-2918",
+            "note": "ORCID education entries: MA, Biostatistics, Boston University, 2004 (source: Jennifer R. Fonda, PhD); PhD, Epidemiology, Boston University, 2015 (source: Jennifer R. Fonda, PhD)"
+          }
+        ],
+        "details": {
+          "degree": "PhD",
+          "department": "Epidemiology",
+          "graduation_year": 2015
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0001-9482-2918"
+      }
+    },
+    {
+      "id": "person:canonical:jingmei-yang-7782",
+      "type": "person",
+      "label": "Jingmei Yang",
+      "sources": [
+        {
+          "source": "bu_repository",
+          "url": "https://hdl.handle.net/2144/52999",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "bu_repository",
+            "url": "https://hdl.handle.net/2144/52999",
+            "note": "OpenBU thesis/dissertation: Doctor of Philosophy, Systems Engineering, Boston University, 2026 (\"Adapting AI models for healthcare applications\")"
+          },
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0009-0000-8562-7782",
+            "note": "ORCID education entries: PhD, Systems Engineering, Boston University, 2026 (source: Jingmei Yang)"
+          }
+        ],
+        "details": {
+          "degree": "Doctor of Philosophy",
+          "department": "Systems Engineering",
+          "graduation_year": 2026
+        }
+      },
+      "attributes": {
+        "orcid": "0009-0000-8562-7782"
+      }
+    },
+    {
+      "id": "person:canonical:jonathan-m-carnino-7269",
+      "type": "person",
+      "label": "Jonathan M. Carnino",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0001-8908-7269",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0001-8908-7269",
+            "note": "ORCID education entries: BS, Boston University, 2020 (source: Jonathan M Carnino); MD, Boston University School of Medicine, 2026 (source: Jonathan M Carnino)"
+          }
+        ],
+        "details": {
+          "degree": "MD",
+          "graduation_year": 2026
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0001-8908-7269"
+      }
+    },
+    {
+      "id": "person:canonical:jui-hung-hung-9213",
+      "type": "person",
+      "label": "Jui‐Hung Hung",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0003-2208-9213",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0003-2208-9213",
+            "note": "ORCID education entries: Ph.D., Bioinformatics, Boston University, 2011 (source: Jui-Hung Hung)"
+          }
+        ],
+        "details": {
+          "degree": "Ph.D.",
+          "department": "Bioinformatics",
+          "graduation_year": 2011
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0003-2208-9213"
+      }
+    },
+    {
+      "id": "person:canonical:karol-mateusz-pencina-7047",
+      "type": "person",
+      "label": "Karol Mateusz Pencina",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0003-1824-7047",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0003-1824-7047",
+            "note": "ORCID education entries: Ph.D., Mathematics and Statistics, Boston University, 2012 (source: karol m pencina)"
+          }
+        ],
+        "details": {
+          "degree": "Ph.D.",
+          "department": "Mathematics and Statistics",
+          "graduation_year": 2012
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0003-1824-7047"
+      }
+    },
+    {
+      "id": "person:canonical:katherine-hsu-422x",
+      "type": "person",
+      "label": "Katherine Hsu",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0001-7933-422X",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0001-7933-422X",
+            "note": "ORCID education entries: MPH, School of Public Health, Boston University, 2005 (source: Katherine Hsu)"
+          }
+        ],
+        "details": {
+          "degree": "MPH",
+          "department": "School of Public Health",
+          "graduation_year": 2005
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0001-7933-422X"
+      }
+    },
+    {
       "id": "person:canonical:kathryn-lunetta-biostatistics",
       "type": "person",
       "label": "Kathryn L. Lunetta",
@@ -135,6 +1367,368 @@
       },
       "attributes": {
         "orcid": "0000-0002-9268-810X"
+      }
+    },
+    {
+      "id": "person:canonical:kelly-cho-7076",
+      "type": "person",
+      "label": "Kelly Cho",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0003-1727-7076",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0003-1727-7076",
+            "note": "ORCID education entries: M.P.H., Biostatistics& Epidemiology, Boston University School of Public Health, 2001 (source: Kelly Cho); Ph.D., Biostatistics, Boston University School of Public Health, 2008 (source: Kelly Cho)"
+          }
+        ],
+        "details": {
+          "degree": "Ph.D.",
+          "department": "Biostatistics",
+          "graduation_year": 2008
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0003-1727-7076"
+      }
+    },
+    {
+      "id": "person:canonical:kendra-d-sims-3002",
+      "type": "person",
+      "label": "Kendra D. Sims",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0002-6740-3002",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-6740-3002",
+            "note": "ORCID education entries: MPH, Epidemiology, Boston University, 2017 (source: Kendra D Sims)"
+          }
+        ],
+        "details": {
+          "degree": "MPH",
+          "department": "Epidemiology",
+          "graduation_year": 2017
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-6740-3002"
+      }
+    },
+    {
+      "id": "person:canonical:kevin-james-lane-6811",
+      "type": "person",
+      "label": "Kevin  James Lane",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0002-1038-6811",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-1038-6811",
+            "note": "ORCID education entries: PhD, Environmental Health, Boston University School of Public Health, 2014 (source: Kevin Lane)"
+          }
+        ],
+        "details": {
+          "degree": "PhD",
+          "department": "Environmental Health",
+          "graduation_year": 2014
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-1038-6811"
+      }
+    },
+    {
+      "id": "person:canonical:kimberly-a-bertrand-7618",
+      "type": "person",
+      "label": "Kimberly A. Bertrand",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0002-4565-7618",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-4565-7618",
+            "note": "ORCID education entries: MPH, Epidemiology & Biostatistics, Boston University School of Public Health, 2005 (source: Kimberly A. Bertrand)"
+          }
+        ],
+        "details": {
+          "degree": "MPH, Epidemiology & Biostatistics",
+          "graduation_year": 2005
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-4565-7618"
+      }
+    },
+    {
+      "id": "person:canonical:komal-peer-4910",
+      "type": "person",
+      "label": "Komal Peer",
+      "sources": [
+        {
+          "source": "bu_repository",
+          "url": "https://hdl.handle.net/2144/42322",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "bu_repository",
+            "url": "https://hdl.handle.net/2144/42322",
+            "note": "OpenBU thesis/dissertation: Doctor of Philosophy, Environmental Health, Boston University, 2021 (\"Approaches to enhance interpretability and meaningful use of big data in population health practice and research\")"
+          }
+        ],
+        "details": {
+          "degree": "Doctor of Philosophy",
+          "department": "Environmental Health",
+          "graduation_year": 2021
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-9685-4910"
+      }
+    },
+    {
+      "id": "person:canonical:kristin-baltrusaitis-9513",
+      "type": "person",
+      "label": "Kristin Baltrusaitis",
+      "sources": [
+        {
+          "source": "bu_repository",
+          "url": "https://hdl.handle.net/2144/38799",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "bu_repository",
+            "url": "https://hdl.handle.net/2144/38799",
+            "note": "OpenBU thesis/dissertation: Doctor of Philosophy, Biostatistics, Boston University, 2019 (\"Comparative evaluation of methods that adjust for reporting biases in participatory surveillance systems\")"
+          }
+        ],
+        "details": {
+          "degree": "Doctor of Philosophy",
+          "department": "Biostatistics",
+          "graduation_year": 2019
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0003-2090-9513"
+      }
+    },
+    {
+      "id": "person:canonical:laura-sampson-2081",
+      "type": "person",
+      "label": "Laura Sampson",
+      "sources": [
+        {
+          "source": "bu_repository",
+          "url": "https://hdl.handle.net/2144/40706",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "bu_repository",
+            "url": "https://hdl.handle.net/2144/40706",
+            "note": "OpenBU thesis/dissertation: Doctor of Philosophy, Epidemiology, Boston University, 2020 (\"Predicting and explaining incident and ongoing depression in U.S. Army National Guard members: a lifecourse perspective\")"
+          },
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-1715-2081",
+            "note": "ORCID education entries: PhD in Epidemiology, Boston University School of Public Health, 2020 (source: Laura Sampson)"
+          }
+        ],
+        "details": {
+          "degree": "Doctor of Philosophy",
+          "department": "Epidemiology",
+          "graduation_year": 2020
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-1715-2081"
+      }
+    },
+    {
+      "id": "person:canonical:lucas-schiffer-0326",
+      "type": "person",
+      "label": "Lucas Schiffer",
+      "sources": [
+        {
+          "source": "bu_repository",
+          "url": "https://hdl.handle.net/2144/47473",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "bu_repository",
+            "url": "https://hdl.handle.net/2144/47473",
+            "note": "OpenBU thesis/dissertation: Doctor of Philosophy, Bioinformatics GRS, Boston University, 2023 (\"Multimodal, longitudinal, and mega-analysis of biomedical data\")"
+          }
+        ],
+        "details": {
+          "degree": "Doctor of Philosophy",
+          "department": "Bioinformatics GRS",
+          "graduation_year": 2023
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0003-3628-0326"
+      }
+    },
+    {
+      "id": "person:canonical:manuel-jose-marte-601x",
+      "type": "person",
+      "label": "Manuel Jose Marte",
+      "sources": [
+        {
+          "source": "bu_repository",
+          "url": "https://hdl.handle.net/2144/51792",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "bu_repository",
+            "url": "https://hdl.handle.net/2144/51792",
+            "note": "OpenBU thesis/dissertation: Doctor of Philosophy, Sargent College of Health and Rehabilitation Sciences, Boston University, 2026 (\"A multimodal and naturalistic approach to assessment in aphasia\")"
+          }
+        ],
+        "details": {
+          "degree": "Doctor of Philosophy",
+          "department": "Sargent College of Health and Rehabilitation Sciences",
+          "graduation_year": 2026
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-1837-601X"
+      }
+    },
+    {
+      "id": "person:canonical:marina-ritchie-1293",
+      "type": "person",
+      "label": "Marina Ritchie",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0002-5844-1293",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-5844-1293",
+            "note": "ORCID education entries: BA, Boston University, 2016 (source: Marina Ritchie); MA, Boston University, 2017 (source: Marina Ritchie)"
+          }
+        ],
+        "details": {
+          "degree": "MA",
+          "graduation_year": 2017
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-5844-1293"
+      }
+    },
+    {
+      "id": "person:canonical:matthew-s-panizzon-2097",
+      "type": "person",
+      "label": "Matthew S. Panizzon",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0002-6449-2097",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-6449-2097",
+            "note": "ORCID education entries: M.A., Psychology, Boston University, 2004 (source: Matthew S. Panizzon); Ph.D., Clinical Psychology, Boston University, 2008 (source: Matthew S. Panizzon)"
+          }
+        ],
+        "details": {
+          "degree": "Ph.D.",
+          "department": "Clinical Psychology",
+          "graduation_year": 2008
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-6449-2097"
+      }
+    },
+    {
+      "id": "person:canonical:maureen-dubreuil-1515",
+      "type": "person",
+      "label": "Maureen Dubreuil",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0002-6253-1515",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-6253-1515",
+            "note": "ORCID education entries: MSc, Boston University School of Public Health, 2017 (source: Maureen Dubreuil, MD, MSc)"
+          }
+        ],
+        "details": {
+          "degree": "MSc",
+          "graduation_year": 2017
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-6253-1515"
       }
     },
     {
@@ -169,6 +1763,465 @@
       }
     },
     {
+      "id": "person:canonical:michael-r-winter-4714",
+      "type": "person",
+      "label": "Michael R Winter",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0002-3745-4714",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-3745-4714",
+            "note": "ORCID education entries: BA, Mathematics and Statistics, Boston University, 1987; MPH, Epidemiology and Biostatistics, Boston University, 1993"
+          }
+        ],
+        "details": {
+          "degree": "MPH",
+          "department": "Epidemiology and Biostatistics",
+          "graduation_year": 1993
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-3745-4714"
+      }
+    },
+    {
+      "id": "person:canonical:michael-ryan-cassidy-8667",
+      "type": "person",
+      "label": "Michael Ryan Cassidy",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0002-0522-8667",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-0522-8667",
+            "note": "ORCID education entries: BA, Boston University, 2004 (source: Michael R. Cassidy); MD, Boston University School of Medicine, 2008 (source: Michael R. Cassidy)"
+          }
+        ],
+        "details": {
+          "degree": "MD",
+          "graduation_year": 2008
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-0522-8667"
+      }
+    },
+    {
+      "id": "person:canonical:michal-horny-6398",
+      "type": "person",
+      "label": "Michal Horný",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0003-3624-6398",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0003-3624-6398",
+            "note": "ORCID education entries: Ph.D., Health Law, Policy and Management, Boston University, 2017 (source: Michal Horný)"
+          }
+        ],
+        "details": {
+          "degree": "Ph.D.",
+          "department": "Health Law, Policy and Management",
+          "graduation_year": 2017
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0003-3624-6398"
+      }
+    },
+    {
+      "id": "person:canonical:mohamed-athif-0873",
+      "type": "person",
+      "label": "Mohamed Athif",
+      "sources": [
+        {
+          "source": "bu_repository",
+          "url": "https://hdl.handle.net/2144/52133",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "bu_repository",
+            "url": "https://hdl.handle.net/2144/52133",
+            "note": "OpenBU thesis/dissertation: Doctor of Philosophy, Biomedical Engineering, Boston University, 2026 (\"Investigation of single-cell and population dynamics of hippocampal networks\")"
+          }
+        ],
+        "details": {
+          "degree": "Doctor of Philosophy",
+          "department": "Biomedical Engineering",
+          "graduation_year": 2026
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0001-9470-0873"
+      }
+    },
+    {
+      "id": "person:canonical:muhammad-m-qureshi-3308",
+      "type": "person",
+      "label": "Muhammad M. Qureshi",
+      "sources": [
+        {
+          "source": "bu_repository",
+          "url": "https://hdl.handle.net/2144/52033",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "bu_repository",
+            "url": "https://hdl.handle.net/2144/52033",
+            "note": "OpenBU thesis/dissertation: Doctor of Philosophy, Epidemiology, Boston University, 2026 (\"Assessing the impact of institutional and sociodemographic factors on treatment and outcomes in head and neck cancer\")"
+          },
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-2056-3308",
+            "note": "ORCID education entries: PhD, Epidemiology, Boston University, 2025"
+          }
+        ],
+        "details": {
+          "degree": "Doctor of Philosophy",
+          "department": "Epidemiology",
+          "graduation_year": 2026
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-2056-3308"
+      }
+    },
+    {
+      "id": "person:canonical:petra-l-schubert-0173",
+      "type": "person",
+      "label": "Petra L. Schubert",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0002-6135-0173",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-6135-0173",
+            "note": "ORCID education entries: Bachelor of Science, Health Sciences, Boston University, 2015 (source: Petra Schubert); MPH, Epidemiology, Boston University School of Public Health, 2016 (source: Petra Schubert)"
+          }
+        ],
+        "details": {
+          "degree": "MPH",
+          "department": "Epidemiology",
+          "graduation_year": 2016
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-6135-0173"
+      }
+    },
+    {
+      "id": "person:canonical:qianfan-wu-3222",
+      "type": "person",
+      "label": "Qianfan Wu",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0009-0008-5924-3222",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0009-0008-5924-3222",
+            "note": "ORCID education entries: M.S. in Mathematical Finance, Questrom School of Business, Boston University, 2018 (source: Qianfan Wu)"
+          }
+        ],
+        "details": {
+          "degree": "M.S. in Mathematical Finance",
+          "department": "Questrom School of Business",
+          "graduation_year": 2018
+        }
+      },
+      "attributes": {
+        "orcid": "0009-0008-5924-3222"
+      }
+    },
+    {
+      "id": "person:canonical:qiuyuan-qin-9177",
+      "type": "person",
+      "label": "Qiuyuan Qin",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0002-5587-9177",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-5587-9177",
+            "note": "ORCID education entries: MS, Statistics, Boston University, 2018 (source: Qiuyuan Qin)"
+          }
+        ],
+        "details": {
+          "degree": "MS",
+          "department": "Statistics",
+          "graduation_year": 2018
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-5587-9177"
+      }
+    },
+    {
+      "id": "person:canonical:rebecca-j-song-1698",
+      "type": "person",
+      "label": "Rebecca J. Song",
+      "sources": [
+        {
+          "source": "bu_repository",
+          "url": "https://hdl.handle.net/2144/44451",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "bu_repository",
+            "url": "https://hdl.handle.net/2144/44451",
+            "note": "OpenBU thesis/dissertation: Doctor of Philosophy, Epidemiology, Boston University, 2022 (\"Assessment of cardiovascular disease risk factors and treatment using longitudinal data\")"
+          }
+        ],
+        "details": {
+          "degree": "Doctor of Philosophy",
+          "department": "Epidemiology",
+          "graduation_year": 2022
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0001-8431-1698"
+      }
+    },
+    {
+      "id": "person:canonical:regan-d-conrad-4415",
+      "type": "person",
+      "label": "Regan D. Conrad",
+      "sources": [
+        {
+          "source": "bu_repository",
+          "url": "https://hdl.handle.net/2144/50096",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "bu_repository",
+            "url": "https://hdl.handle.net/2144/50096",
+            "note": "OpenBU thesis/dissertation: Doctor of Philosophy, Bioinformatics, Boston University, 2025 (\"Dissecting the airway field of injury and immune microenvironment in lung squamous premalignancy at a single cell resolution\")"
+          },
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-5855-4415",
+            "note": "ORCID education entries: PhD, Bioinformatics, Boston University, 2025 (source: Regan D. Conrad)"
+          }
+        ],
+        "details": {
+          "degree": "Doctor of Philosophy",
+          "department": "Bioinformatics",
+          "graduation_year": 2025
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-5855-4415"
+      }
+    },
+    {
+      "id": "person:canonical:sahana-s-kowshik-7638",
+      "type": "person",
+      "label": "Sahana S Kowshik",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0009-0006-9547-7638",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0009-0006-9547-7638",
+            "note": "ORCID education entries: Master of Science, Computer Science, Boston University, 2023 (source: Sahana S. Kowshik)"
+          }
+        ],
+        "details": {
+          "degree": "Master of Science",
+          "department": "Computer Science",
+          "graduation_year": 2023
+        }
+      },
+      "attributes": {
+        "orcid": "0009-0006-9547-7638"
+      }
+    },
+    {
+      "id": "person:canonical:salomon-wollenstein-betech-4041",
+      "type": "person",
+      "label": "Salomón Wollenstein-Betech",
+      "sources": [
+        {
+          "source": "bu_repository",
+          "url": "https://hdl.handle.net/2144/44773",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "bu_repository",
+            "url": "https://hdl.handle.net/2144/44773",
+            "note": "OpenBU thesis/dissertation: Doctor of Philosophy, Systems Engineering, Boston University, 2022 (\"Estimation and optimization methods for transportation networks\")"
+          }
+        ],
+        "details": {
+          "degree": "Doctor of Philosophy",
+          "department": "Systems Engineering",
+          "graduation_year": 2022
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0003-0149-4041"
+      }
+    },
+    {
+      "id": "person:canonical:samad-amini-6220",
+      "type": "person",
+      "label": "Samad Amini",
+      "sources": [
+        {
+          "source": "bu_repository",
+          "url": "https://hdl.handle.net/2144/49644",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "bu_repository",
+            "url": "https://hdl.handle.net/2144/49644",
+            "note": "OpenBU thesis/dissertation: Doctor of Philosophy, Systems Engineering, Boston University, 2025 (\"Transforming dementia diagnosis & prognosis through AI\")"
+          }
+        ],
+        "details": {
+          "degree": "Doctor of Philosophy",
+          "department": "Systems Engineering",
+          "graduation_year": 2025
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-2063-6220"
+      }
+    },
+    {
+      "id": "person:canonical:satish-k-singh-3155",
+      "type": "person",
+      "label": "Satish K. Singh",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0002-7664-3155",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-7664-3155",
+            "note": "ORCID education entries: Bachelor of Arts, summa cum laude, Medical Sciences, College of Liberal Arts, Boston University, 1987 (source: Satish Singh); Doctor of Medicine, School of Medicine, Boston University, 1987 (source: Satish Singh)"
+          }
+        ],
+        "details": {
+          "degree": "Doctor of Medicine",
+          "department": "School of Medicine",
+          "graduation_year": 1987
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-7664-3155"
+      }
+    },
+    {
+      "id": "person:canonical:seho-park-0280",
+      "type": "person",
+      "label": "Seho Park",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0002-3247-0280",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-3247-0280",
+            "note": "ORCID education entries: Ph.D, School of Medicine, Boston University, 2026 (source: Seho Park)"
+          }
+        ],
+        "details": {
+          "degree": "Ph.D",
+          "department": "School of Medicine",
+          "graduation_year": 2026
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-3247-0280"
+      }
+    },
+    {
       "id": "person:canonical:serkalem-demissie-biostatistics",
       "type": "person",
       "label": "Serkalem Demissie",
@@ -193,6 +2246,679 @@
       },
       "attributes": {
         "orcid": "0000-0002-8009-0987"
+      }
+    },
+    {
+      "id": "person:canonical:seth-elkin-frankston-0199",
+      "type": "person",
+      "label": "Seth Elkin-Frankston",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0002-8913-0199",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-8913-0199",
+            "note": "ORCID education entries: PhD, Anatomy and Neurobiology, Boston University School of Medicine, 2013 (source: Seth Elkin-Frankston)"
+          }
+        ],
+        "details": {
+          "degree": "PhD",
+          "department": "Anatomy and Neurobiology",
+          "graduation_year": 2013
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-8913-0199"
+      }
+    },
+    {
+      "id": "person:canonical:shahabeddin-sotudian-6192",
+      "type": "person",
+      "label": "Shahabeddin Sotudian",
+      "sources": [
+        {
+          "source": "bu_repository",
+          "url": "https://hdl.handle.net/2144/46243",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "bu_repository",
+            "url": "https://hdl.handle.net/2144/46243",
+            "note": "OpenBU thesis/dissertation: Doctor of Philosophy, Systems Engineering, Boston University, 2023 (\"Robust learning to rank models and their biomedical applications\")"
+          }
+        ],
+        "details": {
+          "degree": "Doctor of Philosophy",
+          "department": "Systems Engineering",
+          "graduation_year": 2023
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-5864-6192"
+      }
+    },
+    {
+      "id": "person:canonical:shangran-qiu-841x",
+      "type": "person",
+      "label": "Shangran Qiu",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0003-0571-841X",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0003-0571-841X",
+            "note": "ORCID education entries: Doctor of Philosophy, Department of Physics, Boston University, 2022 (source: Shangran Qiu)"
+          }
+        ],
+        "details": {
+          "degree": "Doctor of Philosophy",
+          "department": "Department of Physics",
+          "graduation_year": 2022
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0003-0571-841X"
+      }
+    },
+    {
+      "id": "person:canonical:stacy-l-andersen-6386",
+      "type": "person",
+      "label": "Stacy L. Andersen",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0002-2442-6386",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-2442-6386",
+            "note": "ORCID education entries: PhD, Behavioral Neuroscience, Boston University School of Medicine, 2014 (source: Stacy L. Andersen)"
+          }
+        ],
+        "details": {
+          "degree": "PhD",
+          "department": "Behavioral Neuroscience",
+          "graduation_year": 2014
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-2442-6386"
+      }
+    },
+    {
+      "id": "person:canonical:steven-edward-arnold-415x",
+      "type": "person",
+      "label": "Steven Edward Arnold",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0002-9487-415X",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-9487-415X",
+            "note": "ORCID education entries: MD, Boston University School of Medicine, 1983 (source: Steven Arnold)"
+          }
+        ],
+        "details": {
+          "degree": "MD",
+          "graduation_year": 1983
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-9487-415X"
+      }
+    },
+    {
+      "id": "person:canonical:taiyao-wang-3892",
+      "type": "person",
+      "label": "Taiyao Wang",
+      "sources": [
+        {
+          "source": "bu_repository",
+          "url": "https://hdl.handle.net/2144/41007",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "bu_repository",
+            "url": "https://hdl.handle.net/2144/41007",
+            "note": "OpenBU thesis/dissertation: Doctor of Philosophy, Systems Engineering, Boston University, 2020 (\"Data analytics and optimization methods in biomedical systems: from microbes to humans\")"
+          }
+        ],
+        "details": {
+          "degree": "Doctor of Philosophy",
+          "department": "Systems Engineering",
+          "graduation_year": 2020
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-0331-3892"
+      }
+    },
+    {
+      "id": "person:canonical:tammy-jiang-5706",
+      "type": "person",
+      "label": "Tammy Jiang",
+      "sources": [
+        {
+          "source": "bu_repository",
+          "url": "https://hdl.handle.net/2144/42580",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "bu_repository",
+            "url": "https://hdl.handle.net/2144/42580",
+            "note": "OpenBU thesis/dissertation: Doctor of Philosophy, Epidemiology, Boston University, 2021 (\"Suicide and non-fatal suicide attempts among persons with depression in the population of Denmark\")"
+          }
+        ],
+        "details": {
+          "degree": "Doctor of Philosophy",
+          "department": "Epidemiology",
+          "graduation_year": 2021
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-6887-5706"
+      }
+    },
+    {
+      "id": "person:canonical:thomas-patrick-ahern-8727",
+      "type": "person",
+      "label": "Thomas Patrick Ahern",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0003-0440-8727",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0003-0440-8727",
+            "note": "ORCID education entries: MPH, Epidemiology, Boston University School of Public Health, 2006 (source: Thomas Ahern); PhD, Epidemiology, Boston University School of Public Health, 2010 (source: Thomas Ahern)"
+          }
+        ],
+        "details": {
+          "degree": "PhD",
+          "department": "Epidemiology",
+          "graduation_year": 2010
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0003-0440-8727"
+      }
+    },
+    {
+      "id": "person:canonical:ting-fang-alvin-ang-2552",
+      "type": "person",
+      "label": "Ting Fang Alvin Ang",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0003-4687-2552",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0003-4687-2552",
+            "note": "ORCID education entries: MPH, Boston University School of Public Health, 2016 (source: Ting Fang Alvin Ang)"
+          }
+        ],
+        "details": {
+          "degree": "MPH",
+          "graduation_year": 2016
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0003-4687-2552"
+      }
+    },
+    {
+      "id": "person:canonical:tingting-xu-737x",
+      "type": "person",
+      "label": "Tingting Xu",
+      "sources": [
+        {
+          "source": "bu_repository",
+          "url": "https://hdl.handle.net/2144/41022",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "bu_repository",
+            "url": "https://hdl.handle.net/2144/41022",
+            "note": "OpenBU thesis/dissertation: Doctor of Philosophy, Systems Engineering, Boston University, 2020 (\"Machine learning for effective predictions and prescriptions in health care\")"
+          },
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-5043-737X",
+            "note": "ORCID education entries: Ph.D., Systems Engineering, Boston University, 2020 (source: Tingting Xu)"
+          }
+        ],
+        "details": {
+          "degree": "Doctor of Philosophy",
+          "department": "Systems Engineering",
+          "graduation_year": 2020
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-5043-737X"
+      }
+    },
+    {
+      "id": "person:canonical:ulas-karaoz-6757",
+      "type": "person",
+      "label": "Ulaş Karaöz",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0002-8238-6757",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-8238-6757",
+            "note": "ORCID education entries: Ph.D., Graduate Program in Bioinformatics, Boston University, 2008 (source: Ulas Karaoz)"
+          }
+        ],
+        "details": {
+          "degree": "Ph.D.",
+          "department": "Graduate Program in Bioinformatics",
+          "graduation_year": 2008
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-8238-6757"
+      }
+    },
+    {
+      "id": "person:canonical:unay-dorken-gallastegi-5800",
+      "type": "person",
+      "label": "Unay Dorken Gallastegi",
+      "sources": [
+        {
+          "source": "bu_repository",
+          "url": "https://hdl.handle.net/2144/50608",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "bu_repository",
+            "url": "https://hdl.handle.net/2144/50608",
+            "note": "OpenBU thesis/dissertation: Doctor of Philosophy, Electrical & Computer Engineering, Boston University, 2025 (\"Computational methods for scene inference from thermal hyperspectral measurements\")"
+          }
+        ],
+        "details": {
+          "degree": "Doctor of Philosophy",
+          "department": "Electrical & Computer Engineering",
+          "graduation_year": 2025
+        }
+      },
+      "attributes": {
+        "orcid": "0009-0000-8568-5800"
+      }
+    },
+    {
+      "id": "person:canonical:vijetha-balakundi-3006",
+      "type": "person",
+      "label": "Vijetha Balakundi",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0009-0003-5631-3006",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0009-0003-5631-3006",
+            "note": "ORCID education entries: Masters (Bioinformatics), Graduate School of Arts and Sciences, Boston University, 2023 (source: Vijetha Balakundi)"
+          }
+        ],
+        "details": {
+          "degree": "Masters (Bioinformatics)",
+          "department": "Graduate School of Arts and Sciences",
+          "graduation_year": 2023
+        }
+      },
+      "attributes": {
+        "orcid": "0009-0003-5631-3006"
+      }
+    },
+    {
+      "id": "person:canonical:vin-tangpricha-5853",
+      "type": "person",
+      "label": "Vin Tangpricha",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0002-4021-5853",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-4021-5853",
+            "note": "ORCID education entries: Ph.D., Molecular Medicine, Boston University School of Medicine, 2004 (source: Vin Tangpricha)"
+          }
+        ],
+        "details": {
+          "degree": "Ph.D.",
+          "department": "Molecular Medicine",
+          "graduation_year": 2004
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-4021-5853"
+      }
+    },
+    {
+      "id": "person:canonical:wayne-w-lamorte-9809",
+      "type": "person",
+      "label": "Wayne W. LaMorte",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0002-7813-9809",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-7813-9809",
+            "note": "ORCID education entries: Ph.D., Biochemistry, Boston University Medical Campus, 1985 (source: Wayne LaMorte); M.P.H., Epidemiology and BIostatistics, Boston University Medical Campus, 1993 (source: Wayne LaMorte)"
+          }
+        ],
+        "details": {
+          "degree": "M.P.H.",
+          "department": "Epidemiology and BIostatistics",
+          "graduation_year": 1993
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-7813-9809"
+      }
+    },
+    {
+      "id": "person:canonical:weining-lu-3044",
+      "type": "person",
+      "label": "Weining Lu",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0002-6570-3044",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-6570-3044",
+            "note": "ORCID education entries: Master of Science in Clinical Research (MSCR), Boston University Chobanian & Avedisian School of Medicine, Boston University, 2026 (source: Weining Lu)"
+          }
+        ],
+        "details": {
+          "degree": "Master of Science in Clinical Research (MSCR)",
+          "department": "Boston University Chobanian & Avedisian School of Medicine",
+          "graduation_year": 2026
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-6570-3044"
+      }
+    },
+    {
+      "id": "person:canonical:wenrui-li-7911",
+      "type": "person",
+      "label": "Wenrui Li",
+      "sources": [
+        {
+          "source": "bu_repository",
+          "url": "https://hdl.handle.net/2144/43181",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "bu_repository",
+            "url": "https://hdl.handle.net/2144/43181",
+            "note": "OpenBU thesis/dissertation: Doctor of Philosophy, Mathematics & Statistics, Boston University, 2021 (\"Uncertainty quantification in noisy networks\")"
+          },
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-6471-7911",
+            "note": "ORCID education entries: PhD, Department of Mathematics and Statistics, Boston University, 2021 (source: Wenrui Li)"
+          }
+        ],
+        "details": {
+          "degree": "Doctor of Philosophy",
+          "department": "Mathematics & Statistics",
+          "graduation_year": 2021
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-6471-7911"
+      }
+    },
+    {
+      "id": "person:canonical:william-r-pellegrini-095x",
+      "type": "person",
+      "label": "William R. Pellegrini",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0002-8425-095X",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-8425-095X",
+            "note": "ORCID education entries: MD, Chobanian & Avedisian School of Medicine, Boston University, 2021 (source: William R. Pellegrini)"
+          }
+        ],
+        "details": {
+          "degree": "MD",
+          "department": "Chobanian & Avedisian School of Medicine",
+          "graduation_year": 2021
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-8425-095X"
+      }
+    },
+    {
+      "id": "person:canonical:xiao-zhou-444x",
+      "type": "person",
+      "label": "Xiao Zhou",
+      "sources": [
+        {
+          "source": "bu_repository",
+          "url": "https://hdl.handle.net/2144/44832",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "bu_repository",
+            "url": "https://hdl.handle.net/2144/44832",
+            "note": "OpenBU thesis/dissertation: Doctor of Philosophy, Computer Science, Boston University, 2022 (\"Non-competitive and competitive deep learning for imaging applications\")"
+          },
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-8933-444X",
+            "note": "ORCID education entries: PhD, Computer Science, Boston University, 2022 (source: Xiao Zhou)"
+          }
+        ],
+        "details": {
+          "degree": "Doctor of Philosophy",
+          "department": "Computer Science",
+          "graduation_year": 2022
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-8933-444X"
+      }
+    },
+    {
+      "id": "person:canonical:yi-guan-8824",
+      "type": "person",
+      "label": "Yi Guan",
+      "sources": [
+        {
+          "source": "bu_repository",
+          "url": "https://hdl.handle.net/2144/41246",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "bu_repository",
+            "url": "https://hdl.handle.net/2144/41246",
+            "note": "OpenBU thesis/dissertation: Master of Science, Anatomy & Neurobiology, Boston University, 2020 (\"Structural MRI used to predict conversion from mild cognitive impairment to Alzheimer's disease at different rates\")"
+          }
+        ],
+        "details": {
+          "degree": "Master of Science",
+          "department": "Anatomy & Neurobiology",
+          "graduation_year": 2020
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0001-5680-8824"
+      }
+    },
+    {
+      "id": "person:canonical:yili-du-5477",
+      "type": "person",
+      "label": "Yili Du",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0001-8444-5477",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0001-8444-5477",
+            "note": "ORCID education entries: MS in Biostatistics, Department of Biostatistics, Boston University, 2025 (source: Yili Du)"
+          }
+        ],
+        "details": {
+          "degree": "MS in Biostatistics",
+          "department": "Department of Biostatistics",
+          "graduation_year": 2025
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0001-8444-5477"
+      }
+    },
+    {
+      "id": "person:canonical:zhiping-weng-7966",
+      "type": "person",
+      "label": "Zhiping Weng",
+      "sources": [
+        {
+          "source": "user_submitted",
+          "url": "https://orcid.org/0000-0002-3032-7966",
+          "note": "Curated person directory entry"
+        }
+      ],
+      "bu_affiliation": {
+        "status": "verified_alumnus",
+        "evidence": [
+          {
+            "source": "user_submitted",
+            "url": "https://orcid.org/0000-0002-3032-7966",
+            "note": "ORCID education entries: Ph.D., Biomedical Engineering, Boston University, 1997 (source: Zhiping Weng)"
+          }
+        ],
+        "details": {
+          "degree": "Ph.D.",
+          "department": "Biomedical Engineering",
+          "graduation_year": 1997
+        }
+      },
+      "attributes": {
+        "orcid": "0000-0002-3032-7966"
       }
     }
   ],

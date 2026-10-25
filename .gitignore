@@ -158,3 +158,6 @@ venv/
 
 # Raw API response caches (re-fetchable; may be large)
 data/raw/
+
+
+.env

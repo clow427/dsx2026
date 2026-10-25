@@ -1,0 +1,229 @@
+{
+ "_comment": "MOCK ORCID /educations response (fictional)",
+ "affiliation-group": [
+  {
+   "summaries": [
+    {
+     "education-summary": {
+      "put-code": 1,
+      "role-title": "Ph.D.",
+      "department-name": "Biostatistics",
+      "organization": {
+       "name": "Boston University",
+       "address": {
+        "city": "Boston",
+        "country": "US"
+       }
+      },
+      "end-date": {
+       "year": {
+        "value": "2015"
+       }
+      },
+      "source": {
+       "source-name": {
+        "value": "Example Person"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "summaries": [
+    {
+     "education-summary": {
+      "put-code": 2,
+      "role-title": "MPH",
+      "department-name": null,
+      "organization": {
+       "name": "Example University School of Public Health",
+       "address": {
+        "city": "Boston",
+        "country": "US"
+       }
+      },
+      "end-date": {
+       "year": {
+        "value": "2010"
+       }
+      },
+      "source": {
+       "source-name": {
+        "value": "Example Person"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "summaries": [
+    {
+     "education-summary": {
+      "put-code": 3,
+      "role-title": "M.S.",
+      "department-name": "Epidemiology",
+      "organization": {
+       "name": "Boston University School of Public Health",
+       "address": {
+        "city": "Boston",
+        "country": "US"
+       }
+      },
+      "end-date": {
+       "year": {
+        "value": "2011"
+       }
+      },
+      "source": {
+       "source-name": {
+        "value": "Boston University"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "summaries": [
+    {
+     "education-summary": {
+      "put-code": 4,
+      "role-title": "Postdoctoral Fellow",
+      "department-name": null,
+      "organization": {
+       "name": "Boston University",
+       "address": {
+        "city": "Boston",
+        "country": "US"
+       }
+      },
+      "end-date": {
+       "year": {
+        "value": "2017"
+       }
+      },
+      "source": {
+       "source-name": {
+        "value": "Example Person"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "summaries": [
+    {
+     "education-summary": {
+      "put-code": 5,
+      "role-title": "PhD",
+      "department-name": null,
+      "organization": {
+       "name": "Boston University Medical Center",
+       "address": {
+        "city": "Boston",
+        "country": "US"
+       }
+      },
+      "end-date": {
+       "year": {
+        "value": "2012"
+       }
+      },
+      "source": {
+       "source-name": {
+        "value": "Example Person"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "summaries": [
+    {
+     "education-summary": {
+      "put-code": 6,
+      "role-title": "BA",
+      "department-name": null,
+      "organization": {
+       "name": "Example College",
+       "address": {
+        "city": "Boston",
+        "country": "US"
+       }
+      },
+      "end-date": null,
+      "source": {
+       "source-name": {
+        "value": "Example Person"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "summaries": [
+    {
+     "education-summary": {
+      "put-code": 7,
+      "role-title": "PhD",
+      "department-name": null,
+      "organization": {
+       "name": "Boston University",
+       "address": {
+        "city": "Boston",
+        "country": "US"
+       }
+      },
+      "end-date": {
+       "year": {
+        "value": "2099"
+       }
+      },
+      "source": {
+       "source-name": {
+        "value": "Example Person"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "summaries": [
+    {
+     "education-summary": {
+      "put-code": 8,
+      "role-title": "Doctor of Medicine",
+      "department-name": null,
+      "organization": {
+       "name": "Example Org Name",
+       "address": {
+        "city": "Boston",
+        "country": "US"
+       },
+       "disambiguated-organization": {
+        "disambiguated-organization-identifier": "https://ror.org/05qwgg493",
+        "disambiguation-source": "ROR"
+       }
+      },
+      "end-date": {
+       "year": {
+        "value": "2009"
+       }
+      },
+      "source": {
+       "source-name": {
+        "value": "Example Person"
+       }
+      }
+     }
+    }
+   ]
+  }
+ ]
+}

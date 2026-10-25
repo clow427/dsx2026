@@ -75,3 +75,9 @@
   - _Requirements: 7_
 - [ ] 10. Write property-based tests for correctness properties I1–I6 in `design.md`
   - _Requirements: 3, 6_
+- [x] 11. Discover BU alumni from public ORCID education records and OpenBU theses
+  - `pipelines/identity/orcid_education.py`: for every ORCID on a source-level person, fetch the public `/educations` summaries and keep completed BU degrees (BU organization by ROR or name, a degree title, an end year that isn't in the future). Evidence: the ORCID record (`user_submitted`).
+  - `pipelines/identity/openbu.py`: harvest OpenBU's "Boston University Theses & Dissertations" set over OAI-PMH (`dim` format). A BU-granted thesis is `bu_repository` evidence of its author's degree.
+  - `pipelines/identity/discover.py` writes `data/curation/people.discovered.yaml` (generated, same format as `people.yaml`) for graph people tied to a BU degree by ORCID. The directory step loads it after `people.yaml`, and hand-curated entries win. Theses without an ORCID are not used: a name alone can't prove who wrote a thesis.
+  - _Test:_ `tests/identity/test_alumni_sources.py` (fixtures plus property D1: an entry exists iff a graph ORCID has a stated BU degree and isn't hand-curated).
+  - _Requirements: 1.1, 1.3, 1.4, 4.1_

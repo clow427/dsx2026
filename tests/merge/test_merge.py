@@ -12,6 +12,7 @@ import copy
 import json
 
 import pytest
+import yaml
 
 from pipelines.common.contract import REPO_ROOT
 from pipelines.common.validation import validate_graph
@@ -387,7 +388,9 @@ def test_real_curated_people_appear_once_and_members_are_gone(real_graph):
     matches = json.loads(REAL_MATCHES.read_text())["matches"]
     ids = [n["id"] for n in doc["nodes"]]
     canonical_ids = [n["id"] for n in people["nodes"]]
-    assert len(canonical_ids) == 6
+    # Every hand-curated person is present (people.discovered.yaml adds more on top).
+    curated = yaml.safe_load((REPO_ROOT / "data" / "curation" / "people.yaml").read_text())
+    assert {f"person:canonical:{e['slug']}" for e in curated} <= set(canonical_ids)
     for cid in canonical_ids:
         assert ids.count(cid) == 1
     present = set(ids)

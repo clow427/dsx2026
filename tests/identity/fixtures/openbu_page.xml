@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- MOCK OpenBU OAI-PMH ListRecords page (fictional records) -->
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/">
+<ListRecords>
+<record><header><identifier>oai:open.bu.edu:2144/90001</identifier></header><metadata>
+<dim:dim xmlns:dim="http://www.dspace.org/xmlns/dspace/dim">
+<dim:field mdschema="dc" element="contributor" qualifier="author">Example, Thesis Writer</dim:field>
+<dim:field mdschema="dc" element="contributor" qualifier="advisor">Advisor, Example A.</dim:field>
+<dim:field mdschema="dc" element="identifier" qualifier="orcid">https://orcid.org/0000-0000-0000-0002</dim:field>
+<dim:field mdschema="dc" element="date" qualifier="issued">2019-05-19</dim:field>
+<dim:field mdschema="dc" element="identifier" qualifier="uri">https://hdl.handle.net/2144/90001</dim:field>
+<dim:field mdschema="dc" element="title">MOCK Example dissertation on clinical prediction</dim:field>
+<dim:field mdschema="etd" element="degree" qualifier="name">Doctor of Philosophy</dim:field>
+<dim:field mdschema="etd" element="degree" qualifier="level">doctoral</dim:field>
+<dim:field mdschema="etd" element="degree" qualifier="discipline">Biostatistics</dim:field>
+<dim:field mdschema="etd" element="degree" qualifier="grantor">Boston University</dim:field>
+</dim:dim></metadata></record>
+<record><header><identifier>oai:open.bu.edu:2144/90002</identifier></header><metadata>
+<dim:dim xmlns:dim="http://www.dspace.org/xmlns/dspace/dim">
+<dim:field mdschema="dc" element="contributor" qualifier="author">Sample, Name Only, 1925-</dim:field>
+<dim:field mdschema="dc" element="date" qualifier="issued">1955</dim:field>
+<dim:field mdschema="dc" element="identifier" qualifier="uri">https://hdl.handle.net/2144/90002</dim:field>
+<dim:field mdschema="dc" element="title">MOCK Example thesis without ORCID</dim:field>
+<dim:field mdschema="etd" element="degree" qualifier="name">Master of Arts</dim:field>
+<dim:field mdschema="etd" element="degree" qualifier="grantor">Boston University</dim:field>
+</dim:dim></metadata></record>
+<record><header><identifier>oai:open.bu.edu:2144/90003</identifier></header><metadata>
+<dim:dim xmlns:dim="http://www.dspace.org/xmlns/dspace/dim">
+<dim:field mdschema="dc" element="contributor" qualifier="author">Other, Grantor</dim:field>
+<dim:field mdschema="dc" element="date" qualifier="issued">2001</dim:field>
+<dim:field mdschema="dc" element="identifier" qualifier="uri">https://hdl.handle.net/2144/90003</dim:field>
+<dim:field mdschema="etd" element="degree" qualifier="name">Doctor of Philosophy</dim:field>
+<dim:field mdschema="etd" element="degree" qualifier="grantor">Example University</dim:field>
+</dim:dim></metadata></record>
+<record><header status="deleted"><identifier>oai:open.bu.edu:2144/90004</identifier></header></record>
+<resumptionToken completeListSize="5" cursor="0">mock-token-1</resumptionToken>
+</ListRecords>
+</OAI-PMH>
