@@ -10,11 +10,20 @@ import { STATUS_COLOR } from "./shared";
 
 export type PeopleSelection = { kind: "person"; id: string } | { kind: "link"; id: string } | null;
 
+/** A topic drawn at the center, with a spoke to each person who has papers on it. */
+export interface TopicHub {
+  id: string;
+  label: string;
+  spokes: { personId: string; papers: number }[];
+}
+
 interface Props {
   index: GraphIndex;
   personIds: string[];
   links: PersonLink[];
+  /** The focus person, or the hub topic's ID. */
   focusId: string;
+  hub?: TopicHub;
   /** People added by "Expand"; their scenes use a force layout instead of rings. */
   expanded: string[];
   selection: PeopleSelection;
@@ -51,6 +60,26 @@ const STYLE: StylesheetJson = [
       "transition-duration": 150,
     },
   },
+  {
+    selector: 'node[kind = "hub"]',
+    style: {
+      shape: "round-rectangle",
+      width: "data(w)",
+      height: "data(h)",
+      "background-color": PRIMARY,
+      "border-color": "#ffffff",
+      "border-width": 4,
+      color: "#ffffff",
+      "font-family": "Bricolage Grotesque, system-ui, sans-serif",
+      "font-size": 14,
+      "font-weight": 700,
+      "text-valign": "center",
+      "text-margin-y": 0,
+      "text-wrap": "wrap",
+      "text-max-width": "170px",
+      "text-background-opacity": 0,
+    },
+  },
   { selector: "node.focus", style: { "border-color": INK, "border-width": 4, "font-size": 13, "font-weight": 700, "z-index": 20 } },
   { selector: "node.selected-el", style: { "border-color": PRIMARY, "border-width": 5, "z-index": 30 } },
   { selector: "node.faded", style: { opacity: 0.18 } },
@@ -66,6 +95,7 @@ const STYLE: StylesheetJson = [
     },
   },
   { selector: "edge[grantOnly = 1]", style: { "line-color": "hsl(38, 80%, 55%)", "line-style": "dashed", "curve-style": "bezier", opacity: 0.6 } },
+  { selector: 'edge[kind = "spoke"]', style: { "line-color": "hsl(340, 75%, 80%)", opacity: 0.7, "curve-style": "straight" } },
   { selector: "edge.focus-edge", style: { "line-color": "hsl(240, 10%, 62%)", opacity: 0.9 } },
   { selector: "edge.faded", style: { opacity: 0.08 } },
   // The side panel describes the selected connection, so the line itself carries no label.
@@ -76,18 +106,28 @@ function short(label: string): string {
   return label.length > 32 ? `${label.slice(0, 30)}…` : label;
 }
 
-export function PeopleGraph({ index, personIds, links, focusId, expanded, selection, onSelect, onExpand }: Props) {
+export function PeopleGraph({ index, personIds, links, focusId, hub, expanded, selection, onSelect, onExpand }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const cyRef = useRef<Core | null>(null);
+  const lastFocus = useRef<string | null>(null);
   const handlers = useRef({ onSelect, onExpand });
   handlers.current = { onSelect, onExpand };
 
   useEffect(() => {
     if (!containerRef.current) return;
     const cy = cytoscape({ container: containerRef.current, style: STYLE, wheelSensitivity: 0.3, minZoom: 0.15, maxZoom: 2.5 });
-    cy.on("tap", "node", (evt) => handlers.current.onSelect({ kind: "person", id: evt.target.id() }));
-    cy.on("tap", "edge", (evt) => handlers.current.onSelect({ kind: "link", id: evt.target.id() }));
-    cy.on("dbltap", "node", (evt) => handlers.current.onExpand(evt.target.id()));
+    cy.on("tap", "node", (evt) => {
+      if (evt.target.data("kind") === "hub") handlers.current.onSelect(null);
+      else handlers.current.onSelect({ kind: "person", id: evt.target.id() });
+    });
+    cy.on("tap", "edge", (evt) => {
+      // A spoke stands for the person's papers on the topic, so it selects the person.
+      if (evt.target.data("kind") === "spoke") handlers.current.onSelect({ kind: "person", id: evt.target.data("target") });
+      else handlers.current.onSelect({ kind: "link", id: evt.target.id() });
+    });
+    cy.on("dbltap", "node", (evt) => {
+      if (evt.target.data("kind") !== "hub") handlers.current.onExpand(evt.target.id());
+    });
     cy.on("tap", (evt) => {
       if (evt.target === cy) handlers.current.onSelect(null);
     });
@@ -112,8 +152,18 @@ export function PeopleGraph({ index, personIds, links, focusId, expanded, select
   useEffect(() => {
     const cy = cyRef.current;
     if (!cy) return;
+    // A new center is a new scene: start from an empty canvas so it gets the ring layout.
+    if (lastFocus.current !== focusId) {
+      cy.elements().remove();
+      lastFocus.current = focusId;
+    }
+    const spokeId = (personId: string) => `spoke|${personId}`;
     const wanted = new Set(personIds);
     const wantedLinks = new Set(links.map((l) => l.id));
+    if (hub) {
+      wanted.add(hub.id);
+      hub.spokes.forEach((sp) => wantedLinks.add(spokeId(sp.personId)));
+    }
     cy.batch(() => {
       cy.elements().forEach((el) => {
         if (el.group() === "nodes" ? !wanted.has(el.id()) : !wantedLinks.has(el.id())) el.remove();
@@ -126,6 +176,10 @@ export function PeopleGraph({ index, personIds, links, focusId, expanded, select
       strength.set(l.b, (strength.get(l.b) ?? 0) + linkStrength(l));
     }
     const toAdd: ElementDefinition[] = [];
+    if (hub && cy.getElementById(hub.id).empty()) {
+      // Laid out at person size (the ring layout spaces every ring by the largest node), then enlarged.
+      toAdd.push({ group: "nodes", data: { id: hub.id, label: hub.label, kind: "hub", ring: 20, w: 54, h: 54 }, position: { x: 0, y: 0 } });
+    }
     for (const id of personIds) {
       const existing = cy.getElementById(id);
       const n = index.nodes.get(id)!;
@@ -159,6 +213,10 @@ export function PeopleGraph({ index, personIds, links, focusId, expanded, select
         },
       });
     }
+    for (const sp of hub?.spokes ?? []) {
+      if (cy.getElementById(spokeId(sp.personId)).nonempty()) continue;
+      toAdd.push({ group: "edges", data: { id: spokeId(sp.personId), source: hub!.id, target: sp.personId, kind: "spoke", width: Math.min(5, 1 + sp.papers * 0.6) } });
+    }
     const kept = cy.nodes().length;
     const added = cy.add(toAdd);
     if (added.nodes().length || added.edges().length) {
@@ -176,12 +234,13 @@ export function PeopleGraph({ index, personIds, links, focusId, expanded, select
       } else {
         cy.layout({ name: "cose", animate: false, randomize: fresh, nodeRepulsion: () => 24000, idealEdgeLength: () => 120, nodeOverlap: 24, numIter: 1500, fit: true, padding: 48 } as never).run();
       }
+      if (hub) cy.getElementById(hub.id).data({ w: 190, h: 64 });
       if (cy.zoom() > 1.3) {
         cy.zoom(1.3);
         cy.center();
       }
     }
-  }, [index, personIds, links, focusId, expanded]);
+  }, [index, personIds, links, focusId, hub, expanded]);
 
   useEffect(() => {
     const cy = cyRef.current;

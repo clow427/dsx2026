@@ -149,7 +149,10 @@ export function TopicBrowser({ index, fieldName, topicId, onChange, onOpenInNetw
                     <h2 className="mt-2 font-display text-3xl font-bold tracking-[-0.03em] text-foreground">{topic.label}</h2>
                     <p className="mt-1 text-sm text-muted-foreground">BU people with papers on this topic, alumni first.</p>
                   </div>
-                  <div className="flex items-center gap-3">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <Button className="rounded-full" onClick={() => onOpenInNetwork(topic.id)}>
+                      <Network className="mr-1.5 h-4 w-4" aria-hidden="true" /> See them in the network
+                    </Button>
                     <Switch id="topic-alumni" checked={alumniOnly} onCheckedChange={setAlumniOnly} />
                     <Label htmlFor="topic-alumni" className="text-sm">Verified alumni only</Label>
                   </div>

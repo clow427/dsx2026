@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { BookOpen, ExternalLink, Landmark, X } from "lucide-react";
+import { BookOpen, ExternalLink, Hash, Landmark, X } from "lucide-react";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 import { cn } from "@/lib/utils";
 import { initials } from "@/lib/graphLabels";
@@ -55,7 +55,19 @@ export function Eyebrow({ children, className }: { children: React.ReactNode; cl
   return <span className={cn("block text-[11px] font-bold uppercase tracking-[0.2em] text-primary", className)}>{children}</span>;
 }
 
-/** People-only search. Shows the picked person as a chip with a clear button. */
+function topicPapers(index: GraphIndex, id: string): number {
+  return (index.edgesByNode.get(id) ?? []).filter((e) => e.type === "HAS_TOPIC").length;
+}
+
+export function TopicIcon({ size = "md" }: { size?: keyof typeof SIZES }) {
+  return (
+    <span aria-hidden="true" className={cn("inline-flex shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground", SIZES[size])}>
+      <Hash className="h-[45%] w-[45%]" />
+    </span>
+  );
+}
+
+/** People search (optionally topics too). Shows the pick as a chip with a clear button. */
 export function PersonPicker({
   index,
   pidx,
@@ -64,6 +76,7 @@ export function PersonPicker({
   placeholder = "Search for a person…",
   label,
   autoFocus,
+  includeTopics = false,
 }: {
   index: GraphIndex;
   pidx: PeopleIndex;
@@ -72,16 +85,46 @@ export function PersonPicker({
   placeholder?: string;
   label: string;
   autoFocus?: boolean;
+  /** Also offer topics (picking one shows the people working on it). */
+  includeTopics?: boolean;
 }) {
   const [query, setQuery] = useState("");
-  const results = useMemo(() => {
-    const group = search(index, query, 200).find((g) => g.type === "person");
-    return (group?.results ?? [])
+  const { results, topics } = useMemo(() => {
+    const groups = search(index, query, 200);
+    const people = (groups.find((g) => g.type === "person")?.results ?? [])
       .map((p) => ({ p, links: pidx.adjacency.get(p.id)?.size ?? 0 }))
       .sort((a, b) => STATUS_RANK[statusOf(a.p)] - STATUS_RANK[statusOf(b.p)] || b.links - a.links)
-      .slice(0, 10);
-  }, [index, pidx, query]);
+      .slice(0, includeTopics ? 6 : 10);
+    const topicHits = includeTopics
+      ? (groups.find((g) => g.type === "topic")?.results ?? [])
+          .map((t) => ({ t, papers: topicPapers(index, t.id) }))
+          .filter((x) => x.papers > 0)
+          .sort((a, b) => b.papers - a.papers)
+          .slice(0, 6)
+      : [];
+    return { results: people, topics: topicHits };
+  }, [index, pidx, query, includeTopics]);
   const picked = value ? index.nodes.get(value) : undefined;
+
+  if (picked?.type === "topic") {
+    return (
+      <div className="flex items-center gap-3 rounded-2xl border border-border bg-card p-3 shadow-sm">
+        <TopicIcon size="sm" />
+        <div className="min-w-0 flex-1">
+          <p className="truncate text-sm font-semibold text-foreground">{picked.label}</p>
+          <p className="truncate text-xs text-muted-foreground">Topic · {topicPapers(index, picked.id)} papers</p>
+        </div>
+        <button
+          type="button"
+          onClick={() => onChange(null)}
+          className="rounded-full p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          aria-label={`Clear ${label}`}
+        >
+          <X className="h-4 w-4" />
+        </button>
+      </div>
+    );
+  }
 
   if (picked) {
     return (
@@ -108,7 +151,26 @@ export function PersonPicker({
       <CommandInput value={query} onValueChange={setQuery} placeholder={placeholder} autoFocus={autoFocus} aria-label={label} />
       {query.trim() && (
         <CommandList className="max-h-[320px]">
-          <CommandEmpty>No people match “{query.trim()}”.</CommandEmpty>
+          <CommandEmpty>No {includeTopics ? "people or topics" : "people"} match “{query.trim()}”.</CommandEmpty>
+          {topics.length > 0 && (
+            <CommandGroup heading="Topics (see the people working on them)">
+              {topics.map(({ t, papers }) => (
+                <CommandItem
+                  key={t.id}
+                  value={t.id}
+                  onSelect={() => {
+                    onChange(t.id);
+                    setQuery("");
+                  }}
+                  className="gap-2.5"
+                >
+                  <TopicIcon size="xs" />
+                  <span className="min-w-0 flex-1 truncate">{t.label}</span>
+                  <span className="shrink-0 text-[11px] text-muted-foreground">{papers} papers</span>
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          )}
           <CommandGroup heading="People (BU alumni first)">
             {results.map(({ p, links }) => (
               <CommandItem

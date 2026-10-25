@@ -24,12 +24,13 @@ import { PathFinder } from "@/features/path/PathFinder";
 import { TopicBrowser } from "@/features/topics/TopicBrowser";
 
 // URL state (design.md). Views (?view=):
-//   network (default)  people-only network: ?node=<person>, ?sel=<person>, ?pair=<link id>
+//   network (default)  people-only network: ?node=<person or topic>, ?sel=<person>, ?pair=<link id>
 //   connect            path finder: ?from=<person>, ?to=<person>
 //   topics             research areas: ?field=<field name>, ?topic=<topic id>
 //   people             Find My People: ?topic=<query>
 //   records            every record type: ?node=<focus id>, ?sel=<node>, ?edge=<edge>
-// A ?node= that isn't a person (old links to topics or papers) opens the records view.
+//   network also takes a topic: ?node=<topic id> shows the people working on it.
+// A ?node= that isn't a person or topic (e.g. a paper) opens the records view.
 // Deep links open straight to a scene.
 
 type View = "network" | "connect" | "topics" | "people" | "records";
@@ -58,7 +59,9 @@ function ExploreReady({ index, isMock }: { index: GraphIndex; isMock: boolean })
   const pidx = useMemo(() => buildPeopleIndex(index), [index]);
   const rawFocus = params.get("node");
   const rawView = params.get("view") as View | null;
-  const view: View = rawView && VIEWS.some((v) => v.key === rawView) ? rawView : rawFocus && index.nodes.get(rawFocus)?.type !== "person" ? "records" : "network";
+  // People and topics open in the people network; any other record type opens in All records.
+  const networkable = (id: string | null) => !!id && ["person", "topic"].includes(index.nodes.get(id)?.type ?? "");
+  const view: View = rawView && VIEWS.some((v) => v.key === rawView) ? rawView : rawFocus && !networkable(rawFocus) ? "records" : "network";
   const focusId = rawFocus && index.nodes.has(rawFocus) ? rawFocus : (demo?.id ?? index.doc.nodes[0]?.id ?? null);
   const selection: Selection = params.get("edge") ? { kind: "edge", id: params.get("edge")! } : params.get("sel") ? { kind: "node", id: params.get("sel")! } : focusId ? { kind: "node", id: focusId } : null;
 
@@ -104,10 +107,10 @@ function ExploreReady({ index, isMock }: { index: GraphIndex; isMock: boolean })
     [index, update],
   );
   const focus = useCallback((id: string) => update({ node: id, sel: null, edge: null, view: "records" }), [update]);
-  /** Open a person in the people network (other node types open in the records view). */
+  /** Open a person or topic in the people network (other node types open in the records view). */
   const openInNetwork = useCallback(
     (id: string) =>
-      index.nodes.get(id)?.type === "person"
+      ["person", "topic"].includes(index.nodes.get(id)?.type ?? "")
         ? setParams(new URLSearchParams({ node: id }))
         : setParams(new URLSearchParams({ view: "records", node: id })),
     [index, setParams],
@@ -180,7 +183,7 @@ function ExploreReady({ index, isMock }: { index: GraphIndex; isMock: boolean })
         <PeopleNetwork
           index={index}
           pidx={pidx}
-          focusId={rawFocus && index.nodes.get(rawFocus)?.type === "person" ? rawFocus : null}
+          focusId={networkable(rawFocus) ? rawFocus : null}
           selection={peopleSelection}
           onFocus={(id) => setParams(id ? new URLSearchParams({ node: id }) : new URLSearchParams())}
           onSelect={(sel) => update({ sel: sel?.kind === "person" ? sel.id : null, pair: sel?.kind === "link" ? sel.id : null })}
