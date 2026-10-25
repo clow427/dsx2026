@@ -10,6 +10,18 @@ npm run typecheck  # strict TypeScript over the explorer code
 npm run build      # syncs data, then builds dist/ (static; no backend, no auth)
 ```
 
+## Views (`/explore`)
+
+| View | URL | What it shows |
+|---|---|---|
+| People network (default) | `/explore?node=<person id>` | People only, colored by BU status. Verified alumni sit on the inner ring, then BU researchers, then others. Links are shared papers and NIH grants; click one to see the records behind it. |
+| How are we connected? | `?view=connect&from=<id>&to=<id>` | Shortest chain of real collaborations between two people (up to 6 steps), with the record behind every step. |
+| Topics | `?view=topics&field=<field>&topic=<topic id>` | Field → subfield → topic, then the BU people working on a topic, alumni first. |
+| Find My People | `?view=people&topic=<query>` | Ranked people for a topic, with the records that explain each rank. |
+| All records | `?view=records&node=<id>` | Every node type (papers, topics, organizations, grants) and the full filter panel. |
+
+People links are computed in `src/data/people.ts` from edges already in the graph (COAUTHORED_WITH, shared RECEIVED_AWARD, and FUNDED_BY + AUTHORED); each link keeps those edges as evidence.
+
 ## Data
 
 `scripts/sync-graph.mjs` picks the first file that exists:
