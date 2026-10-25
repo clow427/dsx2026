@@ -32,6 +32,7 @@ from pathlib import Path
 from pipelines.common.contract import REPO_ROOT
 from pipelines.common.graph import write_graph
 from pipelines.common.validation import validate_graph
+from pipelines.profiles.build import apply_profiles, load_profiles
 
 from .merge import MergeError, is_mock_path, merge_graphs
 
@@ -80,6 +81,12 @@ def run_merge(
     except MergeError as exc:
         log.error("merge refused: %s", exc)
         return 1
+
+    # Person profiles (pipelines/profiles) are keyed by ORCID and OpenAlex IDs, so they
+    # re-attach to the merged people. Only the real data/modules/profiles.json is applied.
+    profiles = load_profiles(modules_dir / "profiles.json") if modules_dir == MODULES_DIR else None
+    if profiles:
+        log.info("  person profiles attached: %d", apply_profiles(doc, profiles).applied)
 
     result = validate_graph(doc)
     if not result.ok:
