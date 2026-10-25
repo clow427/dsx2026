@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Plus, RotateCcw, Route } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -52,17 +52,17 @@ interface Props {
 export function PeopleNetwork({ index, pidx, focusId, selection, onFocus, onSelect, onConnect }: Props) {
   const [audience, setAudience] = useState<Audience>("everyone");
   const [grants, setGrants] = useState(true);
-  const [limit, setLimit] = useState(FOCUS_LIMIT);
-  const [expanded, setExpanded] = useState<string[]>([]);
-  const [pinned, setPinned] = useState<string[]>([]);
+  // Per-center view state. Keyed by the center so switching centers resets it in the same render
+  // (an effect would render the new center once with the old state first, animating twice).
+  const [view, setView] = useState({ focus: focusId, limit: FOCUS_LIMIT, expanded: [] as string[], pinned: [] as string[] });
+  const current = view.focus === focusId ? view : { focus: focusId, limit: FOCUS_LIMIT, expanded: [] as string[], pinned: [] as string[] };
+  const { limit, expanded, pinned } = current;
+  const patchView = (patch: Partial<typeof current>) => setView({ ...current, ...patch });
+  const setLimit = (fn: (l: number) => number) => patchView({ limit: fn(limit) });
+  const setExpanded = (ids: string[]) => patchView({ expanded: ids });
+  const setPinned = (ids: string[]) => patchView({ pinned: ids });
   const kinds = grants ? ALL_KINDS : PAPER_KINDS;
   const statuses = AUDIENCE_STATUSES[audience];
-
-  useEffect(() => {
-    setExpanded([]);
-    setPinned([]);
-    setLimit(FOCUS_LIMIT);
-  }, [focusId]);
 
   const focusNode = focusId ? index.nodes.get(focusId) : undefined;
   const isTopic = focusNode?.type === "topic";
@@ -109,10 +109,10 @@ export function PeopleNetwork({ index, pidx, focusId, selection, onFocus, onSele
   }, [index, pidx, focusId, focusNode, isTopic, topicPeople, statuses, kinds, limit, expanded, pinned]);
 
   const selectPerson = (id: string) => {
-    if (scene && !scene.personIds.includes(id)) setPinned((p) => [...p, id]);
+    if (scene && !scene.personIds.includes(id)) setPinned([...pinned, id]);
     onSelect({ kind: "person", id });
   };
-  const expand = (id: string) => setExpanded((x) => (x.includes(id) ? x : [...x, id]));
+  const expand = (id: string) => setExpanded(expanded.includes(id) ? expanded : [...expanded, id]);
 
   if (!focusId || !scene) return <StartScreen index={index} pidx={pidx} onPick={onFocus} />;
 
@@ -203,7 +203,7 @@ export function PeopleNetwork({ index, pidx, focusId, selection, onFocus, onSele
           <ul className="mt-3 space-y-1 border-t border-border pt-3 text-xs text-muted-foreground">
             <li className="flex items-center gap-2"><span className="w-6 border-t-2 border-[hsl(240,10%,75%)]" aria-hidden="true" />Shared papers (thicker = more)</li>
             {grants && <li className="flex items-center gap-2"><span className="w-6 border-t-2 border-dashed border-warning" aria-hidden="true" />NIH grant link only</li>}
-            <li>Hover a person to highlight their connections. Double-click to show their network.</li>
+            <li>Hover a person to highlight their connections. Click to see details; double-click to bring them to the center.</li>
           </ul>
         </div>
       </aside>
@@ -225,7 +225,7 @@ export function PeopleNetwork({ index, pidx, focusId, selection, onFocus, onSele
               <Route className="mr-1.5 h-3.5 w-3.5" aria-hidden="true" /> Find a connection
             </Button>
           )}
-          <Button size="sm" variant="ghost" className="h-8 rounded-full" onClick={() => { setExpanded([]); setPinned([]); setLimit(FOCUS_LIMIT); onSelect(null); }}>
+          <Button size="sm" variant="ghost" className="h-8 rounded-full" onClick={() => { setView({ focus: focusId, limit: FOCUS_LIMIT, expanded: [], pinned: [] }); onSelect(null); }}>
             <RotateCcw className="mr-1.5 h-3.5 w-3.5" aria-hidden="true" /> Reset
           </Button>
         </div>
@@ -245,7 +245,7 @@ export function PeopleNetwork({ index, pidx, focusId, selection, onFocus, onSele
             expanded={expanded}
             selection={selection}
             onSelect={(sel) => (sel?.kind === "person" ? selectPerson(sel.id) : onSelect(sel))}
-            onExpand={expand}
+            onFocus={(id) => onFocus(id)}
           />
         </div>
       </main>

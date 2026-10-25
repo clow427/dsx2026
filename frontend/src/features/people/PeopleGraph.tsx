@@ -28,7 +28,8 @@ interface Props {
   expanded: string[];
   selection: PeopleSelection;
   onSelect: (sel: PeopleSelection) => void;
-  onExpand: (id: string) => void;
+  /** Double-click: make this person the new center. */
+  onFocus: (id: string) => void;
 }
 
 const INK = "hsl(240, 30%, 14%)";
@@ -66,6 +67,8 @@ const STYLE: StylesheetJson = [
       shape: "round-rectangle",
       width: "data(w)",
       height: "data(h)",
+      "transition-property": "width, height, opacity",
+      "transition-duration": 260,
       "background-color": PRIMARY,
       "border-color": "#ffffff",
       "border-width": 4,
@@ -102,23 +105,33 @@ const STYLE: StylesheetJson = [
   { selector: "edge.selected-el", style: { "line-color": PRIMARY, "curve-style": "bezier", opacity: 1, "z-index": 25 } },
 ];
 
+const MOVE_MS = 650;
+const FADE_MS = 260;
+const MAX_ZOOM = 1.3;
+
+function prefersReducedMotion(): boolean {
+  return typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches === true;
+}
+
 function short(label: string): string {
   return label.length > 32 ? `${label.slice(0, 30)}…` : label;
 }
 
-export function PeopleGraph({ index, personIds, links, focusId, hub, expanded, selection, onSelect, onExpand }: Props) {
+export function PeopleGraph({ index, personIds, links, focusId, hub, expanded, selection, onSelect, onFocus }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const cyRef = useRef<Core | null>(null);
   const lastFocus = useRef<string | null>(null);
-  const handlers = useRef({ onSelect, onExpand });
-  handlers.current = { onSelect, onExpand };
+  const handlers = useRef({ onSelect, onFocus });
+  handlers.current = { onSelect, onFocus };
 
   useEffect(() => {
     if (!containerRef.current) return;
     const cy = cytoscape({ container: containerRef.current, style: STYLE, wheelSensitivity: 0.3, minZoom: 0.15, maxZoom: 2.5 });
     cy.on("tap", "node", (evt) => {
-      if (evt.target.data("kind") === "hub") handlers.current.onSelect(null);
-      else handlers.current.onSelect({ kind: "person", id: evt.target.id() });
+      if (evt.target.data("kind") === "hub") return handlers.current.onSelect(null);
+      handlers.current.onSelect({ kind: "person", id: evt.target.id() });
+      // Glide the clicked person to the middle of the view.
+      if (!prefersReducedMotion()) cy.animate({ center: { eles: evt.target } }, { duration: 450, easing: "ease-in-out-cubic" });
     });
     cy.on("tap", "edge", (evt) => {
       // A spoke stands for the person's papers on the topic, so it selects the person.
@@ -126,7 +139,7 @@ export function PeopleGraph({ index, personIds, links, focusId, hub, expanded, s
       else handlers.current.onSelect({ kind: "link", id: evt.target.id() });
     });
     cy.on("dbltap", "node", (evt) => {
-      if (evt.target.data("kind") !== "hub") handlers.current.onExpand(evt.target.id());
+      if (evt.target.data("kind") !== "hub") handlers.current.onFocus(evt.target.id());
     });
     cy.on("tap", (evt) => {
       if (evt.target === cy) handlers.current.onSelect(null);
@@ -152,11 +165,12 @@ export function PeopleGraph({ index, personIds, links, focusId, hub, expanded, s
   useEffect(() => {
     const cy = cyRef.current;
     if (!cy) return;
-    // A new center is a new scene: start from an empty canvas so it gets the ring layout.
-    if (lastFocus.current !== focusId) {
-      cy.elements().remove();
-      lastFocus.current = focusId;
-    }
+    const sceneChange = lastFocus.current !== focusId;
+    const firstScene = lastFocus.current === null || cy.nodes().length === 0;
+    lastFocus.current = focusId;
+    const animate = !firstScene && !prefersReducedMotion();
+    cy.elements().stop(true, true); // finish any animation still running from the previous change
+
     const spokeId = (personId: string) => `spoke|${personId}`;
     const wanted = new Set(personIds);
     const wantedLinks = new Set(links.map((l) => l.id));
@@ -164,11 +178,21 @@ export function PeopleGraph({ index, personIds, links, focusId, hub, expanded, s
       wanted.add(hub.id);
       hub.spokes.forEach((sp) => wantedLinks.add(spokeId(sp.personId)));
     }
-    cy.batch(() => {
-      cy.elements().forEach((el) => {
-        if (el.group() === "nodes" ? !wanted.has(el.id()) : !wantedLinks.has(el.id())) el.remove();
-      });
-    });
+
+    // People and links that leave the scene fade out instead of vanishing.
+    let departing = cy.elements().filter((el) => (el.group() === "nodes" ? !wanted.has(el.id()) : !wantedLinks.has(el.id())));
+    departing = departing.union(departing.connectedEdges());
+    if (animate && departing.nonempty()) {
+      const leaving = departing;
+      leaving.animate({ style: { opacity: 0 } }, { duration: FADE_MS, complete: () => leaving.remove() });
+    } else {
+      departing.remove();
+    }
+
+    // New people grow out of the new center (or the middle of the view when the center is new too).
+    const focusEl = cy.getElementById(focusId);
+    const viewCenter = { x: (cy.width() / 2 - cy.pan().x) / cy.zoom(), y: (cy.height() / 2 - cy.pan().y) / cy.zoom() };
+    const origin = focusEl.nonempty() && !departing.contains(focusEl) ? { ...focusEl.position() } : viewCenter;
 
     const strength = new Map<string, number>();
     for (const l of links) {
@@ -178,7 +202,7 @@ export function PeopleGraph({ index, personIds, links, focusId, hub, expanded, s
     const toAdd: ElementDefinition[] = [];
     if (hub && cy.getElementById(hub.id).empty()) {
       // Laid out at person size (the ring layout spaces every ring by the largest node), then enlarged.
-      toAdd.push({ group: "nodes", data: { id: hub.id, label: hub.label, kind: "hub", ring: 20, w: 54, h: 54 }, position: { x: 0, y: 0 } });
+      toAdd.push({ group: "nodes", data: { id: hub.id, label: hub.label, kind: "hub", ring: 20, w: 54, h: 54 }, position: { ...origin } });
     }
     for (const id of personIds) {
       const existing = cy.getElementById(id);
@@ -187,20 +211,26 @@ export function PeopleGraph({ index, personIds, links, focusId, hub, expanded, s
       const size = id === focusId ? 54 : Math.min(44, 20 + Math.sqrt(strength.get(id) ?? 1) * 5);
       // Rings: focus at the center, then alumni, BU researchers, others.
       const ring = id === focusId ? 10 : 4 - STATUS_RANK[status];
-      if (existing.nonempty()) {
+      if (existing.nonempty() && !departing.contains(existing)) {
         existing.data({ size, ring });
         continue;
       }
-      const anchor = links.find((l) => (l.a === id || l.b === id) && cy.getElementById(l.a === id ? l.b : l.a).nonempty());
-      const pos = anchor ? cy.getElementById(anchor.a === id ? anchor.b : anchor.a).position() : { x: 0, y: 0 };
+      if (existing.nonempty()) existing.remove(); // was fading out but is wanted again
+      let pos = origin;
+      if (!sceneChange) {
+        const anchor = links.find((l) => (l.a === id || l.b === id) && cy.getElementById(l.a === id ? l.b : l.a).nonempty());
+        if (anchor) pos = cy.getElementById(anchor.a === id ? anchor.b : anchor.a).position();
+      }
       toAdd.push({
         group: "nodes",
         data: { id, label: short(n.label), color: STATUS_COLOR[status], size, ring },
-        position: { x: pos.x + (Math.random() - 0.5) * 80, y: pos.y + (Math.random() - 0.5) * 80 },
+        position: { x: pos.x + (Math.random() - 0.5) * 30, y: pos.y + (Math.random() - 0.5) * 30 },
       });
     }
     for (const l of links) {
-      if (cy.getElementById(l.id).nonempty()) continue;
+      const existing = cy.getElementById(l.id);
+      if (existing.nonempty() && !departing.contains(existing)) continue;
+      if (existing.nonempty()) existing.remove();
       const c = linkCounts(l);
       toAdd.push({
         group: "edges",
@@ -217,29 +247,39 @@ export function PeopleGraph({ index, personIds, links, focusId, hub, expanded, s
       if (cy.getElementById(spokeId(sp.personId)).nonempty()) continue;
       toAdd.push({ group: "edges", data: { id: spokeId(sp.personId), source: hub!.id, target: sp.personId, kind: "spoke", width: Math.min(5, 1 + sp.papers * 0.6) } });
     }
-    const kept = cy.nodes().length;
     const added = cy.add(toAdd);
-    if (added.nodes().length || added.edges().length) {
-      const fresh = kept < 2;
-      if (fresh && expanded.length === 0) {
-        cy.layout({
-          name: "concentric",
-          concentric: (node: cytoscape.NodeSingular) => node.data("ring"),
-          levelWidth: () => 1,
-          minNodeSpacing: 34,
-          animate: false,
-          fit: true,
-          padding: 48,
-        } as never).run();
-      } else {
-        cy.layout({ name: "cose", animate: false, randomize: fresh, nodeRepulsion: () => 24000, idealEdgeLength: () => 120, nodeOverlap: 24, numIter: 1500, fit: true, padding: 48 } as never).run();
-      }
+    if (added.empty() && departing.empty()) return;
+    if (animate) added.style("opacity", 0);
+    // The ring layout spaces rings by the largest node, so lay the hub out at person size.
+    if (hub) cy.getElementById(hub.id).data({ w: 54, h: 54 });
+
+    const scene = cy.elements().not(departing);
+    const finish = () => {
       if (hub) cy.getElementById(hub.id).data({ w: 190, h: 64 });
-      if (cy.zoom() > 1.3) {
-        cy.zoom(1.3);
-        cy.center();
+      if (animate) added.animate({ style: { opacity: 1 } }, { duration: FADE_MS });
+      if (cy.zoom() > MAX_ZOOM) {
+        if (animate) cy.animate({ zoom: MAX_ZOOM, center: { eles: scene } }, { duration: FADE_MS });
+        else {
+          cy.zoom(MAX_ZOOM);
+          cy.center(scene);
+        }
       }
-    }
+    };
+    const motion = animate ? { animate: true, animationDuration: MOVE_MS, animationEasing: "ease-in-out-cubic" } : { animate: false };
+    const layout =
+      expanded.length === 0
+        ? scene.layout({
+            name: "concentric",
+            concentric: (node: cytoscape.NodeSingular) => node.data("ring"),
+            levelWidth: () => 1,
+            minNodeSpacing: 34,
+            fit: true,
+            padding: 48,
+            ...motion,
+          } as never)
+        : scene.layout({ name: "cose", randomize: false, nodeRepulsion: () => 24000, idealEdgeLength: () => 120, nodeOverlap: 24, numIter: 1500, fit: true, padding: 48, ...motion } as never);
+    layout.one("layoutstop", finish);
+    layout.run();
   }, [index, personIds, links, focusId, hub, expanded]);
 
   useEffect(() => {
