@@ -215,7 +215,7 @@ const Landing = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const exploreHref = data?.topic ? `/explore?node=${encodeURIComponent(data.topic.id)}` : "/explore";
+  const exploreHref = "/explore";
   const peopleHref = data?.topic ? `/explore?view=people&topic=${encodeURIComponent(data.topic.label)}` : "/explore?view=people";
 
   const headline = (size: "graph" | "stack") => (

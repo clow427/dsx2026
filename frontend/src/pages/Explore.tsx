@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { Expand, List, Network, RotateCcw, Users } from "lucide-react";
+import { Database, Expand, LayoutGrid, List, Network, RotateCcw, Route, Search, Users } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -17,9 +17,30 @@ import { EdgePanel, NodePanel } from "@/features/details/DetailPanels";
 import { SearchBox } from "@/features/search/SearchBox";
 import { FilterPanel } from "@/features/filters/FilterPanel";
 import { FindMyPeople } from "@/features/find-my-people/FindMyPeople";
+import { buildPeopleIndex } from "@/data/people";
+import { PeopleNetwork } from "@/features/people/PeopleNetwork";
+import type { PeopleSelection } from "@/features/people/PeopleGraph";
+import { PathFinder } from "@/features/path/PathFinder";
+import { TopicBrowser } from "@/features/topics/TopicBrowser";
 
-// URL state (design.md): ?node=<focus id>, ?sel=<selected node>, ?edge=<selected edge>,
-// ?view=graph|people, ?topic=<Find My People query>. Deep links open straight to a scene.
+// URL state (design.md). Views (?view=):
+//   network (default)  people-only network: ?node=<person or topic>, ?sel=<person>, ?pair=<link id>
+//   connect            path finder: ?from=<person>, ?to=<person>
+//   topics             research areas: ?field=<field name>, ?topic=<topic id>
+//   people             Find My People: ?topic=<query>
+//   records            every record type: ?node=<focus id>, ?sel=<node>, ?edge=<edge>
+//   network also takes a topic: ?node=<topic id> shows the people working on it.
+// A ?node= that isn't a person or topic (e.g. a paper) opens the records view.
+// Deep links open straight to a scene.
+
+type View = "network" | "connect" | "topics" | "people" | "records";
+const VIEWS: { key: View; label: string; icon: typeof Network }[] = [
+  { key: "network", label: "People network", icon: Users },
+  { key: "connect", label: "How are we connected?", icon: Route },
+  { key: "topics", label: "Topics", icon: LayoutGrid },
+  { key: "people", label: "Find My People", icon: Search },
+  { key: "records", label: "All records", icon: Database },
+];
 
 const FOCUS_LIMIT = 40;
 const EXPAND_LIMIT = 25;
@@ -35,8 +56,12 @@ export default function Explore() {
 function ExploreReady({ index, isMock }: { index: GraphIndex; isMock: boolean }) {
   const [params, setParams] = useSearchParams();
   const demo = useMemo(() => defaultTopic(index), [index]);
-  const view = params.get("view") === "people" ? "people" : "graph";
+  const pidx = useMemo(() => buildPeopleIndex(index), [index]);
   const rawFocus = params.get("node");
+  const rawView = params.get("view") as View | null;
+  // People and topics open in the people network; any other record type opens in All records.
+  const networkable = (id: string | null) => !!id && ["person", "topic"].includes(index.nodes.get(id)?.type ?? "");
+  const view: View = rawView && VIEWS.some((v) => v.key === rawView) ? rawView : rawFocus && !networkable(rawFocus) ? "records" : "network";
   const focusId = rawFocus && index.nodes.has(rawFocus) ? rawFocus : (demo?.id ?? index.doc.nodes[0]?.id ?? null);
   const selection: Selection = params.get("edge") ? { kind: "edge", id: params.get("edge")! } : params.get("sel") ? { kind: "node", id: params.get("sel")! } : focusId ? { kind: "node", id: focusId } : null;
 
@@ -81,7 +106,21 @@ function ExploreReady({ index, isMock }: { index: GraphIndex; isMock: boolean })
     },
     [index, update],
   );
-  const focus = useCallback((id: string) => update({ node: id, sel: null, edge: null, view: null }), [update]);
+  const focus = useCallback((id: string) => update({ node: id, sel: null, edge: null, view: "records" }), [update]);
+  /** Open a person or topic in the people network (other node types open in the records view). */
+  const openInNetwork = useCallback(
+    (id: string) =>
+      ["person", "topic"].includes(index.nodes.get(id)?.type ?? "")
+        ? setParams(new URLSearchParams({ node: id }))
+        : setParams(new URLSearchParams({ view: "records", node: id })),
+    [index, setParams],
+  );
+  const connectFrom = useCallback((id: string) => setParams(new URLSearchParams({ view: "connect", from: id })), [setParams]);
+  const peopleSelection: PeopleSelection = params.get("pair")
+    ? { kind: "link", id: params.get("pair")! }
+    : params.get("sel")
+      ? { kind: "person", id: params.get("sel")! }
+      : null;
   const expand = useCallback((id: string) => setExpanded((x) => (x.includes(id) ? x : [...x, id])), []);
 
   // The visible subgraph: focus + its top neighbors, plus expanded and pinned nodes.
@@ -113,7 +152,7 @@ function ExploreReady({ index, isMock }: { index: GraphIndex; isMock: boolean })
     selection.kind === "edge" ? (
       <EdgePanel index={index} edgeId={selection.id} onSelect={select} onFocus={focus} />
     ) : (
-      <NodePanel key={selection.id} index={index} nodeId={selection.id} onSelect={select} onFocus={focus} onExpand={(id) => { if (view === "people") focus(id); else expand(id); }} />
+      <NodePanel key={selection.id} index={index} nodeId={selection.id} onSelect={select} onFocus={focus} onExpand={(id) => { if (view === "people") openInNetwork(id); else expand(id); }} />
     )
   ) : (
     <p className="p-4 text-sm text-muted-foreground">Select a node or a connection to see its records.</p>
@@ -123,18 +162,52 @@ function ExploreReady({ index, isMock }: { index: GraphIndex; isMock: boolean })
     <>
       <header className="flex h-14 shrink-0 items-center gap-4 border-b border-border px-4">
         <Link to="/" aria-label="6degrees home"><Logo size="sm" /></Link>
-        <nav aria-label="Views" className="flex gap-1">
-          <Button size="sm" variant={view === "graph" ? "secondary" : "ghost"} aria-current={view === "graph" ? "page" : undefined} onClick={() => update({ view: null })}>
-            <Network className="mr-1.5 h-4 w-4" aria-hidden="true" /> Explore graph
-          </Button>
-          <Button size="sm" variant={view === "people" ? "secondary" : "ghost"} aria-current={view === "people" ? "page" : undefined} onClick={() => update({ view: "people", topic: params.get("topic") ?? demo?.label ?? "" })}>
-            <Users className="mr-1.5 h-4 w-4" aria-hidden="true" /> Find My People
-          </Button>
+        <nav aria-label="Views" className="flex min-w-0 gap-1 overflow-x-auto scrollbar-none">
+          {VIEWS.map(({ key, label, icon: Icon }) => (
+            <Button
+              key={key}
+              size="sm"
+              variant={view === key ? "secondary" : "ghost"}
+              className={cn("shrink-0 rounded-full", view === key && "text-primary")}
+              aria-current={view === key ? "page" : undefined}
+              onClick={() => setParams(key === "network" ? new URLSearchParams() : new URLSearchParams({ view: key }))}
+            >
+              <Icon className="mr-1.5 h-4 w-4" aria-hidden="true" /> {label}
+            </Button>
+          ))}
         </nav>
       </header>
       <DataBanner index={index} isMock={isMock} />
 
-      {view === "people" ? (
+      {view === "network" ? (
+        <PeopleNetwork
+          index={index}
+          pidx={pidx}
+          focusId={networkable(rawFocus) ? rawFocus : null}
+          selection={peopleSelection}
+          onFocus={(id) => setParams(id ? new URLSearchParams({ node: id }) : new URLSearchParams())}
+          onSelect={(sel) => update({ sel: sel?.kind === "person" ? sel.id : null, pair: sel?.kind === "link" ? sel.id : null })}
+          onConnect={connectFrom}
+        />
+      ) : view === "connect" ? (
+        <PathFinder
+          index={index}
+          pidx={pidx}
+          from={params.get("from")}
+          to={params.get("to")}
+          onChange={(from, to) => update({ from, to })}
+          onOpenInNetwork={openInNetwork}
+        />
+      ) : view === "topics" ? (
+        <TopicBrowser
+          index={index}
+          fieldName={params.get("field")}
+          topicId={params.get("topic")}
+          onChange={(field, topic) => update({ field, topic })}
+          onOpenInNetwork={openInNetwork}
+          onConnect={connectFrom}
+        />
+      ) : view === "people" ? (
         <div className="grid min-h-0 flex-1 lg:grid-cols-[1fr_400px]">
           <main className="min-h-0 overflow-auto" data-lenis-prevent>
             <FindMyPeople
@@ -142,7 +215,7 @@ function ExploreReady({ index, isMock }: { index: GraphIndex; isMock: boolean })
               query={params.get("topic") ?? demo?.label ?? ""}
               onQueryChange={(q) => update({ topic: q })}
               onSelect={select}
-              onOpenInGraph={focus}
+              onOpenInGraph={openInNetwork}
             />
           </main>
           <aside aria-label="Details" className="min-h-0 overflow-auto border-l border-border" data-lenis-prevent>{detail}</aside>

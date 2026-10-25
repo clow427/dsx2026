@@ -1,8 +1,50 @@
 {
   "schema_version": "0.1.0",
-  "generated_at": "2026-10-24T23:24:28Z",
-  "notes": "Automated identity matches: canonical people (people.json) vs source-level persons, blocked by name and ORCID and scored per design.md. 6 merged, 0 candidate, 0 rejected. Pairs not shown because the canonical person has a stronger match: person:canonical:michael-lavalley-biostatistics ~ person:nih:8631908 (candidate/low); person:canonical:michael-lavalley-biostatistics ~ person:openalex:A5075246228 (rejected/high, reviewed by p2-curator 2026-10-24). 2 pair(s) overridden by manual review (data/curation/reviews.yaml).",
+  "generated_at": "2026-10-25T04:22:36Z",
+  "notes": "Automated identity matches: canonical people (people.json) vs source-level persons, blocked by name and ORCID and scored per design.md. 96 merged, 0 candidate, 0 rejected. Pairs not shown because the canonical person has a stronger match: person:canonical:allan-j-walkey-6894 ~ person:nih:9182444 (candidate/medium); person:canonical:chunming-ding-5594 ~ person:openalex:A5007136664 (rejected/high); person:canonical:esther-s-tung-6907 ~ person:openalex:A5032754420 (rejected/high); person:canonical:haochun-huang-7140 ~ person:openalex:A5064321370 (rejected/high); person:canonical:henghui-zhu-6975 ~ person:openalex:A5074828414 (rejected/high); person:canonical:henghui-zhu-6975 ~ person:openalex:A5103202381 (rejected/high); person:canonical:henghui-zhu-6975 ~ person:openalex:A5112345848 (candidate/low); person:canonical:jennifer-beane-2132 ~ person:nih:9853675 (candidate/low); person:canonical:jennifer-beane-2132 ~ person:openalex:A5055562797 (rejected/high); person:canonical:jingmei-yang-7782 ~ person:openalex:A5079824167 (rejected/high); person:canonical:jui-hung-hung-9213 ~ person:openalex:A5031988329 (rejected/high); person:canonical:jui-hung-hung-9213 ~ person:openalex:A5100660046 (rejected/high); person:canonical:kelly-cho-7076 ~ person:openalex:A5016750227 (candidate/low); person:canonical:kelly-cho-7076 ~ person:openalex:A5111993999 (candidate/low); person:canonical:kendra-d-sims-3002 ~ person:nih:16196046 (candidate/medium); person:canonical:manuel-jose-marte-601x ~ person:nih:7877979 (candidate/low); person:canonical:michael-lavalley-biostatistics ~ person:nih:8631908 (candidate/low); person:canonical:michael-lavalley-biostatistics ~ person:openalex:A5075246228 (rejected/high, reviewed by p2-curator 2026-10-24); person:canonical:michal-horny-6398 ~ person:openalex:A5084268825 (rejected/high); person:canonical:satish-k-singh-3155 ~ person:openalex:A5005378783 (rejected/high); person:canonical:satish-k-singh-3155 ~ person:openalex:A5100624584 (rejected/high); person:canonical:satish-k-singh-3155 ~ person:openalex:A5101761206 (rejected/high); person:canonical:stacy-l-andersen-6386 ~ person:nih:12422210 (candidate/low); person:canonical:stacy-l-andersen-6386 ~ person:openalex:A5062797260 (rejected/high); person:canonical:taiyao-wang-3892 ~ person:openalex:A5012711290 (candidate/low); person:canonical:taiyao-wang-3892 ~ person:openalex:A5072258594 (rejected/high); person:canonical:taiyao-wang-3892 ~ person:openalex:A5078504833 (rejected/high); person:canonical:taiyao-wang-3892 ~ person:openalex:A5078538616 (rejected/high); person:canonical:taiyao-wang-3892 ~ person:openalex:A5113619848 (candidate/low); person:canonical:tammy-jiang-5706 ~ person:openalex:A5033428260 (candidate/low); person:canonical:tingting-xu-737x ~ person:openalex:A5003841843 (rejected/high); person:canonical:weining-lu-3044 ~ person:nih:8230238 (candidate/low); person:canonical:weining-lu-3044 ~ person:openalex:A5005871534 (rejected/high); person:canonical:weining-lu-3044 ~ person:openalex:A5056367234 (rejected/high); person:canonical:weining-lu-3044 ~ person:openalex:A5089260859 (rejected/high); person:canonical:weining-lu-3044 ~ person:openalex:A5100317997 (rejected/high); person:canonical:weining-lu-3044 ~ person:openalex:A5100381728 (rejected/high); person:canonical:wenrui-li-7911 ~ person:nih:8230238 (candidate/low); person:canonical:wenrui-li-7911 ~ person:openalex:A5056367234 (rejected/high); person:canonical:wenrui-li-7911 ~ person:openalex:A5089260859 (rejected/high); person:canonical:wenrui-li-7911 ~ person:openalex:A5100317997 (rejected/high); person:canonical:wenrui-li-7911 ~ person:openalex:A5100335605 (rejected/high); person:canonical:wenrui-li-7911 ~ person:openalex:A5100381728 (rejected/high); person:canonical:xiao-zhou-444x ~ person:openalex:A5041746271 (rejected/high); person:canonical:xiao-zhou-444x ~ person:openalex:A5101675041 (rejected/high); person:canonical:yili-du-5477 ~ person:openalex:A5100676809 (rejected/high); person:canonical:zhiping-weng-7966 ~ person:openalex:A5041652196 (rejected/high). 2 pair(s) overridden by manual review (data/curation/reviews.yaml).",
   "matches": [
+    {
+      "canonical_id": "person:canonical:albert-laszlo-barabasi-3522",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5038976962"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5038976962 carries the same ORCID 0000-0002-4028-3522",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-4028-3522"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5038976962 name 'Albert-Ĺaszló Barabási' equals 'Albert-Ĺaszló Barabási' after normalization"
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:alex-hoagland-3445",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5001344402"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5001344402 carries the same ORCID 0000-0001-6947-3445",
+          "evidence_urls": [
+            "https://orcid.org/0000-0001-6947-3445"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5001344402 name 'Alex Hoagland' equals 'Alex Hoagland' after normalization"
+        }
+      ]
+    },
     {
       "canonical_id": "person:canonical:alexa-beiser-biostatistics",
       "status": "merged",
@@ -43,6 +85,342 @@
       }
     },
     {
+      "canonical_id": "person:canonical:allan-j-walkey-6894",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5015841346"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5015841346 carries the same ORCID 0000-0003-4685-6894",
+          "evidence_urls": [
+            "https://orcid.org/0000-0003-4685-6894"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5015841346 name 'Allan J. Walkey' equals 'Allan J. Walkey' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5015841346 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W2210659736",
+            "https://openalex.org/W2762171989",
+            "https://openalex.org/W2964553511"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:amelia-kent-wesselink-4451",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5052173123"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5052173123 carries the same ORCID 0000-0002-3929-4451",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-3929-4451"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5052173123 name 'Amelia Kent Wesselink' equals 'Amelia Kent Wesselink' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5052173123 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W4394687073",
+            "https://orcid.org/0000-0002-3929-4451"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:ashley-galloway-5386",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5069005040"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5069005040 carries the same ORCID 0000-0003-3083-5386",
+          "evidence_urls": [
+            "https://orcid.org/0000-0003-3083-5386"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5069005040 name 'Ashley Galloway' equals 'Ashley Galloway' after normalization"
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:benjamin-j-hescott-9496",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5073101130"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5073101130 carries the same ORCID 0000-0002-8179-9496",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-8179-9496"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5073101130 name 'Benjamin J. Hescott' equals 'Benjamin J. Hescott' after normalization"
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:benjamin-m-rader-0193",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5026438558"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5026438558 carries the same ORCID 0000-0002-6095-0193",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-6095-0193"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5026438558 name 'Benjamin M. Rader' equals 'Benjamin M. Rader' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5026438558 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W4367041201",
+            "https://hdl.handle.net/2144/48161"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:boran-hao-0513",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5068903474"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5068903474 carries the same ORCID 0000-0001-7922-0513",
+          "evidence_urls": [
+            "https://orcid.org/0000-0001-7922-0513"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5068903474 name 'Boran Hao' equals 'Boran Hao' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5068903474 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W3092208592",
+            "https://openalex.org/W3185286648",
+            "https://openalex.org/W4205152081"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:christine-m-gunn-2834",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5077055988"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5077055988 carries the same ORCID 0000-0003-3340-2834",
+          "evidence_urls": [
+            "https://orcid.org/0000-0003-3340-2834"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5077055988 name 'Christine M. Gunn' equals 'Christine M. Gunn' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5077055988 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W2769451332",
+            "https://openalex.org/W2783882211",
+            "https://openalex.org/W2995856088"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:chunming-ding-5594",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5072737130"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5072737130 carries the same ORCID 0000-0002-2063-5594",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-2063-5594"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5072737130 name 'Chunming Ding' equals 'Chunming Ding' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5072737130 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W2042210880",
+            "https://orcid.org/0000-0002-2063-5594"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:daina-b-esposito-0523",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5043170740"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5043170740 carries the same ORCID 0000-0003-2894-0523",
+          "evidence_urls": [
+            "https://orcid.org/0000-0003-2894-0523"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5043170740 name 'Daina B. Esposito' equals 'Daina B. Esposito' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5043170740 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W2946657958",
+            "https://hdl.handle.net/2144/44454"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:daniel-a-levy-8724",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5074117194"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5074117194 carries the same ORCID 0000-0003-1843-8724",
+          "evidence_urls": [
+            "https://orcid.org/0000-0003-1843-8724"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5074117194 name 'Daniel A Levy' equals 'Daniel A Levy' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5074117194 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W2060947741",
+            "https://openalex.org/W2556053991",
+            "https://openalex.org/W4225114792"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:daniel-c-posner-6924",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5013204547"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5013204547 carries the same ORCID 0000-0002-3056-6924",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-3056-6924"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5013204547 name 'Daniel C. Posner' equals 'Daniel C. Posner' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5013204547 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W2896420497",
+            "https://hdl.handle.net/2144/39002"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:daniel-gusenleitner-0880",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5002327693"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5002327693 carries the same ORCID 0000-0002-7428-0880",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-7428-0880"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5002327693 name 'Daniel Gusenleitner' equals 'Daniel Gusenleitner' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5002327693 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W2110380713",
+            "https://orcid.org/0000-0002-7428-0880"
+          ]
+        }
+      ]
+    },
+    {
       "canonical_id": "person:canonical:david-gagnon-biostatistics",
       "status": "merged",
       "confidence": "high",
@@ -73,6 +451,439 @@
       ]
     },
     {
+      "canonical_id": "person:canonical:demetrius-dimucci-5013",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5042246657"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5042246657 carries the same ORCID 0000-0003-1763-5013",
+          "evidence_urls": [
+            "https://orcid.org/0000-0003-1763-5013"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5042246657 name 'Demetrius DiMucci' equals 'Demetrius DiMucci' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5042246657 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W3173778715",
+            "https://hdl.handle.net/2144/39614"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:dhayana-dallmeier-7023",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5072153801"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5072153801 carries the same ORCID 0000-0003-3665-7023",
+          "evidence_urls": [
+            "https://orcid.org/0000-0003-3665-7023"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5072153801 name 'Dhayana Dallmeier' equals 'Dhayana Dallmeier' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5072153801 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W4408286090",
+            "https://orcid.org/0000-0003-3665-7023"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:diala-lteif-8795",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5072514907"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5072514907 carries the same ORCID 0000-0002-9580-8795",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-9580-8795"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5072514907 name 'Diala Lteif' equals 'Diala Lteif' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5072514907 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W4400324640",
+            "https://hdl.handle.net/2144/53713"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:dylan-steiner-4368",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5054884940"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5054884940 carries the same ORCID 0000-0003-1004-4368",
+          "evidence_urls": [
+            "https://orcid.org/0000-0003-1004-4368"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5054884940 name 'Dylan Steiner' equals 'Dylan Steiner' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5054884940 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W4401023365",
+            "https://hdl.handle.net/2144/51146"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:eleanor-h-brown-9213",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5103158780"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5103158780 carries the same ORCID 0000-0001-9564-9213",
+          "evidence_urls": [
+            "https://orcid.org/0000-0001-9564-9213"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5103158780 name 'Eleanor H. Brown' equals 'Eleanor H. Brown' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5103158780 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W3176375188",
+            "https://hdl.handle.net/2144/52082"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:emily-m-lord-0976",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5031951165"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5031951165 carries the same ORCID 0000-0002-1936-0976",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-1936-0976"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5031951165 name 'Emily M Lord' equals 'Emily M Lord' after normalization"
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:erika-rodriguez-4180",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5043876544"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5043876544 carries the same ORCID 0000-0003-4684-4180",
+          "evidence_urls": [
+            "https://orcid.org/0000-0003-4684-4180"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5043876544 name 'Erika Rodriguez' equals 'Erika Rodriguez' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5043876544 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W3012954192",
+            "https://orcid.org/0000-0003-4684-4180"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:erin-l-ferguson-0001",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5078021674"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5078021674 carries the same ORCID 0000-0003-3136-0001",
+          "evidence_urls": [
+            "https://orcid.org/0000-0003-3136-0001"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5078021674 name 'Erin L. Ferguson' equals 'Erin L. Ferguson' after normalization"
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:esther-s-tung-6907",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5048470858"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5048470858 carries the same ORCID 0000-0002-6474-6907",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-6474-6907"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5048470858 name 'Esther S. Tung' equals 'Esther S. Tung' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5048470858 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W2993211385",
+            "https://hdl.handle.net/2144/43976"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:eve-rittenberg-2006",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5053475000"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5053475000 carries the same ORCID 0000-0002-1643-2006",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-1643-2006"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5053475000 name 'Eve Rittenberg' equals 'Eve Rittenberg' after normalization"
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:grace-m-ferri-9129",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5009128153"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5009128153 carries the same ORCID 0000-0001-9377-9129",
+          "evidence_urls": [
+            "https://orcid.org/0000-0001-9377-9129"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5009128153 name 'Grace M. Ferri' equals 'Grace M. Ferri' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5009128153 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W4310602546",
+            "https://orcid.org/0000-0001-9377-9129"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:haochun-huang-7140",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5002151765"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5002151765 carries the same ORCID 0009-0005-2270-7140",
+          "evidence_urls": [
+            "https://orcid.org/0009-0005-2270-7140"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5002151765 name 'Haochun Huang' equals 'Haochun Huang' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5002151765 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W7117159822",
+            "https://orcid.org/0009-0005-2270-7140"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:heather-thompson-brenner-761x",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5051661243"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5051661243 carries the same ORCID 0000-0001-8724-761X",
+          "evidence_urls": [
+            "https://orcid.org/0000-0001-8724-761X"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5051661243 name 'Heather Thompson‐Brenner' equals 'Heather Thompson‐Brenner' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5051661243 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W3139753837",
+            "https://hdl.handle.net/2144/48269"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:henghui-zhu-6975",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5054049845"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5054049845 carries the same ORCID 0000-0002-4534-6975",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-4534-6975"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5054049845 name 'Henghui Zhu' equals 'Henghui Zhu' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5054049845 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W2886374306",
+            "https://openalex.org/W3010184102",
+            "https://openalex.org/W3021523644"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:hillary-j-mull-0445",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5076849972"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5076849972 carries the same ORCID 0000-0002-4484-0445",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-4484-0445"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5076849972 name 'Hillary J. Mull' equals 'Hillary J. Mull' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5076849972 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W3087003437",
+            "https://orcid.org/0000-0002-4484-0445"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:hiren-hansraj-patadiya-248x",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5116628990"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5116628990 carries the same ORCID 0009-0000-6110-248X",
+          "evidence_urls": [
+            "https://orcid.org/0009-0000-6110-248X"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5116628990 name 'Hiren Hansraj Patadiya' equals 'Hiren Hansraj Patadiya' after normalization"
+        }
+      ]
+    },
+    {
       "canonical_id": "person:canonical:howard-cabral-biostatistics",
       "status": "merged",
       "confidence": "high",
@@ -98,6 +909,314 @@
             "https://openalex.org/W3131648174",
             "https://openalex.org/W4324321257",
             "https://www.bu.edu/academics/archive/2013-2014/grs/faculty/biostatistics/"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:jamie-e-collins-007x",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5089912492"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5089912492 carries the same ORCID 0000-0001-8413-007X",
+          "evidence_urls": [
+            "https://orcid.org/0000-0001-8413-007X"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5089912492 name 'Jamie E. Collins' equals 'Jamie E. Collins' after normalization"
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:javad-noorbakhsh-8061",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5006739769"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5006739769 carries the same ORCID 0000-0002-6196-8061",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-6196-8061"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5006739769 name 'Javad Noorbakhsh' equals 'Javad Noorbakhsh' after normalization"
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:jennifer-beane-2132",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5059272397"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5059272397 carries the same ORCID 0000-0002-6699-2132",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-6699-2132"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5059272397 name 'Jennifer Beane' equals 'Jennifer Beane' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5059272397 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W4281257868",
+            "https://openalex.org/W4394015447",
+            "https://openalex.org/W4394585861"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:jennifer-j-yland-8971",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5015633518"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5015633518 carries the same ORCID 0000-0001-7870-8971",
+          "evidence_urls": [
+            "https://orcid.org/0000-0001-7870-8971"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5015633518 name 'Jennifer J. Yland' equals 'Jennifer J. Yland' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5015633518 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W4394687073",
+            "https://hdl.handle.net/2144/46189"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:jennifer-m-vojtech-0228",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5037890839"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5037890839 carries the same ORCID 0000-0002-0583-0228",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-0583-0228"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5037890839 name 'Jennifer M. Vojtech' equals 'Jennifer M. Vojtech' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5037890839 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W4403952653",
+            "https://hdl.handle.net/2144/41482",
+            "https://orcid.org/0000-0002-0583-0228"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:jennifer-r-fonda-2918",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5079856090"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5079856090 carries the same ORCID 0000-0001-9482-2918",
+          "evidence_urls": [
+            "https://orcid.org/0000-0001-9482-2918"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5079856090 name 'Jennifer R. Fonda' equals 'Jennifer R. Fonda' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5079856090 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W4408651146",
+            "https://orcid.org/0000-0001-9482-2918"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:jingmei-yang-7782",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5076569498"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5076569498 carries the same ORCID 0009-0000-8562-7782",
+          "evidence_urls": [
+            "https://orcid.org/0009-0000-8562-7782"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5076569498 name 'Jingmei Yang' equals 'Jingmei Yang' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5076569498 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W3201888594",
+            "https://openalex.org/W4390200977",
+            "https://openalex.org/W4398765017"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:jonathan-m-carnino-7269",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5019325264"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5019325264 carries the same ORCID 0000-0001-8908-7269",
+          "evidence_urls": [
+            "https://orcid.org/0000-0001-8908-7269"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5019325264 name 'Jonathan M. Carnino' equals 'Jonathan M. Carnino' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5019325264 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W4394858004",
+            "https://openalex.org/W4395699500",
+            "https://openalex.org/W4403428876"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:jui-hung-hung-9213",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5025474727"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5025474727 carries the same ORCID 0000-0003-2208-9213",
+          "evidence_urls": [
+            "https://orcid.org/0000-0003-2208-9213"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5025474727 name 'Jui‐Hung Hung' equals 'Jui‐Hung Hung' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5025474727 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W2091789479",
+            "https://openalex.org/W2144983644",
+            "https://orcid.org/0000-0003-2208-9213"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:karol-mateusz-pencina-7047",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5017497126"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5017497126 carries the same ORCID 0000-0003-1824-7047",
+          "evidence_urls": [
+            "https://orcid.org/0000-0003-1824-7047"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5017497126 name 'Karol Mateusz Pencina' equals 'Karol Mateusz Pencina' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5017497126 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W2925214600",
+            "https://orcid.org/0000-0003-1824-7047"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:katherine-hsu-422x",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5007406049"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5007406049 carries the same ORCID 0000-0001-7933-422X",
+          "evidence_urls": [
+            "https://orcid.org/0000-0001-7933-422X"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5007406049 name 'Katherine Hsu' equals 'Katherine Hsu' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5007406049 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W3052200507",
+            "https://orcid.org/0000-0001-7933-422X"
           ]
         }
       ]
@@ -133,6 +1252,340 @@
       ]
     },
     {
+      "canonical_id": "person:canonical:kelly-cho-7076",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5048579153"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5048579153 carries the same ORCID 0000-0003-1727-7076",
+          "evidence_urls": [
+            "https://orcid.org/0000-0003-1727-7076"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5048579153 name 'Kelly Cho' equals 'Kelly Cho' after normalization"
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:kendra-d-sims-3002",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5021615379"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5021615379 carries the same ORCID 0000-0002-6740-3002",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-6740-3002"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5021615379 name 'Kendra D. Sims' equals 'Kendra D. Sims' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5021615379 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W4406918885",
+            "https://orcid.org/0000-0002-6740-3002"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:kevin-james-lane-6811",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5015434039"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5015434039 carries the same ORCID 0000-0002-1038-6811",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-1038-6811"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5015434039 name 'Kevin  James Lane' equals 'Kevin  James Lane' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5015434039 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W3012954192",
+            "https://orcid.org/0000-0002-1038-6811"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:kimberly-a-bertrand-7618",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5072226926"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5072226926 carries the same ORCID 0000-0002-4565-7618",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-4565-7618"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5072226926 name 'Kimberly A. Bertrand' equals 'Kimberly A. Bertrand' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5072226926 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W2470437104",
+            "https://openalex.org/W2560286078",
+            "https://openalex.org/W2567162672"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:komal-peer-4910",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5088214406"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5088214406 carries the same ORCID 0000-0002-9685-4910",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-9685-4910"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5088214406 name 'Komal Peer' equals 'Komal Peer' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5088214406 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W3111775204",
+            "https://hdl.handle.net/2144/42322"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:kristin-baltrusaitis-9513",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5088267373"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5088267373 carries the same ORCID 0000-0003-2090-9513",
+          "evidence_urls": [
+            "https://orcid.org/0000-0003-2090-9513"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5088267373 name 'Kristin Baltrusaitis' equals 'Kristin Baltrusaitis' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5088267373 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W3007273180",
+            "https://hdl.handle.net/2144/38799"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:laura-sampson-2081",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5036143582"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5036143582 carries the same ORCID 0000-0002-1715-2081",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-1715-2081"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5036143582 name 'Laura Sampson' equals 'Laura Sampson' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5036143582 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W3131648174",
+            "https://hdl.handle.net/2144/40706",
+            "https://orcid.org/0000-0002-1715-2081"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:lucas-schiffer-0326",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5026559291"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5026559291 carries the same ORCID 0000-0003-3628-0326",
+          "evidence_urls": [
+            "https://orcid.org/0000-0003-3628-0326"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5026559291 name 'Lucas Schiffer' equals 'Lucas Schiffer' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5026559291 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W3004747635",
+            "https://hdl.handle.net/2144/47473"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:manuel-jose-marte-601x",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5006636784"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5006636784 carries the same ORCID 0000-0002-1837-601X",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-1837-601X"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5006636784 name 'Manuel Jose Marte' equals 'Manuel Jose Marte' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5006636784 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W4402434489",
+            "https://hdl.handle.net/2144/51792"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:marina-ritchie-1293",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5061107946"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5061107946 carries the same ORCID 0000-0002-5844-1293",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-5844-1293"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5061107946 name 'Marina Ritchie' equals 'Marina Ritchie' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5061107946 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W2948916967",
+            "https://orcid.org/0000-0002-5844-1293"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:matthew-s-panizzon-2097",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5075164498"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5075164498 carries the same ORCID 0000-0002-6449-2097",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-6449-2097"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5075164498 name 'Matthew S. Panizzon' equals 'Matthew S. Panizzon' after normalization"
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:maureen-dubreuil-1515",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5044747673"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5044747673 carries the same ORCID 0000-0002-6253-1515",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-6253-1515"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5044747673 name 'Maureen Dubreuil' equals 'Maureen Dubreuil' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5044747673 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W4392791270",
+            "https://orcid.org/0000-0002-6253-1515"
+          ]
+        }
+      ]
+    },
+    {
       "canonical_id": "person:canonical:michael-lavalley-biostatistics",
       "status": "merged",
       "confidence": "high",
@@ -163,6 +1616,433 @@
       ]
     },
     {
+      "canonical_id": "person:canonical:michael-r-winter-4714",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5069517567"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5069517567 carries the same ORCID 0000-0002-3745-4714",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-3745-4714"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5069517567 name 'Michael R Winter' equals 'Michael R Winter' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5069517567 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W2964553511",
+            "https://openalex.org/W3105707210",
+            "https://orcid.org/0000-0002-3745-4714"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:michael-ryan-cassidy-8667",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5010002970"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5010002970 carries the same ORCID 0000-0002-0522-8667",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-0522-8667"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5010002970 name 'Michael Ryan Cassidy' equals 'Michael Ryan Cassidy' after normalization"
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:michal-horny-6398",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5071822865"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5071822865 carries the same ORCID 0000-0003-3624-6398",
+          "evidence_urls": [
+            "https://orcid.org/0000-0003-3624-6398"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5071822865 name 'Michal Horný' equals 'Michal Horný' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5071822865 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W2790330951",
+            "https://openalex.org/W2883939981",
+            "https://orcid.org/0000-0003-3624-6398"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:mohamed-athif-0873",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5016429499"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5016429499 carries the same ORCID 0000-0001-9470-0873",
+          "evidence_urls": [
+            "https://orcid.org/0000-0001-9470-0873"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5016429499 name 'Mohamed Athif' equals 'Mohamed Athif' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5016429499 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W4281846549",
+            "https://hdl.handle.net/2144/52133"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:muhammad-m-qureshi-3308",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5108681312"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5108681312 carries the same ORCID 0000-0002-2056-3308",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-2056-3308"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5108681312 name 'Muhammad M. Qureshi' equals 'Muhammad M. Qureshi' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5108681312 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W2119369174",
+            "https://openalex.org/W2316367947",
+            "https://openalex.org/W2892710309"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:petra-l-schubert-0173",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5047853378"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5047853378 carries the same ORCID 0000-0002-6135-0173",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-6135-0173"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5047853378 name 'Petra L. Schubert' equals 'Petra L. Schubert' after normalization"
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:qianfan-wu-3222",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5025915662"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5025915662 carries the same ORCID 0009-0008-5924-3222",
+          "evidence_urls": [
+            "https://orcid.org/0009-0008-5924-3222"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5025915662 name 'Qianfan Wu' equals 'Qianfan Wu' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5025915662 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W2989980351",
+            "https://orcid.org/0009-0008-5924-3222"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:qiuyuan-qin-9177",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5029202761"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5029202761 carries the same ORCID 0000-0002-5587-9177",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-5587-9177"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5029202761 name 'Qiuyuan Qin' equals 'Qiuyuan Qin' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5029202761 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W2997607228",
+            "https://orcid.org/0000-0002-5587-9177"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:rebecca-j-song-1698",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5002073170"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5002073170 carries the same ORCID 0000-0001-8431-1698",
+          "evidence_urls": [
+            "https://orcid.org/0000-0001-8431-1698"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5002073170 name 'Rebecca J. Song' equals 'Rebecca J. Song' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5002073170 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W3160903713",
+            "https://hdl.handle.net/2144/44451"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:regan-d-conrad-4415",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5031383972"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5031383972 carries the same ORCID 0000-0002-5855-4415",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-5855-4415"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5031383972 name 'Regan D. Conrad' equals 'Regan D. Conrad' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5031383972 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W4394585861",
+            "https://hdl.handle.net/2144/50096",
+            "https://orcid.org/0000-0002-5855-4415"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:sahana-s-kowshik-7638",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5111249144"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5111249144 carries the same ORCID 0009-0006-9547-7638",
+          "evidence_urls": [
+            "https://orcid.org/0009-0006-9547-7638"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5111249144 name 'Sahana S Kowshik' equals 'Sahana S Kowshik' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5111249144 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W4400324640",
+            "https://openalex.org/W4413109010",
+            "https://orcid.org/0009-0006-9547-7638"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:salomon-wollenstein-betech-4041",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5059679881"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5059679881 carries the same ORCID 0000-0003-0149-4041",
+          "evidence_urls": [
+            "https://orcid.org/0000-0003-0149-4041"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5059679881 name 'Salomón Wollenstein-Betech' equals 'Salomón Wollenstein-Betech' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5059679881 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W3080326129",
+            "https://hdl.handle.net/2144/44773"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:samad-amini-6220",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5020927791"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5020927791 carries the same ORCID 0000-0002-2063-6220",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-2063-6220"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5020927791 name 'Samad Amini' equals 'Samad Amini' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5020927791 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W3185286648",
+            "https://openalex.org/W4205152081",
+            "https://openalex.org/W4284667718"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:satish-k-singh-3155",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5042257341"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5042257341 carries the same ORCID 0000-0002-7664-3155",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-7664-3155"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5042257341 name 'Satish K. Singh' equals 'Satish K. Singh' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5042257341 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W2753920783",
+            "https://openalex.org/W2977589809",
+            "https://openalex.org/W2988605950"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:seho-park-0280",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5101483004"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5101483004 carries the same ORCID 0000-0002-3247-0280",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-3247-0280"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5101483004 name 'Seho Park' equals 'Seho Park' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5101483004 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W3095530930",
+            "https://openalex.org/W4412492848",
+            "https://orcid.org/0000-0002-3247-0280"
+          ]
+        }
+      ]
+    },
+    {
       "canonical_id": "person:canonical:serkalem-demissie-biostatistics",
       "status": "merged",
       "confidence": "high",
@@ -188,6 +2068,621 @@
             "https://openalex.org/W4285386114",
             "https://openalex.org/W7116895279",
             "https://www.bu.edu/academics/archive/2013-2014/grs/faculty/biostatistics/"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:seth-elkin-frankston-0199",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5023955036"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5023955036 carries the same ORCID 0000-0002-8913-0199",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-8913-0199"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5023955036 name 'Seth Elkin-Frankston' equals 'Seth Elkin-Frankston' after normalization"
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:shahabeddin-sotudian-6192",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5038930734"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5038930734 carries the same ORCID 0000-0002-5864-6192",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-5864-6192"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5038930734 name 'Shahabeddin Sotudian' equals 'Shahabeddin Sotudian' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5038930734 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W3092208592",
+            "https://openalex.org/W4224284620",
+            "https://openalex.org/W4310398071"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:shangran-qiu-841x",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5049108652"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5049108652 carries the same ORCID 0000-0003-0571-841X",
+          "evidence_urls": [
+            "https://orcid.org/0000-0003-0571-841X"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5049108652 name 'Shangran Qiu' equals 'Shangran Qiu' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5049108652 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W2893063021",
+            "https://openalex.org/W2980855360",
+            "https://openalex.org/W3023079706"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:stacy-l-andersen-6386",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5102850471"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5102850471 carries the same ORCID 0000-0002-2442-6386",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-2442-6386"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5102850471 name 'Stacy L. Andersen' equals 'Stacy L. Andersen' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5102850471 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W4412492848",
+            "https://orcid.org/0000-0002-2442-6386"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:steven-edward-arnold-415x",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5088881304"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5088881304 carries the same ORCID 0000-0002-9487-415X",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-9487-415X"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5088881304 name 'Steven Edward Arnold' equals 'Steven Edward Arnold' after normalization"
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:taiyao-wang-3892",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5079197814"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5079197814 carries the same ORCID 0000-0002-0331-3892",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-0331-3892"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5079197814 name 'Taiyao Wang' equals 'Taiyao Wang' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5079197814 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W2781929058",
+            "https://openalex.org/W2903277834",
+            "https://openalex.org/W3084156731"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:tammy-jiang-5706",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5022914115"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5022914115 carries the same ORCID 0000-0002-6887-5706",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-6887-5706"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5022914115 name 'Tammy Jiang' equals 'Tammy Jiang' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5022914115 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W2982044261",
+            "https://openalex.org/W3025161810",
+            "https://openalex.org/W3127394240"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:thomas-patrick-ahern-8727",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5079241058"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5079241058 carries the same ORCID 0000-0003-0440-8727",
+          "evidence_urls": [
+            "https://orcid.org/0000-0003-0440-8727"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5079241058 name 'Thomas Patrick Ahern' equals 'Thomas Patrick Ahern' after normalization"
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:ting-fang-alvin-ang-2552",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5036085071"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5036085071 carries the same ORCID 0000-0003-4687-2552",
+          "evidence_urls": [
+            "https://orcid.org/0000-0003-4687-2552"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5036085071 name 'Ting Fang Alvin Ang' equals 'Ting Fang Alvin Ang' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5036085071 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W2948916967",
+            "https://openalex.org/W2954775339",
+            "https://openalex.org/W2997607228"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:tingting-xu-737x",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5062549428"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5062549428 carries the same ORCID 0000-0002-5043-737X",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-5043-737X"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5062549428 name 'Tingting Xu' equals 'Tingting Xu' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5062549428 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W2781929058",
+            "https://openalex.org/W2903277834",
+            "https://openalex.org/W3092208592"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:ulas-karaoz-6757",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5053140118"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5053140118 carries the same ORCID 0000-0002-8238-6757",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-8238-6757"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5053140118 name 'Ulaş Karaöz' equals 'Ulaş Karaöz' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5053140118 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W2042210880",
+            "https://orcid.org/0000-0002-8238-6757"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:unay-dorken-gallastegi-5800",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5083875233"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5083875233 carries the same ORCID 0009-0000-8568-5800",
+          "evidence_urls": [
+            "https://orcid.org/0009-0000-8568-5800"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5083875233 name 'Unay Dorken Gallastegi' equals 'Unay Dorken Gallastegi' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5083875233 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W3138556788",
+            "https://hdl.handle.net/2144/50608"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:vijetha-balakundi-3006",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5116353471"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5116353471 carries the same ORCID 0009-0003-5631-3006",
+          "evidence_urls": [
+            "https://orcid.org/0009-0003-5631-3006"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5116353471 name 'Vijetha Balakundi' equals 'Vijetha Balakundi' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5116353471 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W4412624812",
+            "https://orcid.org/0009-0003-5631-3006"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:vin-tangpricha-5853",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5058543746"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5058543746 carries the same ORCID 0000-0002-4021-5853",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-4021-5853"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5058543746 name 'Vin Tangpricha' equals 'Vin Tangpricha' after normalization"
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:wayne-w-lamorte-9809",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5063633673"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5063633673 carries the same ORCID 0000-0002-7813-9809",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-7813-9809"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5063633673 name 'Wayne W. LaMorte' equals 'Wayne W. LaMorte' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5063633673 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W2038160105",
+            "https://orcid.org/0000-0002-7813-9809"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:weining-lu-3044",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5100335605"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5100335605 carries the same ORCID 0000-0002-6570-3044",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-6570-3044"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5100335605 name 'Weining Lu' equals 'Weining Lu' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5100335605 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W4409022842",
+            "https://openalex.org/W7108213256",
+            "https://orcid.org/0000-0002-6570-3044"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:wenrui-li-7911",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5005871534"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5005871534 carries the same ORCID 0000-0002-6471-7911",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-6471-7911"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5005871534 name 'Wenrui Li' equals 'Wenrui Li' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5005871534 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W4388018809",
+            "https://hdl.handle.net/2144/43181",
+            "https://orcid.org/0000-0002-6471-7911"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:william-r-pellegrini-095x",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5086938683"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5086938683 carries the same ORCID 0000-0002-8425-095X",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-8425-095X"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5086938683 name 'William R. Pellegrini' equals 'William R. Pellegrini' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5086938683 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W4395699500",
+            "https://orcid.org/0000-0002-8425-095X"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:xiao-zhou-444x",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5101670927"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5101670927 carries the same ORCID 0000-0002-8933-444X",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-8933-444X"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5101670927 name 'Xiao Zhou' equals 'Xiao Zhou' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5101670927 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W3023079706",
+            "https://hdl.handle.net/2144/44832",
+            "https://orcid.org/0000-0002-8933-444X"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:yi-guan-8824",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5102882703"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5102882703 carries the same ORCID 0000-0001-5680-8824",
+          "evidence_urls": [
+            "https://orcid.org/0000-0001-5680-8824"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5102882703 name 'Yi Guan' equals 'Yi Guan' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5102882703 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W4205419231",
+            "https://hdl.handle.net/2144/41246"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:yili-du-5477",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5102072558"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5102072558 carries the same ORCID 0000-0001-8444-5477",
+          "evidence_urls": [
+            "https://orcid.org/0000-0001-8444-5477"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5102072558 name 'Yili Du' equals 'Yili Du' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5102072558 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W4410420129",
+            "https://orcid.org/0000-0001-8444-5477"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_id": "person:canonical:zhiping-weng-7966",
+      "status": "merged",
+      "confidence": "high",
+      "member_ids": [
+        "person:openalex:A5084369008"
+      ],
+      "signals": [
+        {
+          "signal": "orcid",
+          "detail": "person:openalex:A5084369008 carries the same ORCID 0000-0002-3032-7966",
+          "evidence_urls": [
+            "https://orcid.org/0000-0002-3032-7966"
+          ]
+        },
+        {
+          "signal": "exact_name",
+          "detail": "person:openalex:A5084369008 name 'Zhiping Weng' equals 'Zhiping Weng' after normalization"
+        },
+        {
+          "signal": "shared_affiliation",
+          "detail": "person:openalex:A5084369008 has a Boston University affiliation; canonical person is verified_alumnus",
+          "evidence_urls": [
+            "https://openalex.org/W2144983644",
+            "https://orcid.org/0000-0002-3032-7966"
           ]
         }
       ]

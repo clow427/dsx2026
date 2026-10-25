@@ -22,7 +22,10 @@ class PoliteClient:
         sleep=time.sleep,
     ) -> None:
         self.session = session or requests.Session()
-        self.session.headers.setdefault("User-Agent", "dsx2026-alumni-network-graph/0.1 (research pipeline)")
+        # requests.Session already sets "python-requests/x.y", so setdefault would never apply.
+        # Identify the project instead (some servers, such as OpenBU, reject the generic agent).
+        if self.session.headers.get("User-Agent", "").startswith("python-requests"):
+            self.session.headers["User-Agent"] = "dsx2026-alumni-network-graph/0.1 (research pipeline)"
         self.interval = interval
         self.max_retries = max_retries
         self.timeout = timeout
