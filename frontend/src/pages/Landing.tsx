@@ -262,6 +262,9 @@ const Landing = () => {
         <Button size="lg" variant="outline" className={`font-semibold ${size === "graph" ? "h-12 px-5" : "h-14 px-7 text-base"}`} asChild>
           <Link to={peopleHref}>Find My People</Link>
         </Button>
+        <Button size="lg" variant="ghost" className={`font-semibold ${size === "graph" ? "h-12 px-5" : "h-14 px-7 text-base"}`} asChild>
+          <Link to="/chat">Ask 6degrees</Link>
+        </Button>
       </div>
     </motion.div>
   );
@@ -289,6 +292,9 @@ const Landing = () => {
         <div className="max-w-7xl mx-auto flex items-center justify-between h-[72px] px-6 lg:px-8">
           <Link to="/"><Logo size="md" /></Link>
           <div className="flex items-center gap-3">
+            <Button variant="ghost" className="hidden sm:inline-flex text-sm font-medium" asChild>
+              <Link to="/chat">Ask 6degrees</Link>
+            </Button>
             <Button variant="ghost" className="text-sm font-medium" asChild>
               <Link to={peopleHref}>Find My People</Link>
             </Button>

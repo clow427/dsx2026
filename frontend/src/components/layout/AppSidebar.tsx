@@ -46,7 +46,7 @@ export function AppSidebar() {
   const handleSignOut = async () => {
     if (isMobile) setOpenMobile(false);
     await signOut();
-    navigate("/auth");
+    navigate("/login");
   };
 
   const handleNavClick = () => {

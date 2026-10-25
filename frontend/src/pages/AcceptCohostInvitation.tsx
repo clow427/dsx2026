@@ -108,7 +108,7 @@ const AcceptCohostInvitation = () => {
               <div className="space-y-2">
                 <p className="text-sm text-muted-foreground">Sign in with <strong>{info.email}</strong> to accept.</p>
                 <Button
-                  onClick={() => navigate(`/auth?redirect=${encodeURIComponent(`/cohost/accept?token=${token}`)}`)}
+                  onClick={() => navigate(`/login?redirect=${encodeURIComponent(`/cohost/accept?token=${token}`)}`)}
                   className="rounded-full w-full"
                 >
                   Sign in to accept
@@ -117,7 +117,7 @@ const AcceptCohostInvitation = () => {
             ) : user.email?.toLowerCase() !== String(info.email).toLowerCase() ? (
               <div className="space-y-2">
                 <p className="text-sm text-destructive">You're signed in as {user.email}. Sign in with {info.email} to accept this invitation.</p>
-                <Button variant="outline" onClick={async () => { await supabase.auth.signOut(); navigate(`/auth?redirect=${encodeURIComponent(`/cohost/accept?token=${token}`)}`); }} className="rounded-full w-full">
+                <Button variant="outline" onClick={async () => { await supabase.auth.signOut(); navigate(`/login?redirect=${encodeURIComponent(`/cohost/accept?token=${token}`)}`); }} className="rounded-full w-full">
                   Sign out and switch account
                 </Button>
               </div>
